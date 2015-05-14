@@ -1,7 +1,6 @@
 package blog
 
 const (
-	outputPath           = "./public/"
-	inputPath            = "./source/"
-	articleParallelCount = 100
+	outputDir = "/Users/Lancer/Desktop/public/"
+	inputDir  = "/Users/Lancer/Desktop/source/"
 )

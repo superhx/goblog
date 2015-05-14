@@ -1,39 +1,34 @@
 package blog
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 //Article ...
 type Article struct {
 	Title  string
-	Date   CustomTime
-	Update CustomTime
+	Date   *JSONTime
+	Update *JSONTime
 	Tags   []string
 }
 
-//CustomTime ...
-type CustomTime struct {
+//JSONTime ...
+type JSONTime struct {
 	time.Time
 }
 
-const ctLayout = "2006-01-02 15:04:05"
+//MarshalJSON ...
+func (t JSONTime) MarshalJSON() ([]byte, error) {
+	stamp := fmt.Sprintf("\"%s\"", t.Format(time.RFC3339))
+	return []byte(stamp), nil
+}
 
 //UnmarshalJSON ...
-func (ct *CustomTime) UnmarshalJSON(b []byte) (err error) {
+func (t *JSONTime) UnmarshalJSON(b []byte) (err error) {
 	if b[0] == '"' && b[len(b)-1] == '"' {
 		b = b[1 : len(b)-1]
 	}
-	ct.Time, err = time.Parse(ctLayout, string(b))
+	t.Time, err = time.Parse("2006/01/02|15:04:05", string(b))
 	return
-}
-
-//MarshalJSON ...
-func (ct *CustomTime) MarshalJSON() ([]byte, error) {
-	return []byte(ct.Time.Format(ctLayout)), nil
-}
-
-var nilTime = (time.Time{}).UnixNano()
-
-// IsSet ...
-func (ct *CustomTime) IsSet() bool {
-	return ct.UnixNano() != nilTime
 }
