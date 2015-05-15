@@ -2,28 +2,41 @@ package blog
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
+	"github.com/golang/glog"
 	"github.com/superhx/marker"
 	"html"
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
 	"strconv"
 )
 
+var _ = flag.ContinueOnError
+var _ = glog.CopyStandardLogTo
+
 const (
 	articleParallelCount = 100
+	context              = ""
 )
 
 //Blog is ...
 type Blog struct {
-	Articles  []*Article
+	Articles  []Article
 	parallels chan bool
 }
 
 //Transform ...
 func (blog *Blog) Transform() {
+
 	os.RemoveAll(outputDir)
+	os.MkdirAll(outputDir+"template", os.ModePerm)
+	os.MkdirAll(outputDir+"css", os.ModePerm)
+	os.MkdirAll(outputDir+"js", os.ModePerm)
+	os.MkdirAll(outputDir+"img", os.ModePerm)
+
 	files, err := ioutil.ReadDir(inputDir)
 	if err != nil {
 		fmt.Println("Can not read dir:" + inputDir)
@@ -42,7 +55,13 @@ func (blog *Blog) Transform() {
 	}
 
 	b, _ := json.Marshal(blog.Articles)
-	fmt.Println(string(b))
+	err = ioutil.WriteFile(outputDir+"category.json", b, os.ModePerm)
+	if err != nil {
+		fmt.Println("Write category fail!")
+	}
+
+	GenerateCategory(blog.Articles)
+
 }
 
 func (blog *Blog) transform(fileInfo os.FileInfo) {
@@ -60,21 +79,17 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	mark := marker.Mark(input)
 
 	//extract article info
-	article := getArticle(mark, fileInfo)
-	blog.Articles = append(blog.Articles, &article)
-	// d, _ := article.Date.MarshalJSON()
-	// fmt.Println(string(d))
+	article := GetArticle(mark, fileInfo)
+	blog.Articles = append(blog.Articles, article)
 
 	//set markdown title
 	mark.Parts[0] = &marker.Heading{Depth: 1, Text: &marker.Text{Parts: []marker.Node{&marker.InlineText{Text: article.Title}}}}
 
-	//create output path and output file
-	pubDate := article.Date
-	fileName := fileInfo.Name()
-	outputPath := outputDir + strconv.Itoa(pubDate.Year()) + "/" + strconv.Itoa(int(pubDate.Month())) + "/" + strconv.Itoa(pubDate.Day()) + "/" + fileName[:len(fileName)-len(filepath.Ext(fileName))]
-	os.MkdirAll(outputPath, os.ModePerm)
-	output, err := os.OpenFile(outputPath+"/index.html", os.O_CREATE|os.O_WRONLY, os.ModePerm)
-	defer func() { output.Close() }()
+	//create output dir and output file
+	outputPath := GetOutputPath(article)
+	os.MkdirAll(path.Dir(outputPath), os.ModePerm)
+	output, err := os.OpenFile(outputPath, os.O_CREATE|os.O_WRONLY, os.ModePerm)
+	defer output.Close()
 	if err != nil {
 		fmt.Println("Can not create file: " + outputPath)
 	}
@@ -83,16 +98,38 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	marker.NewHTMLWriter(mark).WriteTo(output)
 }
 
-func getArticle(mark *marker.MarkDown, fileInfo os.FileInfo) (article Article) {
+//GetArticle ...
+func GetArticle(mark *marker.MarkDown, fileInfo os.FileInfo) (article Article) {
 	setting, ok := mark.Parts[0].(*marker.Code)
 	if !ok {
 		fmt.Println("Format error")
 		return
 	}
 	json.Unmarshal([]byte(html.UnescapeString(setting.Text)), &article)
+	article.Origin = &JSONFileInfo{fileInfo.Name(), fileInfo.Size(), fileInfo.Mode(), &JSONTime{fileInfo.ModTime()}, fileInfo.IsDir()}
 	return
 }
 
-func getOutputPath(article Article) string {
-	return ""
+//GetOutputPath ...
+func GetOutputPath(article Article) (outputPath string) {
+	pubDate := article.Date
+	fileName := article.Origin.Name
+	outputPath = outputDir + strconv.Itoa(pubDate.Year()) + "/" + strconv.Itoa(int(pubDate.Month())) + "/" + strconv.Itoa(pubDate.Day()) + "/" + fileName[:len(fileName)-len(filepath.Ext(fileName))] + "/index.html"
+	return
+}
+
+//GenerateCategory ...
+func GenerateCategory(category []Article) {
+	file, err := os.Create(outputDir + "template/category.htm")
+	fmt.Println(outputDir + "template/category.htm")
+	defer file.Close()
+	if err != nil {
+		fmt.Println("Create Categoty template fail")
+	}
+	file.WriteString("<nav><ul>")
+	for _, item := range category {
+		link := context + GetOutputPath(item)
+		file.WriteString("<li><a href=\"" + link + "\">" + item.Title + "</a></li>")
+	}
+	file.WriteString("</ul></nav>")
 }

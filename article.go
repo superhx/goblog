@@ -2,6 +2,7 @@ package blog
 
 import (
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -11,6 +12,7 @@ type Article struct {
 	Date   *JSONTime
 	Update *JSONTime
 	Tags   []string
+	Origin *JSONFileInfo
 }
 
 //JSONTime ...
@@ -31,4 +33,13 @@ func (t *JSONTime) UnmarshalJSON(b []byte) (err error) {
 	}
 	t.Time, err = time.Parse("2006/01/02|15:04:05", string(b))
 	return
+}
+
+//JSONFileInfo ...
+type JSONFileInfo struct {
+	Name    string
+	Size    int64
+	Mode    os.FileMode
+	ModTime *JSONTime
+	IsDir   bool
 }
