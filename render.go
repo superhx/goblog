@@ -17,7 +17,6 @@ func RenderCategory(category []Article) {
 	By(sortByDate).Sort(s)
 
 	file, err := os.Create(outputDir + "template/category.htm")
-	fmt.Println(outputDir + "template/category.htm")
 	defer file.Close()
 	if err != nil {
 		fmt.Println("Create Categoty template fail")
@@ -38,5 +37,5 @@ func RenderArticle(mark *marker.MarkDown, output io.Writer) {
 func sortByDate(i1, i2 Item) bool {
 	a1, _ := i1.(Article)
 	a2, _ := i2.(Article)
-	return a1.Date.Unix()-a2.Date.Unix() < 0
+	return a1.Date.Before(a2.Date.Time)
 }
