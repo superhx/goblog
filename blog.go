@@ -60,7 +60,7 @@ func (blog *Blog) Transform() {
 		fmt.Println("Write category fail!")
 	}
 
-	GenerateCategory(blog.Articles)
+	RenderCategory(blog.Articles)
 
 }
 
@@ -95,7 +95,7 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	}
 
 	//transform markdown to html and output
-	marker.NewHTMLWriter(mark).WriteTo(output)
+	RenderArticle(mark, output)
 }
 
 //GetArticle ...
@@ -116,20 +116,4 @@ func GetOutputPath(article Article) (outputPath string) {
 	fileName := article.Origin.Name
 	outputPath = outputDir + strconv.Itoa(pubDate.Year()) + "/" + strconv.Itoa(int(pubDate.Month())) + "/" + strconv.Itoa(pubDate.Day()) + "/" + fileName[:len(fileName)-len(filepath.Ext(fileName))] + "/index.html"
 	return
-}
-
-//GenerateCategory ...
-func GenerateCategory(category []Article) {
-	file, err := os.Create(outputDir + "template/category.htm")
-	fmt.Println(outputDir + "template/category.htm")
-	defer file.Close()
-	if err != nil {
-		fmt.Println("Create Categoty template fail")
-	}
-	file.WriteString("<nav><ul>")
-	for _, item := range category {
-		link := context + GetOutputPath(item)
-		file.WriteString("<li><a href=\"" + link + "\">" + item.Title + "</a></li>")
-	}
-	file.WriteString("</ul></nav>")
 }

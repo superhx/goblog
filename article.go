@@ -10,7 +10,6 @@ import (
 type Article struct {
 	Title  string
 	Date   *JSONTime
-	Update *JSONTime
 	Tags   []string
 	Origin *JSONFileInfo
 }
