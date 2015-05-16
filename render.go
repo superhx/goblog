@@ -16,14 +16,14 @@ func RenderCategory(category []Article) {
 	}
 	By(sortByDate).Sort(s)
 
-	file, err := os.Create(outputDir + "template/category.htm")
+	file, err := os.Create(config.PublicDir + "/template/category.htm")
 	defer file.Close()
 	if err != nil {
 		fmt.Println("Create Categoty template fail")
 	}
 	file.WriteString("<nav><ul>")
 	for _, item := range category {
-		link := context + GetOutputPath(item)
+		link := "../../" + GetOutputPath(item)
 		file.WriteString("<li><a href=\"" + link + "\">" + item.Title + "</a></li>")
 	}
 	file.WriteString("</ul></nav>")

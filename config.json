@@ -1,0 +1,15 @@
+{
+  "title":"",
+  "subtitle":"",
+  "author":"",
+  "email":"",
+
+  "url":"",
+  "root":"/",
+
+  "sourceDir": "source",
+  "publicDir": "public",
+
+  "disqus":"",
+  "analyze":""
+}
