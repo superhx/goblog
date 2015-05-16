@@ -23,7 +23,7 @@ func RenderCategory(category []Article) {
 	}
 	file.WriteString("<nav><ul>")
 	for _, item := range category {
-		link := "../../" + GetOutputPath(item)
+		link := config.Root + "/" + GetOutputPath(item)
 		file.WriteString("<li><a href=\"" + link + "\">" + item.Title + "</a></li>")
 	}
 	file.WriteString("</ul></nav>")

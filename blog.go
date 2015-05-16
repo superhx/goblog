@@ -12,84 +12,40 @@ import (
 	"path"
 	"path/filepath"
 	"strconv"
+	"sync"
 )
 
 func init() {
 	log.SetOutput(os.Stdout)
 }
 
-const (
-	articleParallelCount = 100
-)
-
-//Blog is ...
+//Blog ias ...
 type Blog struct {
-	Articles  []Article
-	parallels chan bool
+	articles []Article
+	wg       sync.WaitGroup
 }
 
 //Transform ...
 func (blog *Blog) Transform() {
 	files := blog.files()
+	if len(files) == 0 {
+		return
+	}
 
 	for _, file := range files {
-		blog.parallels <- true
+		blog.wg.Add(1)
 		go blog.transform(file)
 	}
 
-	for i := 0; i < articleParallelCount; i++ {
-		blog.parallels <- false
-	}
+	blog.wg.Wait()
 
-	b, _ := json.Marshal(blog.Articles)
+	b, _ := json.Marshal(blog.articles)
 	err := ioutil.WriteFile(config.PublicDir+"/category.json", b, os.ModePerm)
 	if err != nil {
 		log.Warnln("[Generate Fail]: category.json")
 	}
 
-	RenderCategory(blog.Articles)
-
-}
-
-func (blog *Blog) transform(fileInfo os.FileInfo) {
-
-	defer func() { <-blog.parallels }()
-
-	//markdown input
-	input, err := ioutil.ReadFile(config.SourceDir + "/" + fileInfo.Name())
-	if err != nil {
-		log.Warnln("Can not open file: ", fileInfo.Name())
-		return
-	}
-
-	//parse markdown to *Markdown obj
-	mark := marker.Mark(input)
-
-	//extract article info
-	article, err := GetArticle(mark, fileInfo)
-	if err != nil {
-		log.Error("[Format Error]: ", fileInfo.Name())
-		return
-	}
-	blog.Articles = append(blog.Articles, article)
-
-	//set markdown title
-	mark.Parts[0] = &marker.Heading{Depth: 1, Text: &marker.Text{Parts: []marker.Node{&marker.InlineText{Text: article.Title}}}}
-
-	//create output dir and output file
-	outputPath := GetOutputPath(article)
-	os.MkdirAll(path.Dir(outputPath), os.ModePerm)
-	output, err := os.OpenFile(outputPath, os.O_CREATE|os.O_WRONLY, os.ModePerm)
-	defer output.Close()
-	if err != nil {
-		log.Warnln("[Generate Fail]: ", outputPath)
-		return
-	}
-
-	log.Infoln("[Generate]: ", outputPath)
-
-	//transform markdown to html and output
-	RenderArticle(mark, output)
+	RenderCategory(blog.articles)
 }
 
 func (blog *Blog) files() (files []os.FileInfo) {
@@ -137,7 +93,7 @@ func (blog *Blog) files() (files []os.FileInfo) {
 		}
 
 		if article.ModTime().Equal(file.ModTime()) {
-			blog.Articles = append(blog.Articles, m[name])
+			blog.articles = append(blog.articles, m[name])
 		} else {
 			fmt.Println(article.ModTime(), " ", file.ModTime().UTC())
 			os.Remove(GetOutputPath(article))
@@ -153,6 +109,47 @@ func (blog *Blog) files() (files []os.FileInfo) {
 	}
 
 	return
+}
+
+func (blog *Blog) transform(fileInfo os.FileInfo) {
+
+	defer blog.wg.Done()
+
+	//markdown input
+	input, err := ioutil.ReadFile(config.SourceDir + "/" + fileInfo.Name())
+	if err != nil {
+		log.Warnln("Can not open file: ", fileInfo.Name())
+		return
+	}
+
+	//parse markdown to *Markdown obj
+	mark := marker.Mark(input)
+
+	//extract article info
+	article, err := GetArticle(mark, fileInfo)
+	if err != nil {
+		log.Error("[Format Error]: ", fileInfo.Name())
+		return
+	}
+	blog.articles = append(blog.articles, article)
+
+	//set markdown title
+	mark.Parts[0] = &marker.Heading{Depth: 1, Text: &marker.Text{Parts: []marker.Node{&marker.InlineText{Text: article.Title}}}}
+
+	//create output dir and output file
+	outputPath := GetOutputPath(article)
+	os.MkdirAll(path.Dir(outputPath), os.ModePerm)
+	output, err := os.OpenFile(outputPath, os.O_CREATE|os.O_WRONLY, os.ModePerm)
+	defer output.Close()
+	if err != nil {
+		log.Warnln("[Generate Fail]: ", outputPath)
+		return
+	}
+
+	log.Infoln("[Generate]: ", outputPath)
+
+	//transform markdown to html and output
+	RenderArticle(mark, output)
 }
 
 //GetArticle ...
