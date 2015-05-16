@@ -2,9 +2,9 @@ package blog
 
 import (
 	"encoding/json"
-	"flag"
+	"errors"
 	"fmt"
-	"github.com/golang/glog"
+	log "github.com/Sirupsen/logrus"
 	"github.com/superhx/marker"
 	"html"
 	"io/ioutil"
@@ -14,8 +14,9 @@ import (
 	"strconv"
 )
 
-var _ = flag.ContinueOnError
-var _ = glog.CopyStandardLogTo
+func init() {
+	log.SetOutput(os.Stdout)
+}
 
 const (
 	articleParallelCount = 100
@@ -29,11 +30,9 @@ type Blog struct {
 
 //Transform ...
 func (blog *Blog) Transform() {
-
 	files := blog.files()
 
 	for _, file := range files {
-		fmt.Println("Parse file:" + file.Name())
 		blog.parallels <- true
 		go blog.transform(file)
 	}
@@ -45,7 +44,7 @@ func (blog *Blog) Transform() {
 	b, _ := json.Marshal(blog.Articles)
 	err := ioutil.WriteFile(config.PublicDir+"/category.json", b, os.ModePerm)
 	if err != nil {
-		fmt.Println("Write category fail!")
+		log.Warnln("[Generate Fail]: category.json")
 	}
 
 	RenderCategory(blog.Articles)
@@ -59,7 +58,7 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	//markdown input
 	input, err := ioutil.ReadFile(config.SourceDir + "/" + fileInfo.Name())
 	if err != nil {
-		fmt.Println("Can not read file: " + fileInfo.Name())
+		log.Warnln("Can not open file: ", fileInfo.Name())
 		return
 	}
 
@@ -67,7 +66,11 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	mark := marker.Mark(input)
 
 	//extract article info
-	article := GetArticle(mark, fileInfo)
+	article, err := GetArticle(mark, fileInfo)
+	if err != nil {
+		log.Error("[Format Error]: ", fileInfo.Name())
+		return
+	}
 	blog.Articles = append(blog.Articles, article)
 
 	//set markdown title
@@ -79,8 +82,11 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	output, err := os.OpenFile(outputPath, os.O_CREATE|os.O_WRONLY, os.ModePerm)
 	defer output.Close()
 	if err != nil {
-		fmt.Println("Can not create file: " + outputPath)
+		log.Warnln("[Generate Fail]: ", outputPath)
+		return
 	}
+
+	log.Infoln("[Generate]: ", outputPath)
 
 	//transform markdown to html and output
 	RenderArticle(mark, output)
@@ -90,7 +96,7 @@ func (blog *Blog) files() (files []os.FileInfo) {
 
 	old, err := ioutil.ReadDir(config.SourceDir)
 	if err != nil {
-		fmt.Println("Can not read dir:" + config.SourceDir)
+		log.Warnln("Can not open source dir: ", config.SourceDir)
 		return
 	}
 
@@ -99,7 +105,7 @@ func (blog *Blog) files() (files []os.FileInfo) {
 
 	//not init before or category.json broken
 	if err != nil || json.Unmarshal(category, &aticles) != nil {
-		fmt.Println("Init from empty")
+		log.Info("Generate all")
 		os.RemoveAll(config.PublicDir)
 		os.MkdirAll(config.PublicDir+"/template", os.ModePerm)
 		os.MkdirAll(config.PublicDir+"/css", os.ModePerm)
@@ -141,18 +147,19 @@ func (blog *Blog) files() (files []os.FileInfo) {
 	}
 
 	for name := range m {
-		fmt.Println("remove file")
-		os.Remove(GetOutputPath(m[name]))
+		path := GetOutputPath(m[name])
+		os.Remove(path)
+		log.Infoln("[Remove]: ", path)
 	}
 
 	return
 }
 
 //GetArticle ...
-func GetArticle(mark *marker.MarkDown, fileInfo os.FileInfo) (article Article) {
+func GetArticle(mark *marker.MarkDown, fileInfo os.FileInfo) (article Article, err error) {
 	setting, ok := mark.Parts[0].(*marker.Code)
 	if !ok {
-		fmt.Println("Format error")
+		err = errors.New("format error")
 		return
 	}
 	json.Unmarshal([]byte(html.UnescapeString(setting.Text)), &article)
