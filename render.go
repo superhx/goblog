@@ -30,7 +30,7 @@ func RenderCategory(category []Article) {
 }
 
 //RenderArticle ...
-func RenderArticle(mark *marker.MarkDown, output io.Writer) {
+func RenderArticle(mark marker.Node, article Article, output io.Writer) {
 	marker.NewHTMLWriter(mark).WriteTo(output)
 }
 

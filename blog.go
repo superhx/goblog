@@ -149,7 +149,7 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	log.Infoln("[Generate]: ", outputPath)
 
 	//transform markdown to html and output
-	RenderArticle(mark, output)
+	RenderArticle(mark, article, output)
 }
 
 //GetArticle ...
