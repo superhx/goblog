@@ -26,9 +26,9 @@ type Blog struct {
 }
 
 //Transform ...
-func (blog *Blog) Transform() {
-	files := blog.files()
-	if len(files) == 0 {
+func (blog *Blog) Transform() (err error) {
+	files, err := blog.files()
+	if err != nil || len(files) == 0 {
 		return
 	}
 
@@ -40,15 +40,16 @@ func (blog *Blog) Transform() {
 	blog.wg.Wait()
 
 	b, _ := json.Marshal(blog.articles)
-	err := ioutil.WriteFile(config.PublicDir+"/category.json", b, os.ModePerm)
+	err = ioutil.WriteFile(config.PublicDir+"/category.json", b, os.ModePerm)
 	if err != nil {
 		log.Warnln("[Generate Fail]: category.json")
 	}
 
 	RenderCategory(blog.articles)
+	return
 }
 
-func (blog *Blog) files() (files []os.FileInfo) {
+func (blog *Blog) files() (files []os.FileInfo, err error) {
 
 	old, err := ioutil.ReadDir(config.SourceDir)
 	if err != nil {
@@ -72,7 +73,7 @@ func (blog *Blog) files() (files []os.FileInfo) {
 				files = append(files, file)
 			}
 		}
-		return files
+		return
 	}
 
 	m := make(map[string]Article)
