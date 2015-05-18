@@ -1,4 +1,4 @@
-package blog
+package goblog
 
 import (
 	"encoding/json"
@@ -96,14 +96,14 @@ func (blog *Blog) files() (files []os.FileInfo) {
 			blog.articles = append(blog.articles, m[name])
 		} else {
 			fmt.Println(article.ModTime(), " ", file.ModTime().UTC())
-			os.Remove(GetOutputPath(article))
+			os.Remove(config.PublicDir + "/" + GetOutputPath(article))
 			files = append(files, file)
 		}
 		delete(m, name)
 	}
 
 	for name := range m {
-		path := GetOutputPath(m[name])
+		path := config.PublicDir + "/" + GetOutputPath(m[name])
 		os.Remove(path)
 		log.Infoln("[Remove]: ", path)
 	}
@@ -137,7 +137,7 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	mark.Parts[0] = &marker.Heading{Depth: 1, Text: &marker.Text{Parts: []marker.Node{&marker.InlineText{Text: article.Title}}}}
 
 	//create output dir and output file
-	outputPath := GetOutputPath(article)
+	outputPath := config.PublicDir + "/" + GetOutputPath(article)
 	os.MkdirAll(path.Dir(outputPath), os.ModePerm)
 	output, err := os.OpenFile(outputPath, os.O_CREATE|os.O_WRONLY, os.ModePerm)
 	defer output.Close()
@@ -168,6 +168,6 @@ func GetArticle(mark *marker.MarkDown, fileInfo os.FileInfo) (article Article, e
 func GetOutputPath(article Article) (outputPath string) {
 	pubDate := article.Date
 	fileName := article.Name()
-	outputPath = config.PublicDir + "/" + strconv.Itoa(pubDate.Year()) + "/" + strconv.Itoa(int(pubDate.Month())) + "/" + strconv.Itoa(pubDate.Day()) + "/" + fileName[:len(fileName)-len(filepath.Ext(fileName))] + "/index.html"
+	outputPath = strconv.Itoa(pubDate.Year()) + "/" + strconv.Itoa(int(pubDate.Month())) + "/" + strconv.Itoa(pubDate.Day()) + "/" + fileName[:len(fileName)-len(filepath.Ext(fileName))] + "/index.html"
 	return
 }

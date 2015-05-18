@@ -1,8 +1,8 @@
-package blog
+package goblog
 
 import (
 	"encoding/json"
-	"fmt"
+	log "github.com/Sirupsen/logrus"
 	"io/ioutil"
 )
 
@@ -25,7 +25,9 @@ type Config struct {
 func init() {
 	bytes, err := ioutil.ReadFile("config.json")
 	if err != nil {
-		fmt.Println("fail to read config.json")
+		log.Infoln("Using default config")
+		config.SourceDir = "source"
+		config.PublicDir = "public"
 	}
 	json.Unmarshal(bytes, &config)
 }
