@@ -10,7 +10,7 @@ import (
 //RenderCategory ...
 func RenderCategory(category []Article) {
 
-	s := make([]Item, len(category))
+	s := make([]interface{}, len(category))
 	for i := range category {
 		s[i] = category[i]
 	}
@@ -34,7 +34,7 @@ func RenderArticle(mark marker.Node, article Article, output io.Writer) {
 	marker.NewHTMLWriter(mark).WriteTo(output)
 }
 
-func sortByDate(i1, i2 Item) bool {
+func sortByDate(i1, i2 interface{}) bool {
 	a1, _ := i1.(Article)
 	a2, _ := i2.(Article)
 	return a1.Date.Before(a2.Date.Time)

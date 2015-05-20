@@ -6,10 +6,10 @@ import "sort"
 type Item interface{}
 
 //By ...
-type By func(i1, i2 Item) bool
+type By func(i1, i2 interface{}) bool
 
 //Sort ...
-func (by By) Sort(s []Item) {
+func (by By) Sort(s []interface{}) {
 	sw := &sortWrapper{
 		items: s,
 		by:    by,
@@ -18,8 +18,8 @@ func (by By) Sort(s []Item) {
 }
 
 type sortWrapper struct {
-	items []Item
-	by    func(i1, i2 Item) bool
+	items []interface{}
+	by    func(i1, i2 interface{}) bool
 }
 
 func (s *sortWrapper) Len() int {

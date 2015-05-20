@@ -73,6 +73,7 @@ func (blog *Blog) files() (files []os.FileInfo, err error) {
 				files = append(files, file)
 			}
 		}
+		err = nil
 		return
 	}
 
