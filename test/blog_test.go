@@ -6,6 +6,5 @@ import (
 )
 
 func TestTransform(*testing.T) {
-	var blog goblog.Blog
-	blog.Transform()
+	goblog.Generate()
 }

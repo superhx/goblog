@@ -19,14 +19,21 @@ func init() {
 	log.SetOutput(os.Stdout)
 }
 
+//Generate ...
+func Generate() (err error) {
+	var blog Blog
+	err = blog.Generate()
+	return
+}
+
 //Blog ias ...
 type Blog struct {
 	articles []Article
 	wg       sync.WaitGroup
 }
 
-//Transform ...
-func (blog *Blog) Transform() (err error) {
+//Generate ...
+func (blog *Blog) Generate() (err error) {
 	files, err := blog.files()
 	if err != nil || len(files) == 0 {
 		return
@@ -34,7 +41,7 @@ func (blog *Blog) Transform() (err error) {
 
 	for _, file := range files {
 		blog.wg.Add(1)
-		go blog.transform(file)
+		go blog.generate(file)
 	}
 
 	blog.wg.Wait()
@@ -45,7 +52,7 @@ func (blog *Blog) Transform() (err error) {
 		log.Warnln("[Generate Fail]: category.json")
 	}
 
-	RenderCategory(blog.articles)
+	renderCategory(blog.articles)
 	return
 }
 
@@ -98,14 +105,14 @@ func (blog *Blog) files() (files []os.FileInfo, err error) {
 			blog.articles = append(blog.articles, m[name])
 		} else {
 			fmt.Println(article.ModTime(), " ", file.ModTime().UTC())
-			os.Remove(config.PublicDir + "/" + GetOutputPath(article))
+			os.Remove(config.PublicDir + "/" + getOutputPath(article))
 			files = append(files, file)
 		}
 		delete(m, name)
 	}
 
 	for name := range m {
-		path := config.PublicDir + "/" + GetOutputPath(m[name])
+		path := config.PublicDir + "/" + getOutputPath(m[name])
 		os.Remove(path)
 		log.Infoln("[Remove]: ", path)
 	}
@@ -113,7 +120,7 @@ func (blog *Blog) files() (files []os.FileInfo, err error) {
 	return
 }
 
-func (blog *Blog) transform(fileInfo os.FileInfo) {
+func (blog *Blog) generate(fileInfo os.FileInfo) {
 
 	defer blog.wg.Done()
 
@@ -128,7 +135,7 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	mark := marker.Mark(input)
 
 	//extract article info
-	article, err := GetArticle(mark, fileInfo)
+	article, err := getArticle(mark, fileInfo)
 	if err != nil {
 		log.Error("[Format Error]: ", fileInfo.Name())
 		return
@@ -139,7 +146,7 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	mark.Parts[0] = &marker.Heading{Depth: 1, Text: &marker.Text{Parts: []marker.Node{&marker.InlineText{Text: article.Title}}}}
 
 	//create output dir and output file
-	outputPath := config.PublicDir + "/" + GetOutputPath(article)
+	outputPath := config.PublicDir + "/" + getOutputPath(article)
 	os.MkdirAll(path.Dir(outputPath), os.ModePerm)
 	output, err := os.OpenFile(outputPath, os.O_CREATE|os.O_WRONLY, os.ModePerm)
 	defer output.Close()
@@ -151,11 +158,10 @@ func (blog *Blog) transform(fileInfo os.FileInfo) {
 	log.Infoln("[Generate]: ", outputPath)
 
 	//transform markdown to html and output
-	RenderArticle(mark, article, output)
+	renderArticle(mark, article, output)
 }
 
-//GetArticle ...
-func GetArticle(mark *marker.MarkDown, fileInfo os.FileInfo) (article Article, err error) {
+func getArticle(mark *marker.MarkDown, fileInfo os.FileInfo) (article Article, err error) {
 	setting, ok := mark.Parts[0].(*marker.Code)
 	if !ok {
 		err = errors.New("format error")
@@ -166,8 +172,7 @@ func GetArticle(mark *marker.MarkDown, fileInfo os.FileInfo) (article Article, e
 	return
 }
 
-//GetOutputPath ...
-func GetOutputPath(article Article) (outputPath string) {
+func getOutputPath(article Article) (outputPath string) {
 	pubDate := article.Date
 	fileName := article.Name()
 	outputPath = strconv.Itoa(pubDate.Year()) + "/" + strconv.Itoa(int(pubDate.Month())) + "/" + strconv.Itoa(pubDate.Day()) + "/" + fileName[:len(fileName)-len(filepath.Ext(fileName))] + "/index.html"

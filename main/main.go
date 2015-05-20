@@ -5,7 +5,6 @@ import (
 )
 
 func main() {
-	var blog goblog.Blog
-	blog.Transform()
-	goblog.Server()
+	goblog.Generate()
+	goblog.Server(8080)
 }

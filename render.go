@@ -8,7 +8,7 @@ import (
 )
 
 //RenderCategory ...
-func RenderCategory(category []Article) {
+func renderCategory(category []Article) {
 
 	s := make([]interface{}, len(category))
 	for i := range category {
@@ -23,14 +23,14 @@ func RenderCategory(category []Article) {
 	}
 	file.WriteString("<nav><ul>")
 	for _, item := range category {
-		link := config.Root + "/" + GetOutputPath(item)
+		link := config.Root + "/" + getOutputPath(item)
 		file.WriteString("<li><a href=\"" + link + "\">" + item.Title + "</a></li>")
 	}
 	file.WriteString("</ul></nav>")
 }
 
 //RenderArticle ...
-func RenderArticle(mark marker.Node, article Article, output io.Writer) {
+func renderArticle(mark marker.Node, article Article, output io.Writer) {
 	marker.NewHTMLWriter(mark).WriteTo(output)
 }
 
