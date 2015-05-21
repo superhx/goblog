@@ -6,5 +6,5 @@ import (
 
 func main() {
 	goblog.Generate()
-	goblog.Server(8080)
+	//	goblog.Server(8080)
 }

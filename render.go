@@ -2,7 +2,7 @@ package goblog
 
 import (
 	"fmt"
-	"github.com/superhx/marker"
+	"github.com/superhx/mark"
 	"io"
 	"os"
 )
@@ -30,8 +30,8 @@ func renderCategory(category []Article) {
 }
 
 //RenderArticle ...
-func renderArticle(mark marker.Node, article Article, output io.Writer) {
-	marker.NewHTMLWriter(mark).WriteTo(output)
+func renderArticle(node mark.Node, article Article, output io.Writer) {
+	mark.NewHTMLWriter(node).WriteTo(output)
 }
 
 func sortByDate(i1, i2 interface{}) bool {

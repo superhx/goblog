@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	log "github.com/Sirupsen/logrus"
-	"github.com/superhx/marker"
+	"github.com/superhx/mark"
 	"html"
 	"io/ioutil"
 	"os"
@@ -132,18 +132,19 @@ func (blog *Blog) generate(fileInfo os.FileInfo) {
 	}
 
 	//parse markdown to *Markdown obj
-	mark := marker.Mark(input)
+	markdown := mark.Mark(input)
 
 	//extract article info
-	article, err := getArticle(mark, fileInfo)
+	article, err := getArticle(markdown, fileInfo)
 	if err != nil {
 		log.Error("[Format Error]: ", fileInfo.Name())
 		return
 	}
 	blog.articles = append(blog.articles, article)
 
+	markdown.Parts = markdown.Parts[1:]
 	//set markdown title
-	mark.Parts[0] = &marker.Heading{Depth: 1, Text: &marker.Text{Parts: []marker.Node{&marker.InlineText{Text: article.Title}}}}
+	// markdown.Parts[0] = &mark.Heading{Depth: 1, Text: &mark.Text{Parts: []marker.Node{&marker.InlineText{Text: article.Title}}}}
 
 	//create output dir and output file
 	outputPath := config.PublicDir + "/" + getOutputPath(article)
@@ -158,11 +159,11 @@ func (blog *Blog) generate(fileInfo os.FileInfo) {
 	log.Infoln("[Generate]: ", outputPath)
 
 	//transform markdown to html and output
-	renderArticle(mark, article, output)
+	renderArticle(markdown, article, output)
 }
 
-func getArticle(mark *marker.MarkDown, fileInfo os.FileInfo) (article Article, err error) {
-	setting, ok := mark.Parts[0].(*marker.Code)
+func getArticle(markdown *mark.MarkDown, fileInfo os.FileInfo) (article Article, err error) {
+	setting, ok := markdown.Parts[0].(*mark.Code)
 	if !ok {
 		err = errors.New("format error")
 		return
