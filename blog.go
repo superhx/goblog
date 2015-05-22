@@ -15,10 +15,6 @@ import (
 	"sync"
 )
 
-func init() {
-	log.SetOutput(os.Stdout)
-}
-
 //Generate ...
 func Generate() (err error) {
 	var blog Blog
