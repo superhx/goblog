@@ -11,27 +11,27 @@ import (
 	"time"
 )
 
+var config goblog.Config
+
+func init() {
+	config = goblog.GetConfig()
+}
+
 func main() {
 	if len(os.Args) == 1 {
 		help("unkown")
 		return
 	}
-	config := goblog.GetConfig()
 	//	fmt.Println(os.Getwd())
 	switch cmd := os.Args[1]; {
 	case cmd == "server" || cmd == "s":
 		goblog.Server(8001)
 	case cmd == "generate" || cmd == "g":
-		goblog.Generate()
-		err := exec.Command("cp", "-R", config.SourceDir+"/data/", config.PublicDir).Run()
-		fmt.Println(config.SourceDir+"/data/", " ", config.PublicDir)
-		if err != nil {
-			fmt.Println(err)
-		}
+		generate()
 	case cmd == "init" || cmd == "i":
-		initWorkspace()
+		workspace()
 	case cmd == "new" || cmd == "n":
-		newArticle(os.Args[2:])
+		article(os.Args[2:])
 	case cmd == "help" || cmd == "h":
 		if len(os.Args) > 2 {
 			help(os.Args[2])
@@ -41,7 +41,12 @@ func main() {
 	}
 }
 
-func initWorkspace() {
+func generate() {
+	goblog.Generate()
+	exec.Command("cp", "-R", config.SourceDir+"/data/", config.PublicDir).Run()
+}
+
+func workspace() {
 	config := goblog.GetConfig()
 	jconfig, _ := json.MarshalIndent(config, "", "    ")
 	ioutil.WriteFile("config.json", jconfig, os.ModePerm)
@@ -51,7 +56,7 @@ func initWorkspace() {
 	fmt.Println("Init workspace done")
 }
 
-func newArticle(args []string) {
+func article(args []string) {
 	if len(args) == 0 {
 		help("new")
 		return
