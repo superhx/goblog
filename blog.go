@@ -43,7 +43,7 @@ func (blog *Blog) Generate() (err error) {
 	blog.wg.Wait()
 
 	b, _ := json.Marshal(blog.articles)
-	err = ioutil.WriteFile(config.PublicDir+"/category.json", b, os.ModePerm)
+	err = ioutil.WriteFile("category.json", b, os.ModePerm)
 	if err != nil {
 		log.Warnln("[Generate Fail]: category.json")
 	}
@@ -60,7 +60,7 @@ func (blog *Blog) files() (files []os.FileInfo, err error) {
 		return
 	}
 
-	category, err := ioutil.ReadFile(config.PublicDir + "/category.json")
+	category, err := ioutil.ReadFile("category.json")
 	var aticles []Article
 
 	//not init before or category.json broken
