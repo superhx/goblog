@@ -7,6 +7,7 @@ import (
 	"github.com/superhx/goblog"
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"time"
 )
 
@@ -15,12 +16,18 @@ func main() {
 		help("unkown")
 		return
 	}
+	config := goblog.GetConfig()
 	//	fmt.Println(os.Getwd())
 	switch cmd := os.Args[1]; {
 	case cmd == "server" || cmd == "s":
 		goblog.Server(8001)
 	case cmd == "generate" || cmd == "g":
 		goblog.Generate()
+		err := exec.Command("cp", "-R", config.SourceDir+"/data/", config.PublicDir).Run()
+		fmt.Println(config.SourceDir+"/data/", " ", config.PublicDir)
+		if err != nil {
+			fmt.Println(err)
+		}
 	case cmd == "init" || cmd == "i":
 		initWorkspace()
 	case cmd == "new" || cmd == "n":
@@ -39,7 +46,8 @@ func initWorkspace() {
 	jconfig, _ := json.MarshalIndent(config, "", "    ")
 	ioutil.WriteFile("config.json", jconfig, os.ModePerm)
 	os.MkdirAll(config.PublicDir, os.ModePerm)
-	os.MkdirAll(config.SourceDir, os.ModePerm)
+	os.MkdirAll(config.SourceDir+"/articles", os.ModePerm)
+	os.MkdirAll(config.SourceDir+"/data", os.ModePerm)
 	fmt.Println("Init workspace done")
 }
 

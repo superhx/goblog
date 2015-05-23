@@ -54,7 +54,7 @@ func (blog *Blog) Generate() (err error) {
 
 func (blog *Blog) files() (files []os.FileInfo, err error) {
 
-	old, err := ioutil.ReadDir(config.SourceDir)
+	old, err := ioutil.ReadDir(config.SourceDir + "/articles")
 	if err != nil {
 		log.Warnln("Can not open source dir: ", config.SourceDir)
 		return
@@ -121,7 +121,7 @@ func (blog *Blog) generate(fileInfo os.FileInfo) {
 	defer blog.wg.Done()
 
 	//markdown input
-	input, err := ioutil.ReadFile(config.SourceDir + "/" + fileInfo.Name())
+	input, err := ioutil.ReadFile(config.SourceDir + "/articles/" + fileInfo.Name())
 	if err != nil {
 		log.Warnln("Can not open file: ", fileInfo.Name())
 		return
