@@ -1,21 +1,29 @@
 package goblog
 
 import (
+	"bytes"
 	"fmt"
+	log "github.com/Sirupsen/logrus"
+	"github.com/kardianos/osext"
 	"github.com/superhx/mark"
-	"io"
 	"os"
+	"path"
+	"text/template"
 )
 
-//RenderCategory ...
+var templateDir string
+var homeTmpl *template.Template
+var blogTmpl *template.Template
+
+func init() {
+	dir, _ := osext.ExecutableFolder()
+	templateDir = dir + "/theme/template"
+
+	homeTmpl, _ = template.ParseFiles(templateDir + "/home.htm")
+	blogTmpl, _ = template.ParseFiles(templateDir + "/article.htm")
+}
+
 func renderCategory(category []Article) {
-
-	s := make([]interface{}, len(category))
-	for i := range category {
-		s[i] = category[i]
-	}
-	By(sortByDate).Sort(s)
-
 	file, err := os.Create(config.PublicDir + "/template/category.htm")
 	defer file.Close()
 	if err != nil {
@@ -29,13 +37,45 @@ func renderCategory(category []Article) {
 	file.WriteString("</ul></nav>")
 }
 
-//RenderArticle ...
-func renderArticle(node mark.Node, article Article, output io.Writer) {
-	mark.NewHTMLWriter(node).WriteTo(output)
+func renderArticle(node mark.Node, article Article) {
+	outputPath := config.PublicDir + "/" + getOutputPath(article)
+	os.MkdirAll(path.Dir(outputPath), os.ModePerm)
+	output, err := os.OpenFile(outputPath, os.O_CREATE|os.O_WRONLY, os.ModePerm)
+	defer output.Close()
+	if err != nil {
+		log.Errorln(err)
+		return
+	}
+	buf := bytes.NewBufferString("")
+	mark.NewHTMLWriter(node).WriteTo(buf)
+	blogTmpl.Execute(output, map[string]interface{}{"Info": article, "Content": buf})
+	if err != nil {
+		log.Errorln(err)
+		return
+	}
+	log.Infoln("[Generate]: ", outputPath)
 }
 
-func sortByDate(i1, i2 interface{}) bool {
+func renderHomePage(first string) {
+	file, err := os.Create(config.PublicDir + "/index.html")
+	defer file.Close()
+	if err != nil {
+		log.Errorln(err)
+		return
+	}
+	homeTmpl.Execute(file, map[string]string{"First": first})
+}
+
+func sortArticle(category []Article, by By) {
+	s := make([]interface{}, len(category))
+	for i := range category {
+		s[i] = category[i]
+	}
+	By(by).Sort(s)
+}
+
+func byDateR(i1, i2 interface{}) bool {
 	a1, _ := i1.(Article)
 	a2, _ := i2.(Article)
-	return a1.Date.Before(a2.Date.Time)
+	return a1.Date.After(a2.Date.Time)
 }

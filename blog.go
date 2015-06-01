@@ -9,7 +9,6 @@ import (
 	"html"
 	"io/ioutil"
 	"os"
-	"path"
 	"path/filepath"
 	"strconv"
 	"sync"
@@ -30,11 +29,11 @@ type Blog struct {
 
 //Generate ...
 func (blog *Blog) Generate() (err error) {
+	//generate static article html
 	files, err := blog.files()
 	if err != nil || len(files) == 0 {
 		return
 	}
-
 	for _, file := range files {
 		blog.wg.Add(1)
 		go blog.generate(file)
@@ -42,13 +41,20 @@ func (blog *Blog) Generate() (err error) {
 
 	blog.wg.Wait()
 
+	//generate category.json
 	b, _ := json.Marshal(blog.articles)
 	err = ioutil.WriteFile("category.json", b, os.ModePerm)
 	if err != nil {
 		log.Warnln("[Generate Fail]: category.json")
 	}
 
+	//generate static category html
+	sortArticle(blog.articles, byDateR)
 	renderCategory(blog.articles)
+
+	//generate home page
+	renderHomePage(getOutputPath(blog.articles[0]))
+
 	return
 }
 
@@ -139,23 +145,9 @@ func (blog *Blog) generate(fileInfo os.FileInfo) {
 	blog.articles = append(blog.articles, article)
 
 	markdown.Parts = markdown.Parts[1:]
-	//set markdown title
-	// markdown.Parts[0] = &mark.Heading{Depth: 1, Text: &mark.Text{Parts: []marker.Node{&marker.InlineText{Text: article.Title}}}}
-
-	//create output dir and output file
-	outputPath := config.PublicDir + "/" + getOutputPath(article)
-	os.MkdirAll(path.Dir(outputPath), os.ModePerm)
-	output, err := os.OpenFile(outputPath, os.O_CREATE|os.O_WRONLY, os.ModePerm)
-	defer output.Close()
-	if err != nil {
-		log.Warnln("[Generate Fail]: ", outputPath)
-		return
-	}
-
-	log.Infoln("[Generate]: ", outputPath)
 
 	//transform markdown to html and output
-	renderArticle(markdown, article, output)
+	renderArticle(markdown, article)
 }
 
 func getArticle(markdown *mark.MarkDown, fileInfo os.FileInfo) (article Article, err error) {
