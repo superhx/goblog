@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	log "github.com/Sirupsen/logrus"
 	"github.com/kardianos/osext"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/superhx/goblog"
@@ -11,7 +10,6 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
-	"time"
 )
 
 var config goblog.Config
@@ -54,7 +52,7 @@ func generate() {
 	goblog.Generate()
 	exec.Command("cp", "-R", config.SourceDir+"/data/", config.PublicDir).Run()
 	dir, _ := osext.ExecutableFolder()
-	exec.Command("cp", "-R", dir+"/theme/data/", config.PublicDir).Run()
+	exec.Command("cp", "-R", dir+"/../theme/data/", config.PublicDir).Run()
 }
 
 func workspace() {
@@ -72,15 +70,6 @@ func article(args []string) {
 		help("new")
 		return
 	}
-	config := goblog.GetConfig()
 	title := args[0]
-	article := fmt.Sprintf(`{"title":"%s", "date":"%s", "tag":%s}`, title, time.Now().Format("2006/01/02|15:04:05"), []string{})
-	article = "```\n" + article + "\n```"
-	path := fmt.Sprintf("%s/%s.md", config.SourceDir, title)
-	if err := ioutil.WriteFile(path, []byte(article), os.ModePerm); err != nil {
-		log.Errorf("Cannot create %s", path)
-		return
-	}
-
-	log.Infof("File created at %s", path)
+	goblog.New(title, []string{}, "")
 }

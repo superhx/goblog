@@ -17,7 +17,7 @@ var blogTmpl *template.Template
 
 func init() {
 	dir, _ := osext.ExecutableFolder()
-	templateDir = dir + "../theme/template"
+	templateDir = dir + "/../theme/template"
 
 	homeTmpl, _ = template.ParseFiles(templateDir + "/home.htm")
 	blogTmpl, _ = template.ParseFiles(templateDir + "/article.htm")

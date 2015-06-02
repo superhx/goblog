@@ -12,13 +12,32 @@ import (
 	"path/filepath"
 	"strconv"
 	"sync"
+	"time"
 )
 
 //Generate ...
 func Generate() (err error) {
 	var blog Blog
 	err = blog.Generate()
+	if err != nil {
+		log.Errorln(err)
+	}
 	return
+}
+
+//New ...
+func New(title string, tags []string, content string) {
+	article := fmt.Sprintf(`{"title":"%s", "date":"%s", "tag":%s}`, title, time.Now().Format("2006/01/02|15:04:05"), []string{})
+	article = "```\n" + article + "\n```"
+	path := fmt.Sprintf("%s/articles/%s.md", config.SourceDir, title)
+	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, os.ModePerm)
+	if err != nil {
+		log.Errorln(err)
+		return
+	}
+	file.WriteString(article)
+	file.WriteString(content)
+	log.Infoln("Create a new blog: ", title)
 }
 
 //Blog ias ...
