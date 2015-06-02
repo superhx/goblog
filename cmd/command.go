@@ -3,13 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/kardianos/osext"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/superhx/goblog"
 	"github.com/zenazn/goji/graceful"
 	"io/ioutil"
 	"os"
-	"os/exec"
 )
 
 var config goblog.Config
@@ -50,9 +48,6 @@ func server() {
 
 func generate() {
 	goblog.Generate()
-	exec.Command("cp", "-R", config.SourceDir+"/data/", config.PublicDir).Run()
-	dir, _ := osext.ExecutableFolder()
-	exec.Command("cp", "-R", dir+"/../theme/data/", config.PublicDir).Run()
 }
 
 func workspace() {

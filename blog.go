@@ -5,10 +5,12 @@ import (
 	"errors"
 	"fmt"
 	log "github.com/Sirupsen/logrus"
+	"github.com/kardianos/osext"
 	"github.com/superhx/mark"
 	"html"
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strconv"
 	"sync"
@@ -42,7 +44,7 @@ func New(title string, tags []string, content string) {
 
 //Blog ias ...
 type Blog struct {
-	articles []Article
+	articles []interface{}
 	wg       sync.WaitGroup
 }
 
@@ -68,12 +70,14 @@ func (blog *Blog) Generate() (err error) {
 	}
 
 	//generate static category html
-	sortArticle(blog.articles, byDateR)
+	By(func(i1, i2 interface{}) bool {
+		return i1.(*Article).Date.Time.After(i2.(*Article).Date.Time)
+	}).Sort(blog.articles)
+
 	renderCategory(blog.articles)
 
 	//generate home page
-	renderHomePage(getOutputPath(blog.articles[0]))
-
+	renderHomePage(getOutputPath(*(blog.articles[0].(*Article))))
 	return
 }
 
@@ -86,7 +90,7 @@ func (blog *Blog) files() (files []os.FileInfo, err error) {
 	}
 
 	category, err := ioutil.ReadFile("category.json")
-	var aticles []Article
+	var aticles []*Article
 
 	//not init before or category.json broken
 	if err != nil || json.Unmarshal(category, &aticles) != nil {
@@ -102,10 +106,13 @@ func (blog *Blog) files() (files []os.FileInfo, err error) {
 			}
 		}
 		err = nil
+		exec.Command("cp", "-R", config.SourceDir+"/data/", config.PublicDir).Run()
+		dir, _ := osext.ExecutableFolder()
+		exec.Command("cp", "-R", dir+"/../theme/data/", config.PublicDir).Run()
 		return
 	}
 
-	m := make(map[string]Article)
+	m := make(map[string]*Article)
 	for _, a := range aticles {
 		m[a.Name()] = a
 	}
@@ -126,14 +133,14 @@ func (blog *Blog) files() (files []os.FileInfo, err error) {
 			blog.articles = append(blog.articles, m[name])
 		} else {
 			fmt.Println(article.ModTime(), " ", file.ModTime().UTC())
-			os.Remove(config.PublicDir + "/" + getOutputPath(article))
+			os.Remove(config.PublicDir + "/" + getOutputPath(*article))
 			files = append(files, file)
 		}
 		delete(m, name)
 	}
 
 	for name := range m {
-		path := config.PublicDir + "/" + getOutputPath(m[name])
+		path := config.PublicDir + "/" + getOutputPath(*m[name])
 		os.Remove(path)
 		log.Infoln("[Remove]: ", path)
 	}
@@ -161,7 +168,7 @@ func (blog *Blog) generate(fileInfo os.FileInfo) {
 		log.Error("[Format Error]: ", fileInfo.Name())
 		return
 	}
-	blog.articles = append(blog.articles, article)
+	blog.articles = append(blog.articles, &article)
 
 	markdown.Parts = markdown.Parts[1:]
 

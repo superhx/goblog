@@ -13,6 +13,7 @@ func Server(port int) {
 	log.Info("Server start. Please visit http://localhost:" + strconv.Itoa(port))
 	log.Infoln("Press ctrl-c to stop")
 	http.Handle("/dashboard/blog/new", http.HandlerFunc(newBlog))
+	http.Handle("dashboard/generate", http.HandlerFunc(generate))
 	http.Handle("/", http.FileServer(http.Dir(config.PublicDir)))
 	if err := graceful.ListenAndServe(":"+strconv.Itoa(port), nil); err != nil {
 		log.Errorln("[Fail] fail to start server: ", err)
@@ -27,4 +28,8 @@ func newBlog(w http.ResponseWriter, req *http.Request) {
 	res, _ := json.Marshal(map[string]string{"status": "success"})
 	w.Header().Set("Content-type", "application/json")
 	w.Write(res)
+}
+
+func generate(w http.ResponseWriter, req *http.Request) {
+	Generate()
 }

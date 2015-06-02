@@ -25,23 +25,24 @@ func init() {
 	blogTmpl, _ = template.ParseFiles(templateDir + "/article.htm")
 }
 
-func renderCategory(category []Article) {
+func renderCategory(category []interface{}) {
 	file, err := os.Create(config.PublicDir + "/template/category.htm")
 	defer file.Close()
 	if err != nil {
 		fmt.Println("Create Categoty template fail")
 	}
 	file.WriteString("<nav><ul>")
-	for _, item := range category {
-		link := config.Root + "/" + getOutputPath(item)
-		file.WriteString("<li><a href=\"" + link + "\">" + item.Title + "</a></li>")
-	}
-	file.WriteString("</ul></nav>")
 
 	data := make([]map[string]interface{}, 0, len(category))
 	for _, item := range category {
-		data = append(data, map[string]interface{}{"title": item.Title, "tags": item.Tags, "date": item.Date, "link": getOutputPath(item)})
+		article := item.(*Article)
+		link := config.Root + "/" + getOutputPath(*article)
+		file.WriteString("<li><a href=\"" + link + "\">" + article.Title + "</a></li>")
+
+		data = append(data, map[string]interface{}{"title": article.Title, "tags": article.Tags, "date": article.Date, "link": getOutputPath(*article)})
 	}
+	file.WriteString("</ul></nav>")
+
 	json, _ := json.Marshal(data)
 	err = ioutil.WriteFile(config.PublicDir+"/category.json", json, os.ModePerm)
 	if err != nil {
@@ -76,18 +77,4 @@ func renderHomePage(first string) {
 		return
 	}
 	homeTmpl.Execute(output, map[string]string{"First": first})
-}
-
-func sortArticle(category []Article, by By) {
-	s := make([]interface{}, len(category))
-	for i := range category {
-		s[i] = category[i]
-	}
-	By(by).Sort(s)
-}
-
-func byDateR(i1, i2 interface{}) bool {
-	a1, _ := i1.(Article)
-	a2, _ := i2.(Article)
-	return a1.Date.After(a2.Date.Time)
 }
