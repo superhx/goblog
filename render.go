@@ -2,10 +2,12 @@ package goblog
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	log "github.com/Sirupsen/logrus"
 	"github.com/kardianos/osext"
 	"github.com/superhx/mark"
+	"io/ioutil"
 	"os"
 	"path"
 	"text/template"
@@ -35,6 +37,16 @@ func renderCategory(category []Article) {
 		file.WriteString("<li><a href=\"" + link + "\">" + item.Title + "</a></li>")
 	}
 	file.WriteString("</ul></nav>")
+
+	data := make([]map[string]interface{}, 0, len(category))
+	for _, item := range category {
+		data = append(data, map[string]interface{}{"title": item.Title, "tags": item.Tags, "date": item.Date, "link": getOutputPath(item)})
+	}
+	json, _ := json.Marshal(data)
+	err = ioutil.WriteFile(config.PublicDir+"/category.json", json, os.ModePerm)
+	if err != nil {
+		log.Errorln(err)
+	}
 }
 
 func renderArticle(node mark.Node, article Article) {
