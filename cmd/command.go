@@ -45,7 +45,7 @@ func main() {
 
 func server() {
 	go goblog.Server(8001)
-	open.Run("http://localhost:8001/new.html")
+	open.Run("http://localhost:8001/dashboard")
 }
 
 func generate() {

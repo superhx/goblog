@@ -27,10 +27,10 @@ func Generate() (err error) {
 
 //New ...
 func New(title string, tags []string, content string) {
-	article := fmt.Sprintf(`{"title":"%s", "date":"%s", "tag":%s}`, title, time.Now().Format("2006/01/02|15:04:05"), []string{})
-	article = "```\n" + article + "\n```"
+	article := fmt.Sprintf(`{"title":"%s", "date":"%s", "tag":%s}`, title, time.Now().Format("2006/01/02|15:04:05"), tags)
+	article = "```\n" + article + "\n```\n\n"
 	path := fmt.Sprintf("%s/articles/%s.md", config.SourceDir, title)
-	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, os.ModePerm)
+	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY, os.ModePerm)
 	if err != nil {
 		log.Errorln(err)
 		return
