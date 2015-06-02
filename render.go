@@ -17,7 +17,7 @@ var blogTmpl *template.Template
 
 func init() {
 	dir, _ := osext.ExecutableFolder()
-	templateDir = dir + "/theme/template"
+	templateDir = dir + "../theme/template"
 
 	homeTmpl, _ = template.ParseFiles(templateDir + "/home.htm")
 	blogTmpl, _ = template.ParseFiles(templateDir + "/article.htm")
@@ -57,13 +57,13 @@ func renderArticle(node mark.Node, article Article) {
 }
 
 func renderHomePage(first string) {
-	file, err := os.Create(config.PublicDir + "/index.html")
-	defer file.Close()
+	output, err := os.Create(config.PublicDir + "/index.html")
+	defer output.Close()
 	if err != nil {
 		log.Errorln(err)
 		return
 	}
-	homeTmpl.Execute(file, map[string]string{"First": first})
+	homeTmpl.Execute(output, map[string]string{"First": first})
 }
 
 func sortArticle(category []Article, by By) {
