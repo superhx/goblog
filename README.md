@@ -4,7 +4,8 @@
 
 ##Features
 
-- Amazing generating speed. Generating 1000 files(4KB per file) only need 5 seconds.
+- Amazing first generating speed. Generating 1000 files(4KB per file) only need 5s.
+- Intelligent later generating. If you modify or add one file, generating static files only need 50ms.
 - Support GFM markdown (for more detail reference [mark](https://github.com/superhx/mark))
 - Provide two ways **Command line** and **Web Page** to manage you blog
 
