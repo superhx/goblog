@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	log "github.com/Sirupsen/logrus"
-	"github.com/kardianos/osext"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/superhx/goblog/blog"
 	"github.com/zenazn/goji/graceful"
@@ -66,9 +65,7 @@ func workspace() {
 	os.MkdirAll(config.SourceDir+"/articles", os.ModePerm)
 	os.MkdirAll(config.SourceDir+"/data", os.ModePerm)
 
-	dir, _ := osext.ExecutableFolder()
-	dir += "/../src/github.com/superhx/goblog"
-	err := exec.Command("cp", "-R", dir+"/theme/data/", config.PublicDir).Run()
+	err := exec.Command("cp", "-R", blog.ThemeDir+"/data/", config.PublicDir).Run()
 	if err != nil {
 		log.Errorln(err)
 		return

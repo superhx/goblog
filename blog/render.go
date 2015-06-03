@@ -13,14 +13,17 @@ import (
 	"text/template"
 )
 
+//ThemeDir
+var ThemeDir string
+
 var templateDir string
 var homeTmpl *template.Template
 var blogTmpl *template.Template
 
 func init() {
-	dir, _ := osext.ExecutableFolder()
-	dir += "/../src/github.com/superhx/goblog"
-	templateDir = dir + "/theme/template"
+	ThemeDir, _ := osext.ExecutableFolder()
+	ThemeDir += "/../src/github.com/superhx/goblog/theme"
+	templateDir = ThemeDir + "/template"
 
 	homeTmpl, _ = template.ParseFiles(templateDir + "/home.htm")
 	blogTmpl, _ = template.ParseFiles(templateDir + "/article.htm")
