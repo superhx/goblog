@@ -11,6 +11,7 @@ type Article struct {
 	Title         string    `json:"title"`
 	Date          *JSONTime `json:"date"`
 	Tags          []string  `json:"tags"`
+	Category      bool      `json:"category"`
 	*JSONFileInfo `json:"fileInfo"`
 }
 

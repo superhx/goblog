@@ -8,6 +8,11 @@
 - Support GFM markdown (for more detail reference [mark](https://github.com/superhx/mark))
 - Provide two ways **Command line** and **Web Page** to manage you blog
 
+
+##Environment Need
+- go 1.4+
+- pcre
+
 ##Installation
 
 ``` bash
