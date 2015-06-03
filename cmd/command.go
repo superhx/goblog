@@ -8,6 +8,7 @@ import (
 	"github.com/zenazn/goji/graceful"
 	"io/ioutil"
 	"os"
+	"time"
 )
 
 var config goblog.Config
@@ -17,11 +18,15 @@ func init() {
 }
 
 func main() {
+	start := time.Now()
+	defer func() {
+		end := time.Now()
+		fmt.Printf("The call took %v to run.\n", end.Sub(start))
+	}()
 	if len(os.Args) == 1 {
 		help("unkown")
 		return
 	}
-
 	switch cmd := os.Args[1]; {
 	case cmd == "server" || cmd == "s":
 		server()
