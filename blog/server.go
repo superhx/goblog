@@ -2,6 +2,7 @@ package blog
 
 import (
 	"encoding/json"
+	"fmt"
 	log "github.com/Sirupsen/logrus"
 	"github.com/zenazn/goji/graceful"
 	"net/http"
@@ -25,8 +26,11 @@ func Server(port int) {
 func newBlog(w http.ResponseWriter, req *http.Request) {
 	title := req.PostFormValue("title")
 	tags := req.Form["tags[]"]
+	fmt.Println(tags)
 	content := req.PostFormValue("content")
-	New(title, tags, content)
+	category, _ := strconv.ParseBool(req.PostFormValue("category"))
+	New(title, tags, content, category)
+	Generate()
 	res, _ := json.Marshal(map[string]string{"status": "success"})
 	w.Header().Set("Content-type", "application/json")
 	w.Write(res)

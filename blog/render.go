@@ -21,10 +21,9 @@ var homeTmpl *template.Template
 var blogTmpl *template.Template
 
 func init() {
-	ThemeDir, _ := osext.ExecutableFolder()
+	ThemeDir, _ = osext.ExecutableFolder()
 	ThemeDir += "/../src/github.com/superhx/goblog/theme"
 	templateDir = ThemeDir + "/template"
-
 	homeTmpl, _ = template.ParseFiles(templateDir + "/home.htm")
 	blogTmpl, _ = template.ParseFiles(templateDir + "/article.htm")
 }

@@ -27,16 +27,21 @@ func Generate() (err error) {
 }
 
 //New ...
-func New(title string, tags []string, content string) {
-	article := fmt.Sprintf(`{"title":"%s", "date":"%s", "tag":%s}`, title, time.Now().Format("2006/01/02|15:04:05"), tags)
-	article = "```\n" + article + "\n```\n\n"
+func New(title string, tags []string, content string, category bool) {
+	article := make(map[string]interface{})
+	article["title"] = title
+	article["tags"] = tags
+	article["date"] = time.Now().Format("2006/01/02|15:04:05")
+	article["category"] = category
+	bytes, _ := json.Marshal(article)
+	str := "```\n" + string(bytes) + "\n```\n\n"
 	path := fmt.Sprintf("%s/articles/%s.md", config.SourceDir, title)
 	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY, os.ModePerm)
 	if err != nil {
 		log.Errorln(err)
 		return
 	}
-	file.WriteString(article)
+	file.WriteString(str)
 	file.WriteString(content)
 	log.Infoln("Create a new blog: ", title)
 }
@@ -94,7 +99,6 @@ func (blog *Blog) files() (files []os.FileInfo, err error) {
 	//not init before or category.json broken
 	if err != nil || json.Unmarshal(category, &aticles) != nil {
 		log.Info("Generate all")
-		os.RemoveAll(config.PublicDir)
 		os.MkdirAll(config.PublicDir+"/template", os.ModePerm)
 		os.MkdirAll(config.PublicDir+"/css", os.ModePerm)
 		os.MkdirAll(config.PublicDir+"/js", os.ModePerm)
@@ -162,7 +166,7 @@ func (blog *Blog) generate(fileInfo os.FileInfo) {
 	//extract article info
 	article, err := getArticle(markdown, fileInfo)
 	if err != nil {
-		log.Error("[Format Error]: ", fileInfo.Name())
+		log.Error("[Format Error]: ", fileInfo.Name(), "; ", err)
 		return
 	}
 	blog.articles = append(blog.articles, &article)
@@ -179,7 +183,11 @@ func getArticle(markdown *mark.MarkDown, fileInfo os.FileInfo) (article Article,
 		err = errors.New("format error")
 		return
 	}
-	json.Unmarshal([]byte(html.UnescapeString(setting.Text)), &article)
+	err = json.Unmarshal([]byte(html.UnescapeString(setting.Text)), &article)
+	if err != nil {
+		log.Warningln(err)
+		return
+	}
 	article.JSONFileInfo = &JSONFileInfo{fileInfo.Name(), fileInfo.Size(), fileInfo.Mode(), &JSONTime{fileInfo.ModTime()}, fileInfo.IsDir()}
 	return
 }

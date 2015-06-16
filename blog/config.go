@@ -7,6 +7,16 @@ import (
 
 var config Config
 
+func init() {
+	bytes, err := ioutil.ReadFile("config.json")
+	if err != nil {
+		config.SourceDir = "source"
+		config.PublicDir = "public"
+		return
+	}
+	json.Unmarshal(bytes, &config)
+}
+
 //Config ...
 type Config struct {
 	Title     string `json:"title"`
@@ -19,16 +29,6 @@ type Config struct {
 	PublicDir string `json:"publicDir"`
 	Disqus    string `json:"disqus"`
 	Analyze   string `json:"analyze"`
-}
-
-func init() {
-	bytes, err := ioutil.ReadFile("config.json")
-	if err != nil {
-		config.SourceDir = "source"
-		config.PublicDir = "public"
-		return
-	}
-	json.Unmarshal(bytes, &config)
 }
 
 //GetConfig ...
