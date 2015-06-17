@@ -103,6 +103,9 @@
             editor.html(rich_content);
             editor.css("display", "block");
             hidden.css("display", "none");
+            $('.editable').focus();
+            $('#title').focus();
+            $('#title').blur();
             isMarkdown = false;
         }
     }
@@ -119,6 +122,9 @@
         var draft = localStorage.content;
         if (localStorage.isMarkdown == "false") {
             $('.editable').html(markdown.toHTML(draft));
+            $('.editable').focus();
+            $('#title').focus();
+            $('#title').blur();
         } else {
             $('.editable').css("display", "none");
             $('#hidden_editor').css("display", "block");
