@@ -23,8 +23,8 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top container">
-    <div class="container col-md-8 col-md-offset-2">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="col-md-6 col-md-offset-3">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -59,9 +59,9 @@
     <!-- /.container-fluid -->
 </nav>
 
-<div class="container" style="padding-top: 70px">
+<div style="padding-top: 70px">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-6 col-md-offset-3">
             <div class="col-md-12">
                 <input type="text" class="h1" id="title" placeholder="Title"
                        style="border: none;outline: none;width: 100%">
@@ -111,7 +111,6 @@
     }
 
     function recover() {
-        console.log("recover");
         $('#title').val(localStorage.title);
         $('#tags').val(localStorage.tags);
         if (localStorage.category == "true") {
