@@ -173,9 +173,9 @@
   .medium-editor-placeholder:after {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 6px;
     content: attr(data-placeholder) !important;
-    font-style: italic;
+    font-style: normal;
     white-space: pre; }
 
 .medium-editor-dragover {
