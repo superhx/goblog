@@ -1,0 +1,47 @@
+.markdown-source {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    width: 100%;
+    height: auto;
+    resize: none;
+    display: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 6px;
+    color: #555;
+    background-color: #fff;
+
+}
+
+.markdown-source ::-webkit-input-placeholder {
+    color: #999;
+}
+
+.markdown-source::selection {
+    background-color: #ff4f92;
+    color: #ffffff;
+}
+
+.container {
+    padding-top: 70px;
+    padding-bottom: 50px;
+}
+
+body {
+    font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+}
+
+body p {
+    font-size: 16px;
+}
+
+.navbar {
+    font-family: "Avenir Next", sans-serif;
+}
+
+#title, #tags, #text {
+    border: none;
+    outline: none;
+    width: 100%
+}
+
