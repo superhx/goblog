@@ -87,8 +87,9 @@
     content: attr(data-placeholder) !important;
     font-style: normal;
     left: 6px;
+    font-size: 16px;
     position: absolute;
-    top: 0;
+    top: 6px;
     white-space: pre; }
 
 .medium-toolbar-arrow-under:after, .medium-toolbar-arrow-over:before {
