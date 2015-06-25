@@ -13,22 +13,27 @@ h1,
 .h1 {
     font-size: 36px;
 }
+
 h2,
 .h2 {
     font-size: 30px;
 }
+
 h3,
 .h3 {
     font-size: 24px;
 }
+
 h4,
 .h4 {
     font-size: 18px;
 }
+
 h5,
 .h5 {
     font-size: 14px;
 }
+
 h6,
 .h6 {
     font-size: 12px;
@@ -172,7 +177,7 @@ p {
     transition: opacity .35s, visibility .35s, ease-in-out;
     overflow: hidden;
     z-index: 100;
-    box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
 }
 
 .overlay.open {
@@ -235,8 +240,9 @@ p {
     border-bottom: solid 1px #e2e2e2;
 }
 
-.overlay nav ul li.active {
-    background-color: #e2e2e2;
+.overlay nav ul li.active > a {
+    /*background-color: #e2e2e2;*/
+    color: #FF5252;
 }
 
 .overlay nav ul li:last-child {
@@ -324,13 +330,13 @@ p {
 
 .footer {
     text-align: center;
-    height:30px;
+    height: 30px;
     bottom: 0px;
     position: fixed;
     width: 30%;
     font-size: 100%;
     background-color: whitesmoke;
-    box-shadow: 0 1px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
 }
 
 .right-menu .fixed {
