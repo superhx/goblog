@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700);
+
 .markdown-source {
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
     width: 100%;
@@ -28,15 +30,18 @@
 }
 
 body {
-    font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+    font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
 
 body p {
     font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 400;
 }
 
 .navbar {
-    font-family: "Avenir Next", sans-serif;
+    font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
 
 #title, #tags, #text {
@@ -45,3 +50,56 @@ body p {
     width: 100%
 }
 
+table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+table > thead > tr > th,
+table > tbody > tr > th,
+table > tfoot > tr > th,
+table > thead > tr > td,
+table > tbody > tr > td,
+table > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+}
+
+table > caption + thead > tr:first-child > th,
+table > colgroup + thead > tr:first-child > th,
+table > thead:first-child > tr:first-child > th,
+table > caption + thead > tr:first-child > td,
+table > colgroup + thead > tr:first-child > td,
+table > thead:first-child > tr:first-child > td {
+    border-top: 0;
+}
+
+table > tbody + tbody {
+    border-top: 2px solid #ddd;
+}
+
+table > tbody > tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+h1,h2,h3,h4,h5,h5{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+h2{
+    font-weight: 500;
+}
+
+h3{
+    font-weight: 700;
+}
