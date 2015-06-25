@@ -1,52 +1,56 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700);
-
 .markdown-source {
-    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    width: 100%;
-    height: auto;
-    resize: none;
-    display: none;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    padding: 6px;
-    color: #555;
-    background-color: #fff;
-
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  width: 100%;
+  height: auto;
+  resize: none;
+  display: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 6px;
+  color: #555;
+  background-color: #fff;
 }
-
-.markdown-source ::-webkit-input-placeholder {
-    color: #999;
+.markdown-source::-webkit-input-placeholder {
+  color: #999;
 }
-
 .markdown-source::selection {
-    background-color: #ff4f92;
-    color: #ffffff;
+  background-color: #ff4f92;
+  color: #ffffff;
 }
-
 .container {
-    padding-top: 70px;
-    padding-bottom: 50px;
+  padding-top: 70px;
+  padding-bottom: 50px;
 }
-
 body {
+<<<<<<< Updated upstream
     font-size: 16px;
     line-height: 24px;
     font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Source Han Sans", "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+=======
+  font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+>>>>>>> Stashed changes
 }
-
 body p {
-    font-size: 16px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-weight: 400;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 400;
 }
+<<<<<<< Updated upstream
 
-#title, #tags, #text {
-    border: none;
-    outline: none;
-    width: 100%
+=======
+.navbar {
+  font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
+>>>>>>> Stashed changes
+#title, #tags, #text {
+  border: none;
+  outline: none;
+  width: 100%
+}
+<<<<<<< Updated upstream
 
 #title {
     font-size: 36px;
@@ -54,44 +58,97 @@ body p {
     line-height: 1.42857143;
 }
 
+=======
+>>>>>>> Stashed changes
 table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
 }
-
-table > thead > tr > th,
-table > tbody > tr > th,
-table > tfoot > tr > th,
-table > thead > tr > td,
-table > tbody > tr > td,
-table > tfoot > tr > td {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
+table > thead > tr > th, table > tbody > tr > th, table > tfoot > tr > th, table > thead > tr > td, table > tbody > tr > td, table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
 }
-
 table > thead > tr > th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #ddd;
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
 }
-
-table > caption + thead > tr:first-child > th,
-table > colgroup + thead > tr:first-child > th,
-table > thead:first-child > tr:first-child > th,
-table > caption + thead > tr:first-child > td,
-table > colgroup + thead > tr:first-child > td,
-table > thead:first-child > tr:first-child > td {
-    border-top: 0;
+table > caption + thead > tr:first-child > th, table > colgroup + thead > tr:first-child > th, table > thead:first-child > tr:first-child > th, table > caption + thead > tr:first-child > td, table > colgroup + thead > tr:first-child > td, table > thead:first-child > tr:first-child > td {
+  border-top: 0;
 }
-
 table > tbody + tbody {
-    border-top: 2px solid #ddd;
+  border-top: 2px solid #ddd;
+}
+table > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+h1, h2, h3, h4, h5, h5 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+h2 {
+  font-weight: 500;
+}
+h3 {
+  font-weight: 700;
+}
+.icon-arrow-down:before {
+  content: "\e61a";
+}
+.navbar-blog {
+  height: 65px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid rgb(245, 245, 245);
+}
+.navbar-blog > div {
+  margin-top: 6px;
+}
+.toggle.ios, .toggle-on.ios, .toggle-off.ios {
+  border-radius: 20px;
+}
+.publish_btn {
+  color: #57ad68;
+  background-color: #FFFFFF;
+  border: 1px solid rgb(169, 216, 178);
+  border-radius: 19px;
+  height: 38px;
+  padding: 0px 16px;
+  line-height: 36px;
+  font-size: 14px;
+  font-weight: lighter;
+}
+.publish_btn:hover {
+  border-color: #57ad68;
 }
 
-table > tbody > tr:nth-of-type(odd) {
-    background-color: #f9f9f9;
+.blog_publish{
+  margin-top: 15px;
+}
+
+
+.popover-publish {
+  position: absolute;
+  left: -90px;
+}
+.popover-content {
+  min-width: 260px;
+  height: 150px;
+  padding: 0px;
+  box-shadow: rgba(0, 0, 0, 0.247059) 0px 1px 2px 0px, rgba(0, 0, 0, 0.34902) 0px 0px 1px 0px;
+  margin: 14px 0px 0px 0px;
+  padding: 20px;
+}
+
+.popover-option{
+  margin-top: 13px;
+  color: rgba(0, 0, 0, 0.298039);
+}
+
+.popover-option .option{
+  margin-right: 20px;
 }
 
 h1, h2, h3, h4, h5, h5 {
@@ -99,4 +156,24 @@ h1, h2, h3, h4, h5, h5 {
     margin-bottom: 20px;
     line-height: 20px;
     font-weight: 500;
+}
+.popover-arrow {
+  position: absolute;
+  left: 125px;
+  display: inline-block;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 10px solid white;
+  color: rgb(0, 0, 0);
+  border-style: none dashed solid dashed;
+  margin: 0px;
+}
+
+.arrow_t{
+  top:3px;
+  border-bottom: 10px solid rgba(0, 0, 0, 0.4);
+}
+
+.arrow_d{
+  top:4px;
 }

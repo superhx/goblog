@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +24,7 @@
 </head>
 <body style="overflow-x: hidden">
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top navbar-blog">
     <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -41,24 +41,35 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li style="padding-top: 9px;padding-right: 10px">
+                <!-- <li style="padding-top: 9px;padding-right: 10px">
                     <input type="checkbox" id="category" data-size="small">
-                </li>
+                </li> -->
                 <li style="padding-top: 9px;padding-right: 10px">
-                    <!--<button class="btn btn-default" id="switch_btn" style="outline: none;" onclick=switchEditor()>-->
+                    <!--<button class="btn btn-default" id="switch_btn" style="outline: none;" oncofflick=switchEditor()>-->
                     <!--Switch-->
                     <!--</button>-->
-                    <input type="checkbox" id="switch" data-size="small">
+                    <input type="checkbox" id="switch" data-size="normal" data-onstyle="success" data-offstyle="info" data-style="ios">
                 </li>
                 <!--<li><a></a></li>-->
                 <li style="padding-top: 7px">
-                    <button class="btn btn-default" id="publish_btn" onclick="publish()" style="outline: none;">
-                        Publish
+                    <button class="publish_btn" id="publish_btn" onclick="publish()" style="outline: none;">Publish<span class="icon-arrow-down"></span>
                     </button>
+                    <div class="popover-publish">
+                      <span class="popover-arrow arrow_t"></span>
+                      <span class="popover-arrow arrow_d"></span>
+                      <div class="popover-content">
+                        Do you want to publish your blog?
+                        <div class="popover-option">
+                          <span class="option">category</span>  <input type="checkbox" id="category" data-size="mini" data-onstyle="default" data-style="ios">
+                        </div>
+                        <button class="publish_btn blog_publish">Publish blog</button>
+                      </div>
+                    </div>
                 </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
+
     </div>
     <!-- /.container-fluid -->
 </nav>
@@ -91,12 +102,12 @@
 
 <script>
     $('#category').bootstrapToggle({
-        on: '目录开',
-        off: '目录关'
+        on: 'on',
+        off: 'off'
     })
     $('#switch').bootstrapToggle({
-        on: 'Markdown',
-        off: 'RichText'
+        on: 'Mark',
+        off: 'Rich'
     });
 
 
