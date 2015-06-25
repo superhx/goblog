@@ -124,6 +124,7 @@ h3 {
   position: absolute;
   left: -90px;
   display: none;
+  background-color: white;
 }
 .popover-content {
     font-size: 14px;

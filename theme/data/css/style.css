@@ -112,7 +112,7 @@ p {
     cursor: pointer;
     -webkit-transition: opacity .25s ease;
     transition: opacity .25s ease;
-    z-index: 200
+    z-index: 100
 }
 
 .button-container:hover {

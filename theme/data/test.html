@@ -17,134 +17,43 @@
     <link rel="stylesheet" href="css/perfect-scrollbar.css">
     <script src="js/pace.js"></script>
     <link href="css/pace-theme-flash.min.css" rel="stylesheet">
+    <style type="text/css">
+    .search-container{
+      position:fixed;
+      left:200px;
+      top:200px;
+      width: 220px;
+      height: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.14902);
+      overflow: scroll;
+
+    }
+
+    .search-container .icon{
+      margin-left: 10px;
+      margin-top: 6px;
+      float: left;
+    }
+
+    .search-container input{
+      outline: none;
+      border: none;
+      height: 100%;
+      width: 180px;
+      margin-left: 5px;
+      overflow: scroll;
+      display:inline-block;
+
+    }
+    </style>
 </head>
 
 <body class=" pace-done">
-<div class="pace  pace-inactive">
-    <div class="pace-progress" data-progress-text="100%" data-progress="99"
-         style="-webkit-transform: translate3d(100%, 0px, 0px); transform: translate3d(100%, 0px, 0px);">
-        <div class="pace-progress-inner"></div>
-    </div>
-    <div class="pace-activity"></div>
-</div>
-<div class="button-container" id="toggle">
-    <span class="top"></span>
-    <span class="middle"></span>
-    <span class="bottom"></span>
-</div>
-<div class="overlay" id="overlay">
-    <nav class="overlay-menu">
-        <div class="search-div">
-            <input type="text" class="form-control search" placeholder="Search">
-        </div>
-        <div class="ul-div " onmousewheel="return scroll(event,this)">
-            <ul>
-            </ul>
-        </div>
-        <div class="footer">Copyright© 2015 hanxv</div>
-    </nav>
-</div>
-<div class="main-content">
-    <!-- header里面属性： container-fluid  流布局    uppercase：全部大写
-      第一个div xs和md和sm 确认在大小屏幕的宽度  offset设置偏移-->
-    <header class="container-fluid  uppercase ">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2">
-            <div class="blog-title-div">
-                <h1 id="" class=" blog-title">论前端是多么的难写</h1>
-            </div>
-            <div class="blog-info-div">
-                <div class="blog-tag col-md-offset-7">
-                    本文标签:
-                    <a class="node" href="#">H5</a>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="container-fluid content-div content">
-        <article
-                class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2 scrollspy-example  markdown-body"
-                data-spy="scroll" data-target="#right-menu-nav" data-offset="0">
-            <h2 >大标题 论前端是多么的难写 Syntax</h2>
-            <p>思源跟小冢比较，思源多出了Normal这个字重，至于原因之前已经有解释过。然而比较下，以Adobe、Iwata对于字重的注重程度，留意到思源的字重，就算是名字、取向接近，思源的字重还是稍稍重一点。这不知道是对于小冢的原有字重更新？还是为了更适合在屏幕上使用？不得而知。但是以内文去编排的话会跟小冢有分别，这是必定的。</p>
-            <h3 >小标题 论前端是多么的难写 Syntax</h3>
-            <p>报告指出</p>
-            <blockquote>
-                <p>扩展各领域的学术接触是美国支持和发展地区间合作的重要方式。</p>
-            </blockquote>
-            <p>这种方式<strong>成本低</strong>，<em>影响深远</em>，同时可为中亚国家精英与美国之间创造长期持久的<strike>联系</strike>。在过去的23年中，已有超过24000名中亚国家民众通过美国国务院资助的交流项目来到美国，报告建议相关项目规模可进一步扩大。扩展以大学为基础的研究、交流和商务培训项目。报告指出，扩展各领域的学术接触是美国支持和发展地区间合作的重要方式。这种方式成本低，影响深远，同时可为中亚国家精英与美国之间创造长期持久的联系。</p>
-            <ol>
-                <li>list</li>
-                <li>list</li>
-            </ol>
-            <p>相对小冢，思源黑的细体没有太细。他可以做到细的感觉，但相对小冢它无论在我们普通的LCD屏还是Retina屏上还是一套易读易认的细体，加上先前说过Normal跟Regular的新颖设计，足证思源的价值所在。</p>
-            <ul>
-                <li>p1</li>
-                <li>p2</li>
-            </ul>
-            <h2>Code</h2>
-            <p><code>&lt;table class="table"&gt;&lt;/table&gt;</code></p>
-            <pre>Indent each line by at least 1 tab, 2 spaces or 4 spaces.</pre>
-
-            <h2>表格</h2>
-            <p>正文正文正文正文正文正文正文正文正文正文正文正文</p>
-            <p>正文正文正文正文正文正文正文正文正文正文正文正文  </p>
-            <h3>小表格</h3>
-            <table>
-
-                <thead>
-
-                <tr>
-
-                    <th>First Header</th>
-
-                    <th>Second Header</th>
-
-                    <th>Third Header</th>
-
-                </tr>
-
-                </thead>
-
-                <tbody>
-
-                <tr>
-
-                    <td>Content Cell</td>
-
-                    <td>Content Cell</td>
-
-                    <td>Content Cell</td>
-
-                </tr>
-
-                <tr>
-
-                    <td>Content Cell</td>
-
-                    <td>Content Cell</td>
-
-                    <td>Content Cell</td>
-
-                </tr>
-
-                </tbody>
-
-            </table>
-        </article>
-        <div class="col-md-2 col-md-offset-9 right-menu" id="right-menu">
-            <nav class=" hidden-print hidden-xs hidden-sm  right-menu-nav " role="navigation" id="right-menu-nav">
-                <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
-                    <ul class="nav bs-docs-sidenav right-menu-ul"></ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <div class="blog-info-div">
-        <h3 class="blog-time col-md-offset-7  col-xs-offset-4 col-sm-offset-2">创建时间:2015-05-15</h3>
-
-        <h3 class="blog-time col-md-offset-7  col-xs-offset-4 col-sm-offset-2">最后一次修改时间:2015-05-16</h3>
-    </div>
-</div>
+  <div class="search-container" >
+    <span class="icon glyphicon glyphicon-search" aria-hidden="true"></span>
+    <input>
+  </div>
 <!-- Javascript -->
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
