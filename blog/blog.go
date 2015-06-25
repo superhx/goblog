@@ -56,6 +56,26 @@ type Blog struct {
 func (blog *Blog) Generate() (err error) {
 	//generate static article html
 	files, err := blog.files()
+
+	defer func() {
+		//generate category.json
+		b, _ := json.Marshal(blog.articles)
+		err = ioutil.WriteFile("category.json", b, os.ModePerm)
+		if err != nil {
+			log.Warnln("[Generate Fail]: category.json")
+		}
+
+		//generate static category html
+		By(func(i1, i2 interface{}) bool {
+			return i1.(*Article).Date.Time.After(i2.(*Article).Date.Time)
+		}).Sort(blog.articles)
+
+		renderCategory(blog.articles)
+
+		//generate home page
+		renderHomePage(getOutputPath(*(blog.articles[0].(*Article))))
+	}()
+
 	if err != nil || len(files) == 0 {
 		return
 	}
@@ -66,22 +86,6 @@ func (blog *Blog) Generate() (err error) {
 
 	blog.wg.Wait()
 
-	//generate category.json
-	b, _ := json.Marshal(blog.articles)
-	err = ioutil.WriteFile("category.json", b, os.ModePerm)
-	if err != nil {
-		log.Warnln("[Generate Fail]: category.json")
-	}
-
-	//generate static category html
-	By(func(i1, i2 interface{}) bool {
-		return i1.(*Article).Date.Time.After(i2.(*Article).Date.Time)
-	}).Sort(blog.articles)
-
-	renderCategory(blog.articles)
-
-	//generate home page
-	renderHomePage(getOutputPath(*(blog.articles[0].(*Article))))
 	return
 }
 
@@ -145,7 +149,6 @@ func (blog *Blog) files() (files []os.FileInfo, err error) {
 		os.Remove(path)
 		log.Infoln("[Remove]: ", path)
 	}
-
 	return
 }
 
