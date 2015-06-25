@@ -191,9 +191,9 @@ p {
 
 .ul-div {
     padding-top: 10px;
-    padding-bottom: 40px;
+    padding-bottom: 70px;
     overflow: auto;
-    height: 93%;
+    height: 100%;
     position: fixed;
     width: 30%;
 }
@@ -230,9 +230,8 @@ p {
     min-height: 32px;
     position: relative;
     opacity: 0;
-    width: 85%;
-    padding: 5px 0;
-    margin-left: 10%;
+    width: 100%;
+    padding: 5px 20px;
     border-bottom: solid 1px #e2e2e2;
 }
 
