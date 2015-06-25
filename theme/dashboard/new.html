@@ -66,7 +66,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-            <input type="text" class="h1" id="title" placeholder="Title">
+            <input type="text" id="title" placeholder="Title">
         </div>
     </div>
     <div class="row">
@@ -102,7 +102,7 @@
 
     var editor = new MediumEditor('.editable', {
         toolbar: {
-            buttons: ['bold', 'italic', 'strikethrough', 'anchor', 'image', 'quote', 'pre', 'orderedlist', 'unorderedlist', 'h2', 'h3', 'h4'],
+            buttons: ['bold', 'italic', 'strikethrough', 'anchor', 'image', 'quote', 'pre', 'orderedlist', 'unorderedlist', 'h2', 'h3', 'removeFormat'],
         },
         autoLink: false,
         buttonLabels: 'fontawesome',

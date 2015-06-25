@@ -1,32 +1,52 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700);
+
 html {
     overflow: auto;
     overflow-x: hidden;
 }
 
 body {
-    font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+    font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Source Han Sans", "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
 
-h1 {
-    font-size: 2.143em;
-    font-weight: 700
+h1,
+.h1 {
+    font-size: 36px;
+}
+h2,
+.h2 {
+    font-size: 30px;
+}
+h3,
+.h3 {
+    font-size: 24px;
+}
+h4,
+.h4 {
+    font-size: 18px;
+}
+h5,
+.h5 {
+    font-size: 14px;
+}
+h6,
+.h6 {
+    font-size: 12px;
 }
 
-h2 {
-    font-size: 1.429em
-}
-
-h3 {
-    font-size: 1.214em
-}
-
-h4 {
-    font-size: 1.071em
+h1, h2, h3, h4, h5, h5 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 20px;
+    font-weight: 500;
 }
 
 p {
-    font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+    font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Source Han Sans", "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
     font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 400;
 }
 
 .btn-custom {
@@ -86,7 +106,7 @@ p {
 .button-container {
     position: fixed;
     top: 10px;
-    left: 3.5%;
+    left: 3%;
     height: 21px;
     width: 29px;
     cursor: pointer;
@@ -124,27 +144,27 @@ p {
     -webkit-transform: translateY(9px) translateX(0) rotate(45deg);
     -ms-transform: translateY(9px) translateX(0) rotate(45deg);
     transform: translateY(9px) translateX(0) rotate(45deg);
-    background: #FFF
+    background: #fff
 }
 
 .middle.active {
     opacity: 0;
-    background: #FFF
+    background: #fff
 }
 
 .bottom.active {
     -ms-transform: translateY(-9px) translateX(0) rotate(-45deg);
     -webkit-transform: translateY(-9px) translateX(0) rotate(-45deg);
     tranform: translateY(-9px) translateX(0) rotate(-45deg);
-    background: #FFF
+    background: #fff
 }
 
 .overlay {
     position: fixed;
-    background: #FF5252;
+    background: #fff;
     top: 0;
     left: 0;
-    width: 35%;
+    width: 30%;
     height: 100%;
     opacity: 0;
     visibility: hidden;
@@ -152,7 +172,7 @@ p {
     transition: opacity .35s, visibility .35s, ease-in-out;
     overflow: hidden;
     z-index: 100;
-
+    box-shadow: 0 1px 20px rgba(0,0,0,0.1);
 }
 
 .overlay.open {
@@ -164,17 +184,18 @@ p {
     position: relative;
     height: 100%;
     font-size: 16px;
-    font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+    font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Source Han Sans", "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
     font-weight: 400;
     text-align: left
 }
 
 .ul-div {
-    padding-top: 50px;
+    padding-top: 10px;
+    padding-bottom: 40px;
     overflow: auto;
     height: 93%;
     position: fixed;
-    width: 35%;
+    width: 30%;
 }
 
 .overlay nav ul {
@@ -187,22 +208,22 @@ p {
 }
 
 .search-div {
-    position: fixed;
-    opacity: 0.8;
-    width: 31.5%;
+    /*position: fixed;*/
+    width: 100%;
     top: 0;
-    padding-left: 50px;
+    padding-left: 80px;
     padding-right: 30px;
+    padding-top: 1px;
     left: 3.5%;
     height: 50px;
     z-index: 50;
-    background-color: #FF5252;
-    opacity: 0.8;
+    background: rgba(255,82,82,0.9);
+    /*opacity: 0.5;*/
 }
 
 .search {
     width: 250px;
-    margin-top: 10px;
+    margin-top: 7px;
     padding: 1px 12px;
     height: 28px;
 }
@@ -212,14 +233,14 @@ p {
     min-height: 32px;
     position: relative;
     opacity: 0;
-    width: 80%;
-    padding: 10px 0;
+    width: 85%;
+    padding: 5px 0;
     margin-left: 10%;
-    border-bottom: solid 1px #000000;
+    border-bottom: solid 1px #e2e2e2;
 }
 
 .overlay nav ul li.active {
-    background-color: green;
+    background-color: #e2e2e2;
 }
 
 .overlay nav ul li:last-child {
@@ -241,7 +262,7 @@ p {
 
 .overlay nav ul li span {
     font-size: 14px;
-    color: white;
+    color: #555;
 }
 
 .overlay nav ul li span:last-child {
@@ -273,7 +294,7 @@ p {
 .overlay nav ul li a {
     display: block;
     position: relative;
-    color: #FFF;
+    color: #555;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -309,8 +330,8 @@ p {
     text-align: center;
     top: 94%;
     position: fixed;
-    width: 35%;
-    font-size: 150%;
+    width: 30%;
+    font-size: 100%;
 }
 
 .right-menu .fixed {
@@ -324,7 +345,7 @@ p {
     }
 
     .overlay nav ul li {
-        width: 80%;
+        width: 95%;
         margin-left: 20px;
     }
 

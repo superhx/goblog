@@ -37,7 +37,7 @@ a.node:link, a.node:visited, a.node:active {
   border-radius: 2px;
   text-decoration: none;
   color: #999;
-  margin-left: 6px; }
+  margin-right: 5px; }
 
 a.node:hover {
   text-decoration: none;
@@ -48,10 +48,11 @@ a.node:hover {
   overflow: hidden; }
 
 .menu-li a.node {
-  margin-top: 5px;
+  /*margin-top: 5px;*/
   font-size: 12px;
   line-height: 12px;
-  padding: 5px 5px 5px 5px; }
+  /*padding: 5px 5px 5px 5px; */
+} 
 
 header {
   margin-bottom: 40px; }
@@ -90,12 +91,12 @@ header {
   display: none; }
 
 .right-menu nav ul li a.active {
-  border-left: solid 2px blue; }
+  border-left: solid 2px #FF5252; }
 
 .right-menu nav ul li ul.active {
   display: block; }
 
 .right-menu nav ul li ul li.active {
-  border-left: solid 2px blue; }
+  border-left: solid 2px #FF5252; }
 
 /*# sourceMappingURL=index.css.map */

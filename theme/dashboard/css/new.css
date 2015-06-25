@@ -30,7 +30,9 @@
 }
 
 body {
-    font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Source Han Sans", "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
 
 body p {
@@ -40,14 +42,16 @@ body p {
     font-weight: 400;
 }
 
-.navbar {
-    font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
-}
-
 #title, #tags, #text {
     border: none;
     outline: none;
     width: 100%
+}
+
+#title {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.42857143;
 }
 
 table {
@@ -90,16 +94,9 @@ table > tbody > tr:nth-of-type(odd) {
     background-color: #f9f9f9;
 }
 
-h1,h2,h3,h4,h5,h5{
+h1, h2, h3, h4, h5, h5 {
     margin-top: 20px;
     margin-bottom: 20px;
-    line-height: 1.1;
-}
-
-h2{
+    line-height: 20px;
     font-weight: 500;
-}
-
-h3{
-    font-weight: 700;
 }
