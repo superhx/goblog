@@ -24,13 +24,9 @@
   padding-bottom: 50px;
 }
 body {
-<<<<<<< Updated upstream
     font-size: 16px;
     line-height: 24px;
     font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Source Han Sans", "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
-=======
-  font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
->>>>>>> Stashed changes
 }
 body p {
   font-size: 16px;
@@ -38,19 +34,16 @@ body p {
   margin-bottom: 20px;
   font-weight: 400;
 }
-<<<<<<< Updated upstream
 
-=======
 .navbar {
   font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
->>>>>>> Stashed changes
+
 #title, #tags, #text {
   border: none;
   outline: none;
-  width: 100%
+  width: 100%;
 }
-<<<<<<< Updated upstream
 
 #title {
     font-size: 36px;
@@ -58,8 +51,6 @@ body p {
     line-height: 1.42857143;
 }
 
-=======
->>>>>>> Stashed changes
 table {
   width: 100%;
   max-width: 100%;
@@ -134,7 +125,7 @@ h3 {
   left: -90px;
 }
 .popover-content {
-  min-width: 260px;
+  min-width: 280px;
   height: 150px;
   padding: 0px;
   box-shadow: rgba(0, 0, 0, 0.247059) 0px 1px 2px 0px, rgba(0, 0, 0, 0.34902) 0px 0px 1px 0px;

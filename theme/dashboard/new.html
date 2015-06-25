@@ -52,7 +52,7 @@
                 </li>
                 <!--<li><a></a></li>-->
                 <li style="padding-top: 7px">
-                    <button class="publish_btn" id="publish_btn" onclick="publish()" style="outline: none;">Publish<span class="icon-arrow-down"></span>
+                    <button class="publish_btn" data-action="pre-publish" style="outline: none;">Publish<span class="icon-arrow-down"></span>
                     </button>
                     <div class="popover-publish">
                       <span class="popover-arrow arrow_t"></span>
@@ -62,7 +62,7 @@
                         <div class="popover-option">
                           <span class="option">category</span>  <input type="checkbox" id="category" data-size="mini" data-onstyle="default" data-style="ios">
                         </div>
-                        <button class="publish_btn blog_publish">Publish blog</button>
+                        <button class="publish_btn blog_publish" id="publish_btn" onclick="publish()">Publish blog</button>
                       </div>
                     </div>
                 </li>
@@ -101,6 +101,9 @@
 
 
 <script>
+    // console.log($('[data-action="pre-publish"]'));
+
+
     $('#category').bootstrapToggle({
         on: 'on',
         off: 'off'
