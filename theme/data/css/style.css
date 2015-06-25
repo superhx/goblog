@@ -328,10 +328,12 @@ p {
 
 .footer {
     text-align: center;
-    top: 94%;
+    height:30px;
+    bottom: 0px;
     position: fixed;
     width: 30%;
     font-size: 100%;
+    background-color: black;
 }
 
 .right-menu .fixed {
@@ -414,4 +416,3 @@ table > tbody + tbody {
 table > tbody > tr:nth-of-type(odd) {
     background-color: #f9f9f9;
 }
-
