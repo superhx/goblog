@@ -39,7 +39,7 @@ body p {
   font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
 
-#title, #tags, #text {
+#title, #tags, #text,.popover-publish,.popover-content {
   border: none;
   outline: none;
   width: 100%;
@@ -126,6 +126,7 @@ h3 {
   display: none;
 }
 .popover-content {
+    font-size: 14px;
   min-width: 280px;
   padding: 0px;
   box-shadow: rgba(0, 0, 0, 0.247059) 0px 1px 2px 0px, rgba(0, 0, 0, 0.34902) 0px 0px 1px 0px;
@@ -134,7 +135,7 @@ h3 {
 }
 
 .popover-option{
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 13px;
   color: rgba(0, 0, 0, 0.298039);
 }

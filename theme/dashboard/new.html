@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
     <link rel="stylesheet" href="css/bootstrap-toggle.css">
     <link rel="stylesheet" href="css/new.css">
+    <link rel="stylesheet" href="css/markdownicon.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     <script src="js/jquery.js"></script>
@@ -48,22 +49,29 @@
                     <!--<button class="btn btn-default" id="switch_btn" style="outline: none;" oncofflick=switchEditor()>-->
                     <!--Switch-->
                     <!--</button>-->
-                    <input type="checkbox" id="switch" data-size="normal" data-onstyle="success" data-offstyle="info" data-style="ios">
+                    <input type="checkbox" id="switch" data-toggle="toggle" data-size="normal" data-off="Rich" data-on="<i class='markdown-mark'></i>" data-onstyle="success" data-offstyle="info"
+                           data-style="ios">
                 </li>
                 <!--<li><a></a></li>-->
                 <li style="padding-top: 7px">
-                    <button class="publish_btn" data-action="pre-publish" style="outline: none;" tabindex="6">Publish<span class="icon-arrow-down"></span>
+                    <button class="publish_btn" data-action="pre-publish" style="outline: none;" tabindex="6">Publish
+                        <span><i class="fa fa-angle-down fa-lg"></i></span>
                     </button>
                     <div class="popover-publish">
-                      <span class="popover-arrow arrow_t"></span>
-                      <span class="popover-arrow arrow_d"></span>
-                      <div class="popover-content"  tabindex="1">
-                        Do you want to publish your blog?
-                        <div class="popover-option">
-                          <span class="option">category:</span>  <input type="checkbox" id="category" data-size="mini" data-onstyle="default" data-style="ios">
+                        <span class="popover-arrow arrow_t"></span>
+                        <span class="popover-arrow arrow_d"></span>
+
+                        <div class="popover-content" tabindex="1">
+                            Do you want to publish your blog?
+                            <div class="popover-option">
+                                <span class="option">Category:</span> <input type="checkbox" id="category" data-toggle="toggle"
+                                                                             data-size="small" data-on="ON"
+                                                                             data-off="OFF" data-onstyle="success"
+                                                                             data-style="ios">
+                            </div>
+                            <button class="publish_btn blog_publish" id="publish_btn" onclick="publish()">Publish blog
+                            </button>
                         </div>
-                        <button class="publish_btn blog_publish" id="publish_btn" onclick="publish()">Publish blog</button>
-                      </div>
                     </div>
                 </li>
             </ul>
@@ -101,24 +109,14 @@
 
 
 <script>
-    var publishPanleShow=false;
-    $('[data-action="pre-publish"]').click(function(e){
-      $('.popover-publish').toggle().focus();
+    var publishPanleShow = false;
+    $('[data-action="pre-publish"]').click(function (e) {
+        $('.popover-publish').toggle().focus();
 
     });
 
-    $('.popover-publish').blur(function(e){
-      $(e.delegateTarget).hide();
-    });
-
-
-    $('#category').bootstrapToggle({
-        on: 'on',
-        off: 'off'
-    })
-    $('#switch').bootstrapToggle({
-        on: 'Mark',
-        off: 'Rich'
+    $('.popover-publish').blur(function (e) {
+        $(e.delegateTarget).hide();
     });
 
 
@@ -131,7 +129,7 @@
         paste: {
             forcePlainText: false,
             cleanPastedHTML: true,
-            cleanAttrs: ['class', 'style', 'dir','line-height'],
+            cleanAttrs: ['class', 'style', 'dir', 'line-height'],
             cleanTags: ['meta', 'span']
         },
         imageDragging: false
