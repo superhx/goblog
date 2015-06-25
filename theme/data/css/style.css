@@ -218,8 +218,9 @@ p {
     top: 0;
     left: 3.5%;
     z-index: 50;
-    background: gray;
-    padding: 5px 0px;
+    background: #ffffff;
+    padding: 8px 0px;
+    border-bottom:1px solid rgb(245, 245, 245);
     /*opacity: 0.5;*/
 }
 
@@ -350,8 +351,6 @@ p {
     }
 
     .overlay nav ul li {
-        width: 95%;
-        margin-left: 20px;
     }
 
     .overlay.open .main-content {

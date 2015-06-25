@@ -117,7 +117,7 @@ var jsonData = [{
 (function(){
     var a = /\b.*(iphone|ipad|android).*\b/;
     if(!(a.test(navigator.userAgent.toLowerCase()))){
-        
+
     }
 }());
 
@@ -132,7 +132,7 @@ var toggleBlog = function(){
             blogTop = totalList.eq(i).offset();
             num = i;
             break;
-        } 
+        }
     }
     return {
         getTop : function(){return blogTop.top;},
@@ -233,11 +233,30 @@ function dealData(text) {
     }
     $('.ul-div').scrollTop(0);
 }
+
+
 var scroll = function(event, scroller) {
+  console.log("scroll");
+
     var k = event.wheelDelta ? event.wheelDelta : -event.detail * 10;
     scroller.scrollTop = scroller.scrollTop - k;
     return false;
 };
+
+var isUp=false;
+var lastScrollTop=0;
+var searchDiv=$('.search-div')
+var topThresh=searchDiv.height();
+function searchScroll(top){
+  console.log(top);
+  if(top<topThresh) return;
+  if(isUp^(top>lastScrollTop)) searchDiv.fadeToggle();
+  isUp=top<lastScrollTop;
+  lastScrollTop=top;
+}
+
+
+
 $('.ul-div').perfectScrollbar();
 $('.node').on('click', searchNode);
 
