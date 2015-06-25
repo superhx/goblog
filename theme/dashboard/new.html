@@ -52,15 +52,15 @@
                 </li>
                 <!--<li><a></a></li>-->
                 <li style="padding-top: 7px">
-                    <button class="publish_btn" data-action="pre-publish" style="outline: none;">Publish<span class="icon-arrow-down"></span>
+                    <button class="publish_btn" data-action="pre-publish" style="outline: none;" tabindex="6">Publish<span class="icon-arrow-down"></span>
                     </button>
                     <div class="popover-publish">
                       <span class="popover-arrow arrow_t"></span>
                       <span class="popover-arrow arrow_d"></span>
-                      <div class="popover-content">
+                      <div class="popover-content"  tabindex="1">
                         Do you want to publish your blog?
                         <div class="popover-option">
-                          <span class="option">category</span>  <input type="checkbox" id="category" data-size="mini" data-onstyle="default" data-style="ios">
+                          <span class="option">category:</span>  <input type="checkbox" id="category" data-size="mini" data-onstyle="default" data-style="ios">
                         </div>
                         <button class="publish_btn blog_publish" id="publish_btn" onclick="publish()">Publish blog</button>
                       </div>
@@ -77,12 +77,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-            <input type="text" id="title" placeholder="Title">
+            <input type="text" id="title" placeholder="Title" tabindex="1">
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-            <input type="text" id="tags" data-role="tagsinput" placeholder="Tags">
+            <input type="text" id="tags" data-role="tagsinput" placeholder="Tags" tabindex="2">
         </div>
     </div>
     <div class="row">
@@ -94,14 +94,22 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
             <textarea id="hidden_editor" class="markdown-source"
-                      placeholder="Type your text in Markdown"></textarea>
+                      placeholder="Type your text in Markdown" tabindex="3"></textarea>
         </div>
     </div>
 </div>
 
 
 <script>
-    // console.log($('[data-action="pre-publish"]'));
+    var publishPanleShow=false;
+    $('[data-action="pre-publish"]').click(function(e){
+      $('.popover-publish').toggle().focus();
+
+    });
+
+    $('.popover-publish').blur(function(e){
+      $(e.delegateTarget).hide();
+    });
 
 
     $('#category').bootstrapToggle({

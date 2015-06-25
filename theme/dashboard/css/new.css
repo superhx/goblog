@@ -123,10 +123,10 @@ h3 {
 .popover-publish {
   position: absolute;
   left: -90px;
+  display: none;
 }
 .popover-content {
   min-width: 280px;
-  height: 150px;
   padding: 0px;
   box-shadow: rgba(0, 0, 0, 0.247059) 0px 1px 2px 0px, rgba(0, 0, 0, 0.34902) 0px 0px 1px 0px;
   margin: 14px 0px 0px 0px;
@@ -134,6 +134,7 @@ h3 {
 }
 
 .popover-option{
+  font-size: 12px;
   margin-top: 13px;
   color: rgba(0, 0, 0, 0.298039);
 }
