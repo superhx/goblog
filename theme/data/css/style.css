@@ -211,22 +211,19 @@ p {
     /*position: fixed;*/
     width: 100%;
     top: 0;
-    padding-left: 80px;
-    padding-right: 30px;
-    padding-top: 1px;
     left: 3.5%;
-    height: 50px;
     z-index: 50;
-    background: rgba(255,82,82,0.9);
+    background: gray;
+    padding: 5px 0px;
     /*opacity: 0.5;*/
 }
 
-.search {
+/*.search {
     width: 250px;
     margin-top: 7px;
     padding: 1px 12px;
     height: 28px;
-}
+}*/
 
 .overlay nav ul li {
     display: block;

@@ -100,3 +100,32 @@ header {
   border-left: solid 2px #FF5252; }
 
 /*# sourceMappingURL=index.css.map */
+
+.search-container{
+  width: 300px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.14902);
+  overflow: scroll;
+  background-color: white;
+  margin: 0px auto 0px auto;
+}
+
+.search-container .icon{
+  margin-left: 10px;
+  margin-top: 6px;
+  float: left;
+}
+
+.search-container input{
+  -webkit-appearance: none;
+  outline: none ;
+  outline-color: rgba(0, 0, 0, 0.8);
+  border: none;
+  height: 100%;
+  width: 260px; /* search-container width-40px */
+  margin-left: 5px;
+  overflow: scroll;
+  display:inline-block;
+
+}
