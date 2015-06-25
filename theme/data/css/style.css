@@ -333,7 +333,8 @@ p {
     position: fixed;
     width: 30%;
     font-size: 100%;
-    background-color: black;
+    background-color: whitesmoke;
+    box-shadow: 0 1px 20px rgba(0,0,0,0.1);
 }
 
 .right-menu .fixed {
@@ -378,7 +379,7 @@ p {
 }
 
 table {
-    width: 100%;
+    /*width: 100%;*/
     max-width: 100%;
     margin-bottom: 20px;
 }
