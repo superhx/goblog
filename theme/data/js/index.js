@@ -246,7 +246,7 @@ var lastScrollTop=0;
 var searchDiv=$('.search-div')
 var topThreshold=searchDiv.height();
 $('.ul-div').scroll(function(e){
-  var top=$(e.delegateTarget).scrollTop();
+  var top=parseInt($('.ps-scrollbar-y').css('top'));
   if(top<topThreshold) return;
   if(isUp^(top<lastScrollTop)){
     console.log(top);

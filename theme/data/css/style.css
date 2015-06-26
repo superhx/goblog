@@ -310,8 +310,9 @@ p {
   height: 30px;
   bottom: 0px;
   position: fixed;
-  width: 30%;
+  width: 450px;
   font-size: 100%;
+  box-sizing: border-box;
   background-color: whitesmoke;
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
 }
