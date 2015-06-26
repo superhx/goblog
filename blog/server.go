@@ -17,9 +17,9 @@ func Server(port int) {
 	http.Handle("/dashboard/blog/new", http.HandlerFunc(newBlog))
 	http.Handle("/dashboard/generate", http.HandlerFunc(generate))
 	http.Handle("/dashboard/deploy", http.HandlerFunc(deploy))
-	fmt.Println(ThemeDir + "/dashboard")
 	http.Handle("/dashboard/", http.StripPrefix("/dashboard/", http.FileServer(http.Dir(ThemeDir+"/dashboard"))))
 	http.Handle("/", http.FileServer(http.Dir(config.PublicDir)))
+	fmt.Println(ThemeDir + "/dashboard")
 	if err := graceful.ListenAndServe(":"+strconv.Itoa(port), nil); err != nil {
 		log.Errorln("[Fail] fail to start server: ", err)
 	}
