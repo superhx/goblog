@@ -162,9 +162,8 @@ $("#toggle").click(
                 $(".main-content").toggleClass("active");
                 $("#overlay").toggleClass("open");
                 $(".right-menu").toggleClass("active");
-                // $('.ul-div').scrollTop(0);
             if(time == 0){
-            	// $('.ul-div').animate({scrollTop: toggleBlog().getTop()}, 500);
+            	$('.ul-div').animate({scrollTop: toggleBlog().getTop()}, 500);
                 $('.menu-li').eq(toggleBlog().getNum()).addClass('active');
                 time += 1;
             }
@@ -251,7 +250,7 @@ var searchDiv=$('.search-div')
 var topThreshold=searchDiv.height();
 $('.ul-div').scroll(function(e){
   var top=parseInt($('.ps-scrollbar-y').css('top'));
-  if(top<topThreshold) return;
+  if(top<topThreshold)     {searchDiv.fadeIn(); return;}
   if(isUp^(top<lastScrollTop)){
     console.log(top);
     searchDiv.fadeToggle();

@@ -110,7 +110,6 @@ header {
   height: 30px;
   border-radius: 15px;
   border: 1px solid rgba(0, 0, 0, 0.14902);
-  overflow: scroll;
   background-color: white;
   margin: 0px auto 0px auto;
 }
