@@ -149,7 +149,7 @@ p {
     -webkit-transform: translateY(9px) translateX(0) rotate(45deg);
     -ms-transform: translateY(9px) translateX(0) rotate(45deg);
     transform: translateY(9px) translateX(0) rotate(45deg);
-    background: #fff
+    background: rgba(0, 0, 0, 0.14902);
 }
 
 .middle.active {
@@ -161,7 +161,7 @@ p {
     -ms-transform: translateY(-9px) translateX(0) rotate(-45deg);
     -webkit-transform: translateY(-9px) translateX(0) rotate(-45deg);
     tranform: translateY(-9px) translateX(0) rotate(-45deg);
-    background: #fff
+    background: rgba(0, 0, 0, 0.14902);
 }
 
 .overlay {
@@ -376,6 +376,10 @@ p {
 
     .search {
         width: inherit;
+    }
+
+    .button-container{
+      z-index: 200;
     }
 }
 
