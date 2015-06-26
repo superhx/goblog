@@ -249,7 +249,6 @@ $('.ul-div').scroll(function(e){
   var top=$(e.delegateTarget).scrollTop();
   if(top<topThreshold) return;
   if(isUp^(top<lastScrollTop)){
-    console.log('change');
     searchDiv.fadeToggle();
   }
   isUp=top<lastScrollTop;
