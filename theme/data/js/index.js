@@ -104,12 +104,13 @@ var jsonData = [{
 }];
 (function(data) {
     $.each(data, function(index, val) {
-    	var date = new Date(val.date);
+    	var date = Date.parse(val.date);
     	var tag = '';
     	for (var i = val.tags.length - 1; i >= 0; i--) {
     		tag += '<a class="node" href="#">'+val.tags[i]+'</a>'
     	};
-      var string='<li class="menu-li"><span class="time">'+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDay()+'</span><div class="content"><a class="title" href="'+val.link+'">' +val.title+'</a><div class="tags"><span>'+tag+'</span></div></div></li>'
+      console.log(date.toString('MMM d'));
+      var string='<li class="menu-li"><span class="time">'+format(date)+'</span><div class="content"><a class="title" href="'+val.link+'">' +val.title+'</a><div class="tags"><span>'+tag+'</span></div></div></li>'
     	$('.ul-div ul').append(string);
     });
 })(jsonData);
@@ -124,7 +125,7 @@ var jsonData = [{
 
 var toggleBlog = function(){
     // var localhref = window.location.href;
-    var localhref = 'localhost://blog/2012/1/10/markdown_help_9/index.html'
+    var localhref = 'localhost://blog/2012/1/9/markdown_help_8/index.html'
     var blogList = $(".menu-li");
     var blogTop , num;
     for (var i = 0; i < blogList.length; i++) {
@@ -285,7 +286,6 @@ $('.menu-li').mouseenter(function(e){
   var target=$(e.delegateTarget);
   setTimeout(function(){
     if(target.is(':hover')){
-      console.log('on');
       target.find('div.tags').animate({'margin-top':'5px'},400);
     }
   },500);
@@ -293,3 +293,7 @@ $('.menu-li').mouseenter(function(e){
 }).mouseleave(function(e){
   $(e.delegateTarget).find('div.tags').animate({'margin-top':'-25px'},200);
 });
+
+function format(date){
+  return date.toString('MMM d');
+}
