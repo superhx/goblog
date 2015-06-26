@@ -241,17 +241,32 @@ var scroll = function(event, scroller) {
     return false;
 };
 
-var isUp=false;
+var isUp=true;
 var lastScrollTop=0;
 var searchDiv=$('.search-div')
-var topThresh=searchDiv.height();
-function searchScroll(top){
-  console.log(top);
-  if(top<topThresh) return;
-  if(isUp^(top>lastScrollTop)) searchDiv.fadeToggle();
+var topThreshold=searchDiv.height();
+$('.ul-div').scroll(function(e){
+  var top=$(e.delegateTarget).scrollTop();
+  if(top<topThreshold) return;
+  if(isUp^(top<lastScrollTop)){
+    console.log('change');
+    searchDiv.fadeToggle();
+  }
   isUp=top<lastScrollTop;
   lastScrollTop=top;
-}
+});
+
+// var isUp=false;
+// var lastScrollTop=0;
+// var searchDiv=$('.search-div')
+// var topThresh=searchDiv.height();
+// function searchScroll(top){
+//   console.log(top);
+//   if(top<topThreshold) return;
+//   if(isUp^(top>topThreshold)) searchDiv.fadeToggle();
+//   isUp=top<lastScrollTop;
+//   lastScrollTop=top;
+// }
 
 
 

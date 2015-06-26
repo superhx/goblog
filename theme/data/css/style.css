@@ -195,8 +195,8 @@ p {
 }
 
 .ul-div {
-    padding-top: 10px;
-    padding-bottom: 70px;
+    padding-top: 50px;
+    padding-bottom: 30px;
     overflow: auto;
     height: 100%;
     position: relative;
@@ -213,7 +213,6 @@ p {
 }
 
 .search-div {
-    /*position: fixed;*/
     width: 100%;
     top: 0;
     left: 3.5%;
@@ -221,7 +220,8 @@ p {
     background: #ffffff;
     padding: 8px 0px;
     border-bottom:1px solid rgb(245, 245, 245);
-    /*opacity: 0.5;*/
+    position: absolute;
+    float: left;
 }
 
 /*.search {
