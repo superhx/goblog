@@ -109,7 +109,6 @@ var jsonData = [{
     	for (var i = val.tags.length - 1; i >= 0; i--) {
     		tag += '<a class="node" href="#">'+val.tags[i]+'</a>'
     	};
-      console.log(date.toString('MMM d'));
       var string='<li class="menu-li"><span class="time">'+format(date)+'</span><div class="content"><a class="title" href="'+val.link+'">' +val.title+'</a><div class="tags"><span>'+tag+'</span></div></div></li>'
     	$('.ul-div ul').append(string);
     });
@@ -250,6 +249,7 @@ $('.ul-div').scroll(function(e){
   var top=$(e.delegateTarget).scrollTop();
   if(top<topThreshold) return;
   if(isUp^(top<lastScrollTop)){
+    console.log(top);
     searchDiv.fadeToggle();
   }
   isUp=top<lastScrollTop;

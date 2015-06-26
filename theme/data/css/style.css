@@ -143,7 +143,8 @@ p {
   transition: opacity .35s, visibility .35s, ease-in-out;
   overflow: hidden;
   z-index: 100;
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+  /*box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);*/
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 .overlay.open {
   opacity: 1;
@@ -249,6 +250,8 @@ p {
   float: right;
   margin-left: 10px;
   padding: 4px 0 0 0;
+  text-align: left;
+  width: 50px;
 }
 .overlay div.content {
   margin-right: 40px;
