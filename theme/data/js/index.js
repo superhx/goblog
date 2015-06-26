@@ -236,8 +236,6 @@ function dealData(text) {
 
 
 var scroll = function(event, scroller) {
-  console.log("scroll");
-
     var k = event.wheelDelta ? event.wheelDelta : -event.detail * 10;
     scroller.scrollTop = scroller.scrollTop - k;
     return false;
