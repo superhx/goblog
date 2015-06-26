@@ -200,7 +200,7 @@ p {
   padding: 5px 20px;
   border-bottom: solid 1px #e2e2e2;
 }
-.overlay nav ul li.active > a {
+.overlay nav ul li.active  a.title {
   /*background-color: #e2e2e2;*/
   color: #FF5252;
 }

@@ -108,7 +108,7 @@ var jsonData = [{
     	var date = Date.parse(val.date);
     	var tag = '';
     	for (var i = val.tags.length - 1; i >= 0; i--) {
-    		tag += '<a class="node" href="#">'+val.tags[i]+'</a>'
+    		tag += '<span class="node">'+val.tags[i]+'</span>'
     	};
       var string='<li class="menu-li"><span class="time">'+format(date)+'</span><div class="content"><a class="title" href="'+val.link+'">' +val.title+'</a><div class="tags"><span>'+tag+'</span></div></div></li>'
     	$('.ul-div ul').append(string);
@@ -167,7 +167,7 @@ $("#toggle").click(
                 $('.menu-li').eq(toggleBlog().getNum()).addClass('active');
                 time += 1;
             }
-               
+
         }
     ),
 
