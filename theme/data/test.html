@@ -2,64 +2,63 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hanxv's blog</title>
-    <!-- Styles -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/css.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/index.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="css/github-markdown.min.css">-->
-    <link rel="stylesheet" href="css/default.min.css">
-    <link rel="stylesheet" href="css/perfect-scrollbar.css">
-    <script src="js/pace.js"></script>
-    <link href="css/pace-theme-flash.min.css" rel="stylesheet">
-    <style type="text/css">
-    .search-container{
-      position:fixed;
-      left:200px;
-      top:200px;
-      width: 220px;
-      height: 30px;
-      border-radius: 15px;
-      border: 1px solid rgba(0, 0, 0, 0.14902);
-      overflow: scroll;
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Hanxv's blog</title>
+  <!-- Styles -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/css.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
+  <!--<link rel="stylesheet" href="css/github-markdown.min.css">-->
+  <link rel="stylesheet" href="css/default.min.css">
+  <link rel="stylesheet" href="css/perfect-scrollbar.css">
+  <script src="js/pace.js"></script>
+  <link href="css/pace-theme-flash.min.css" rel="stylesheet">
 
-    }
-
-    .search-container .icon{
-      margin-left: 10px;
-      margin-top: 6px;
-      float: left;
-    }
-
-    .search-container input{
-      outline: none;
-      border: none;
-      height: 100%;
-      width: 180px;
-      margin-left: 5px;
-      overflow: scroll;
-      display:inline-block;
-
-    }
-    </style>
 </head>
 
 <body class=" pace-done">
-  <div class="search-container" >
-    <span class="icon glyphicon glyphicon-search" aria-hidden="true"></span>
-    <input>
+  <div class="overlay open" id="overlay">
+    <nav class="overlay-menu">
+      <div class="search-div" style="display: block;">
+        <!-- <input type="text" class="form-control search" placeholder="Search"> -->
+        <div class="search-container">
+          <span class="icon glyphicon glyphicon-search" aria-hidden="true"></span>
+          <input class="search" placeholder="Search">
+        </div>
+      </div>
+      <div class="ul-div ps-container ps-active-y" onmousewheel="return scroll(event,this)" data-ps-id="5b9a91b9-4cb1-8225-1eff-2f60a3c7d68a">
+        <ul>
+          <li class="menu-li">
+            <span class="time">Apr 2</span>
+            <div class="content">
+              <a class="title" href="index.html">This is a long long long title which cannot hold by single line</a>
+              <div class="tags">
+                <span><a class="node" href="#">golang</a><a class="node" href="#">java</a></span>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;">
+          <div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps-scrollbar-y-rail" style="top: 0px; height: 533px; right: 3px;">
+          <div class="ps-scrollbar-y" style="top: 0px; height: 214px;"></div>
+        </div>
+      </div>
+      <div class="footer">Copyright© 2015 hanxv</div>
+    </nav>
   </div>
-<!-- Javascript -->
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/noframework.waypoints.min.js"></script>
-<script src="js/perfect-scrollbar.jquery.js"></script>
-<script src="js/index.js"></script>
+  <!-- Javascript -->
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/noframework.waypoints.min.js"></script>
+  <script src="js/perfect-scrollbar.jquery.js"></script>
+  <script src="js/index.js"></script>
 </body>
 
 </html>

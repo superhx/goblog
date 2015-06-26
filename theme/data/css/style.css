@@ -259,7 +259,6 @@ p {
 .overlay nav ul li a {
     font-size: 18px;
     height: auto;
-
 }
 
 .overlay nav ul li span {
@@ -293,14 +292,41 @@ p {
     }
 }
 
+.overlay span.time{
+  display: inline-block;
+  float: right;
+  margin-left: 10px;
+  padding: 4px 0 0 0;
+}
+
+.overlay div.content{
+  margin-right: 40px;
+}
+
+.overlay div.tags{
+  background-color: white;
+
+}
+
+.overlay nav ul li a.title {
+    margin-bottom: -25px;
+    display: block;
+    position: relative;
+    color: #555;
+    overflow:auto;
+    white-space:inherit;
+    text-decoration: none;
+    line-height: 26px;
+}
+
 .overlay nav ul li a {
     display: block;
     position: relative;
     color: #555;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-decoration: none
+    overflow:auto;
+    white-space:inherit;
+    text-decoration: none;
+    line-height: 26px;
 }
 
 .overlay nav ul li a:after {
