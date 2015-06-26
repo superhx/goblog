@@ -124,7 +124,7 @@ var jsonData = [{
 
 var toggleBlog = function(){
     // var localhref = window.location.href;
-    var localhref = 'localhost://blog/2012/1/1/markdown_help_0/index.html'
+    var localhref = 'localhost://blog/2012/1/10/markdown_help_9/index.html'
     var blogList = $(".menu-li");
     var blogTop , num;
     for (var i = 0; i < blogList.length; i++) {
@@ -249,7 +249,6 @@ $('.ul-div').scroll(function(e){
   var top=$(e.delegateTarget).scrollTop();
   if(top<topThreshold) return;
   if(isUp^(top<lastScrollTop)){
-    console.log('change');
     searchDiv.fadeToggle();
   }
   isUp=top<lastScrollTop;

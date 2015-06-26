@@ -215,7 +215,6 @@ p {
 .search-div {
     width: 100%;
     top: 0;
-    left: 3.5%;
     z-index: 50;
     background: #ffffff;
     padding: 8px 0px;
@@ -421,4 +420,8 @@ table > tbody + tbody {
 
 table > tbody > tr:nth-of-type(odd) {
     background-color: #f9f9f9;
+}
+
+.ps-container > .ps-scrollbar-y-rail{
+  z-index: 300;
 }
