@@ -109,7 +109,7 @@ var jsonData = [{
     	for (var i = val.tags.length - 1; i >= 0; i--) {
     		tag += '<a class="node" href="#">'+val.tags[i]+'</a>'
     	};
-    	var string = '<li class="menu-li"><a href="'+val.link+'">'+val.title+'</a><span>'+tag+'</span><span>'+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDay()+'</span></li>';
+      var string='<li class="menu-li"><span class="time">'+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDay()+'</span><div class="content"><a class="title" href="'+val.link+'">' +val.title+'</a><div class="tags"><span>'+tag+'</span></div></div></li>'
     	$('.ul-div ul').append(string);
     });
 })(jsonData);
@@ -128,7 +128,7 @@ var toggleBlog = function(){
     var blogList = $(".menu-li");
     var blogTop , num;
     for (var i = 0; i < blogList.length; i++) {
-        if (localhref.toLowerCase().indexOf(totalList.eq(i).children('a').attr('href').toLowerCase())>= 0) {
+        if (localhref.toLowerCase().indexOf(totalList.eq(i).find('a').attr('href').toLowerCase())>= 0) {
             blogTop = totalList.eq(i).offset();
             num = i;
             break;
@@ -280,3 +280,16 @@ function searchNode(e) {
     $('.search').val($(e.target).html());
     dealData($(e.target).html());
 }
+
+$('.menu-li').mouseenter(function(e){
+  var target=$(e.delegateTarget);
+  setTimeout(function(){
+    if(target.is(':hover')){
+      console.log('on');
+      target.find('div.tags').animate({'margin-top':'5px'},400);
+    }
+  },500);
+  // $(e.delegateTarget).find('div.tags').animate({'margin-top':'5px'},200);
+}).mouseleave(function(e){
+  $(e.delegateTarget).find('div.tags').animate({'margin-top':'-25px'},200);
+});

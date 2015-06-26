@@ -232,12 +232,13 @@ p {
 
 .overlay nav ul li {
     display: block;
-    min-height: 32px;
+    height: 60px;
     position: relative;
-    opacity: 0;
+    opacity: 1;
     width: 100%;
     padding: 5px 20px;
     border-bottom: solid 1px #e2e2e2;
+
 }
 
 .overlay nav ul li.active > a {
@@ -259,7 +260,6 @@ p {
 .overlay nav ul li a {
     font-size: 18px;
     height: auto;
-
 }
 
 .overlay nav ul li span {
@@ -268,7 +268,7 @@ p {
 }
 
 .overlay nav ul li span:last-child {
-    margin-left: 10px;
+    margin-left: 0px;
 }
 
 @-webkit-keyframes menuFade {
@@ -293,14 +293,46 @@ p {
     }
 }
 
+
+.overlay span.time{
+  display: inline-block;
+  float: right;
+  margin-left: 10px;
+  padding: 4px 0 0 0;
+}
+
+.overlay div.content{
+  margin-right: 40px;
+}
+
+.overlay div.tags{
+  background-color: white;
+  display: block;
+  box-sizing: border-box;
+  padding: 3px 0px;
+  position: relative;
+  margin-top: -25px;
+}
+
+.overlay nav ul li a.title {
+    display: block;
+    position: relative;
+    color: #555;
+    overflow:auto;
+    white-space:pre-wrap;
+    text-decoration: none;
+    line-height: 26px;
+    height: 50px;
+}
+
 .overlay nav ul li a {
     display: block;
     position: relative;
     color: #555;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-decoration: none
+    overflow:auto;
+    white-space:inherit;
+    text-decoration: none;
+    line-height: 26px;
 }
 
 .overlay nav ul li a:after {
