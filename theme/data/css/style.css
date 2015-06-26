@@ -169,7 +169,7 @@ p {
     background: #fff;
     top: 0;
     left: 0;
-    width: 30%;
+    width: 450px;
     height: 100%;
     opacity: 0;
     visibility: hidden;
@@ -199,8 +199,8 @@ p {
     padding-bottom: 70px;
     overflow: auto;
     height: 100%;
-    position: fixed;
-    width: 30%;
+    position: relative;
+    width: 100%;
 }
 
 .overlay nav ul {
@@ -344,7 +344,7 @@ p {
     display: fixed;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 500px) {
     .overlay.open {
         width: 100%;
 
