@@ -47,9 +47,9 @@
   /*margin-right: 2px;*/
 }
 .tagnode:hover {
-  text-decoration: none;
+  /*text-decoration: none;*/
   /*background-color: #e2e2e2;*/
-  color: #ff6363;
+  color: rgb(141, 141, 141);
 }
 .menu-li {
   overflow: hidden;
@@ -81,6 +81,7 @@ header {
 }
 .right-menu {
   position: absolute;
+  margin-top: 15px;
 }
 .right-menu.fixed {
   position: fixed;
@@ -106,13 +107,13 @@ header {
   display: none;
 }
 .right-menu nav ul li a.active {
-  border-left: solid 2px #ff6633;
+  border-left: solid 2px rgba(0, 0, 0, 0.298039);
 }
 .right-menu nav ul li ul.active {
   display: block;
 }
-.right-menu nav ul li ul li.active {
-  border-left: solid 2px #ff6633;
+.right-menu nav ul li ul li a.active {
+  border-left: solid 2px rgba(0, 0, 0, 0.298039);
 }
 
 /*# sourceMappingURL=index.css.map */
