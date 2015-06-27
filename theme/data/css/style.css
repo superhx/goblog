@@ -4,7 +4,7 @@ html {
   overflow-x: hidden;
 }
 body {
-  font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Source Han Sans", "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Lantinghei SC",  "Source Han Sans", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
 h1, .h1 {
   font-size: 36px;
@@ -30,16 +30,20 @@ h1, h2, h3, h4, h5, h5 {
   font-weight: 500;
 }
 p {
-  font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Source Han Sans", "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Lantinghei SC",  "Source Han Sans", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", sans-serif;
   font-size: 16px;
   margin-top: 20px;
   margin-bottom: 20px;
   font-weight: 400;
 }
+
+li{
+  font-size: 16px;
+}
 .btn-custom {
   background-color: transparent;
-  color: #FF5252;
-  border: 2px solid #FF5252;
+  color: #ff6633;
+  border: 2px solid #ff6633;
   padding: 15px 20px;
   margin-top: 30px;
   -webkit-transition: .35s;
@@ -47,9 +51,9 @@ p {
   text-transform: uppercase
 }
 .btn-custom:hover {
-  background-color: #FF5252;
+  background-color: #ff6633;
   color: #FFF;
-  border: 2px solid #FF5252
+  border: 2px solid #ff6633
 }
 .col-centered {
   float: none;
@@ -70,20 +74,20 @@ p {
   padding-top: 40px;
   padding-bottom: 20px;
   max-width: 100%;
-  color: #FF5252
+  color: #ff6633
 }
 .text-center-to-left {
   text-align: center
 }
 .color-primary {
-  color: #FF5252
+  color: #ff6633
 }
 .uppercase {
   text-transform: uppercase
 }
 .button-container {
   position: fixed;
-  top: 10px;
+  top: 15px;
   left: 3%;
   height: 21px;
   width: 29px;
@@ -96,7 +100,7 @@ p {
   opacity: .7
 }
 .button-container span {
-  background: #FF5252;
+  background: #ff6633;
   border: none;
   height: 4px;
   width: 100%;
@@ -142,8 +146,8 @@ p {
   transition: opacity .35s, visibility .35s, ease-in-out;
   overflow: hidden;
   z-index: 100;
-  /*box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);*/
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  /*border-right: 1px solid rgba(0, 0, 0, 0.1);*/
 }
 .overlay.open {
   opacity: 1;
@@ -153,7 +157,7 @@ p {
   position: relative;
   height: 100%;
   font-size: 16px;
-  font-family: Roboto, "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Source Han Sans", "Hiragino Sans GB", "Lantinghei SC", "Heiti SC", "Microsoft YaHei", sans-serif;
+  /*font-family: "Helvetica Neue", Helvetica, Arial, freesans, sans-serif;*/
   font-weight: 400;
   text-align: left
 }
@@ -177,9 +181,9 @@ p {
   width: 100%;
   top: 0;
   z-index: 50;
-  background: #ffffff;
+  background: white;
   padding: 8px 0px;
-  border-bottom: 1px solid rgb(245, 245, 245);
+  border-bottom: 1px solid #e2e2e2;
   position: absolute;
   float: left;
 }
@@ -198,11 +202,11 @@ p {
   opacity: 1;
   width: 100%;
   padding: 5px 20px;
-  border-bottom: solid 1px #e2e2e2;
+  border-bottom: solid 1px rgb(245, 245, 245);
 }
 .overlay nav ul li.active  a.title {
   /*background-color: #e2e2e2;*/
-  color: #FF5252;
+  color: #ff6633;
 }
 .overlay nav ul li:last-child {
   border-bottom: none;
@@ -245,6 +249,7 @@ p {
   }
 }
 .overlay span.time {
+  font-size: 16px;
   display: inline-block;
   float: right;
   margin-left: 10px;
@@ -305,15 +310,17 @@ p {
   font-size: 8px;
 }
 .footer {
+  padding-top: 2px;
   text-align: center;
-  height: 30px;
+  height: 20px;
   bottom: 0px;
   position: fixed;
   width: 450px;
-  font-size: 100%;
+  font-size: 12px;
   box-sizing: border-box;
-  background-color: whitesmoke;
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-top: 1px solid #e2e2e2;
+  color: #333333;
 }
 .right-menu .fixed {
   display: fixed;

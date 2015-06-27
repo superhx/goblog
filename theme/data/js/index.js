@@ -177,7 +177,7 @@ $("#toggle").click(
         };
     });
 (function() {
-    var getEle = $('.content').find('h1,h2');
+    var getEle = $('.content').find('h2,h3');
     var a = getEle.length;
     for (var i = 0; i < a;) {
         var tag = "tag" + i;
@@ -185,7 +185,7 @@ $("#toggle").click(
         getEle.eq(i).attr('id', tag);
         var temp = '<li ><a class="a' + i + '" href="#tag' + i + '">' + getEle.eq(i).html() + '</a>   <ul class="nav">';
         i = i + 1;
-        while ((i < a) && (getEle.eq(i).is('h2'))) {
+        while ((i < a) && (getEle.eq(i).is('h3'))) {
             var tag = "tag" + i;
             getEle.eq(i).addClass(tag);
             getEle.eq(i).attr('id', tag);
@@ -196,7 +196,7 @@ $("#toggle").click(
         $(".right-menu-ul").append(temp);
     }
 
-    $('.content').find('h1,h2,article').each(function() {
+    $('.content').find('h2,h3,article').each(function() {
         new Waypoint({
             element: this,
             handler: function(direction) {
