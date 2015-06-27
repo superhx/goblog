@@ -226,26 +226,30 @@
         }
 
         PNotify.prototype.options.styling = "fontawesome";
+        if (title == "" && content == "") {
+            new PNotify({title: "Content Can't be Blank", type: "error"});
+        } else {
+            $.ajax({
+                url: "/dashboard/blog/new",
+                method: "POST",
+                data: {
+                    "title": title,
+                    "tags": tags,
+                    "category": category,
+                    "content": content,
+                },
+                success: function () {
+                    new PNotify({title: "Publish Success", type: "success"});
+                    clearInterval(t);
+                    localStorage.clear();
+                    setTimeout("javascript:location.href='/dashboard'", 3000);
+                },
+                error: function () {
+                    new PNotify({title: "Publish Failed", type: "error"});
+                }
+            });
+        }
 
-        $.ajax({
-            url: "/dashboard/blog/new",
-            method: "POST",
-            data: {
-                "title": title,
-                "tags": tags,
-                "category": category,
-                "content": content,
-            },
-            success: function () {
-                new PNotify({title: "Publish Success", type:"success"});
-                clearInterval(t);
-                localStorage.clear();
-                setTimeout("javascript:location.href='/dashboard'", 3000);
-            },
-            error: function () {
-                new PNotify({title: "Publish Failed", type:"error"});
-            }
-        });
 
     }
 
