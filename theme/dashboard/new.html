@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/new.css">
     <link rel="stylesheet" href="css/markdownicon.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/pnotify.custom.css">
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
@@ -22,6 +23,7 @@
     <script src="js/bootstrap-tagsinput.js"></script>
     <script src="js/bootstrap-toggle.js"></script>
     <script src="js/marked.min.js"></script>
+    <script src="js/pnotify.custom.js"></script>
 
 </head>
 <body style="overflow-x: hidden">
@@ -37,7 +39,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">GoBlog</a>
+            <a class="navbar-brand" href="/dashboard">GoBlog</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -110,6 +112,7 @@
     </div>
 </div>
 
+</body>
 
 <script>
     var publishPanleShow = false;
@@ -221,16 +224,29 @@
         } else {
             content = toMarkdown($('.editable').html());
         }
-        $.post("/dashboard/blog/new", {
-            "title": title,
-            "tags": tags,
-            "category": category,
-            "content": content,
-        }, function (data, status) {
-            console.log(data)
+
+        PNotify.prototype.options.styling = "fontawesome";
+
+        $.ajax({
+            url: "/dashboard/blog/new",
+            method: "POST",
+            data: {
+                "title": title,
+                "tags": tags,
+                "category": category,
+                "content": content,
+            },
+            success: function () {
+                new PNotify({title: "Publish Success", type:"success"});
+                clearInterval(t);
+                localStorage.clear();
+                setTimeout("javascript:location.href='/dashboard'", 3000);
+            },
+            error: function () {
+                new PNotify({title: "Publish Failed", type:"error"});
+            }
         });
-        clearInterval(t);
-        localStorage.clear();
+
     }
 
     function h(e) {
@@ -243,13 +259,12 @@
         h(this);
     });
 
-    $(function(){
-        $('.toggle-on').first().css("padding-top","8px");
+    $(function () {
+        $('.toggle-on').first().css({"padding-top": "8px", "padding-left": "17px"});
     })
 
     var t = setInterval(autoSave, 1000);
 
 </script>
 
-</body>
 </html>

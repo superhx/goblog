@@ -105,6 +105,7 @@ h3 {
   background-color: #FFFFFF;
   border: 1px solid rgb(169, 216, 178);
   border-radius: 19px;
+  outline: none;
   height: 38px;
   padding: 0px 16px;
   line-height: 36px;
