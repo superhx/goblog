@@ -5,8 +5,7 @@ html {
 }
 
 ::selection {
-  background-color: #FF5252;
-  color: #ffffff;
+  background-color: rgb(193,216,251);
 }
 
 body {
@@ -109,7 +108,7 @@ li{
   opacity: .7
 }
 .button-container span {
-  background: #ff6633;
+  background: rgb(141, 141, 141);
   border: none;
   height: 4px;
   width: 100%;
