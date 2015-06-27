@@ -1,7 +1,7 @@
 var time = 0;
-$.getJSON("./category.json", function(data) {
+// $.getJSON("./category.json", function(data) {
 
-});
+// });
 var jsonData = [{
     "date": "2012-01-10T00:00:00Z",
     "link": "2012/1/10/markdown_help_9/index.html",
@@ -165,6 +165,7 @@ $("#toggle").click(
             if(time == 0){
             	$('.ul-div').animate({scrollTop: toggleBlog().getTop()}, 500);
                 $('.menu-li').eq(toggleBlog().getNum()).addClass('active');
+                console.log(toggleBlog().getTop());
                 time += 1;
             }
 

@@ -53,6 +53,7 @@ li{
   padding: 15px 20px;
   margin-top: 30px;
   -webkit-transition: .35s;
+  -moz-transition: .35s;
   transition: .35s;
   text-transform: uppercase
 }
@@ -72,8 +73,9 @@ li{
   margin: 30px auto
 }
 .fadeIn {
+  animation-duration: 1.2s；
   -webkit-animation-duration: 1.2s;
-  animation-duration: 1.2s
+  -moz-animation-duration: 1.2s;
 }
 .intro {
   text-align: center;
@@ -99,6 +101,7 @@ li{
   width: 29px;
   cursor: pointer;
   -webkit-transition: opacity .25s ease;
+  -moz-transition: opacity .25s ease;
   transition: opacity .25s ease;
   z-index: 100
 }
