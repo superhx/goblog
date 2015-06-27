@@ -108,7 +108,7 @@ li{
   opacity: .7
 }
 .button-container span {
-  background: rgb(141, 141, 141);
+  background: rgb(214, 214, 214);
   border: none;
   height: 4px;
   width: 100%;
@@ -212,9 +212,13 @@ li{
   padding: 5px 20px;
   border-bottom: solid 1px rgb(245, 245, 245);
 }
-.overlay nav ul li.active  a.title {
+.overlay nav ul li.active   {
   /*background-color: #e2e2e2;*/
-  color: #ff6633;
+  background-color: rgb(253,253,253);
+}
+
+.overlay nav ul li.active .tags{
+  background-color: rgb(253,253,253);
 }
 .overlay nav ul li:last-child {
   border-bottom: none;
@@ -311,9 +315,9 @@ li{
   transition: .35s ease
 }
 .overlay nav ul li a:hover:after {
-  -webkit-transform: translateX(0%);
+  /*-webkit-transform: translateX(0%);
   -ms-transform: translateX(0%);
-  transform: translateX(0%)
+  transform: translateX(0%)*/
 }
 .overlay nav ul li a span {
   font-size: 8px;
