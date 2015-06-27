@@ -3,6 +3,12 @@ html {
   overflow: auto;
   overflow-x: hidden;
 }
+
+::selection {
+  background-color: #FF5252;
+  color: #ffffff;
+}
+
 body {
   font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Lantinghei SC",  "Source Han Sans", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
@@ -256,6 +262,7 @@ li{
   padding: 4px 0 0 0;
   text-align: left;
   width: 50px;
+  color: #999999;
 }
 .overlay div.content {
   margin-right: 40px;
