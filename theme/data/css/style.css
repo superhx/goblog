@@ -11,6 +11,13 @@ html {
 body {
   font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Lantinghei SC",  "Source Han Sans", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
+
+article{
+  margin-bottom: 40px;
+  font-size: 22px;
+  line-height: 33px;
+}
+
 h1, .h1 {
   font-size: 36px;
 }

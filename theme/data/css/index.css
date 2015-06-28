@@ -143,9 +143,3 @@ header {
   overflow: scroll;
   display: inline-block;
 }
-
-article{
-  margin-bottom: 40px;
-  font-size: 22px;
-  line-height: 33px;
-}
