@@ -1,90 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{.Info.Title}}</title>
-    <!-- Styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/css.css" rel="stylesheet" type="text/css">
-    <link href="/css/style.min.css" rel="stylesheet">
-    <link href="/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/github-markdown.min.css">
-    <link rel="stylesheet" href="/css/default.min.css">
-    <link rel="stylesheet" href="/css/perfect-scrollbar.css">
-    <script src="/js/pace.js"></script>
-    <link href="/css/pace-theme-flash.min.css" rel="stylesheet">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{.Info.Title}}</title>
+  <!-- Styles -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/css.css" rel="stylesheet" type="text/css">
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/index.css" rel="stylesheet">
+  <!--<link rel="stylesheet" href="css/github-markdown.min.css">-->
+  <link rel="stylesheet" href="/css/default.min.css">
+  <link rel="stylesheet" href="/css/perfect-scrollbar.css">
+  <script src="/js/pace.js"></script>
+  <link href="/css/pace-theme-flash.min.css" rel="stylesheet">
 </head>
 
 <body class=" pace-done">
-    <div class="pace  pace-inactive">
-        <div class="pace-progress" data-progress-text="100%" data-progress="99" style="-webkit-transform: translate3d(100%, 0px, 0px); transform: translate3d(100%, 0px, 0px);">
-            <div class="pace-progress-inner"></div>
+  <div class="pace  pace-inactive">
+    <div class="pace-progress" data-progress-text="100%" data-progress="99" style="-webkit-transform: translate3d(100%, 0px, 0px); transform: translate3d(100%, 0px, 0px);">
+      <div class="pace-progress-inner"></div>
+    </div>
+    <div class="pace-activity"></div>
+  </div>
+  <div class="button-container" id="toggle">
+    <span class="top"></span>
+    <span class="middle"></span>
+    <span class="bottom"></span>
+  </div>
+  <div class="overlay" id="overlay">
+    <nav class="overlay-menu">
+      <div class="search-div">
+        <!-- <input type="text" class="form-control search" placeholder="Search"> -->
+        <div class="search-container">
+          <span class="icon glyphicon glyphicon-search" aria-hidden="true"></span>
+          <input class="search" placeholder="Search">
         </div>
-        <div class="pace-activity"></div>
-    </div>
-    <div class="button-container" id="toggle">
-        <span class="top"></span>
-        <span class="middle"></span>
-        <span class="bottom"></span>
-    </div>
-    <div class="overlay" id="overlay">
-        <nav class="overlay-menu">
-            <div class="search-div">
-                <input type="text" class="form-control search" placeholder="Search">
-            </div>
-            <div class="ul-div " onmousewheel="return scroll(event,this)">
-                <ul>
-                </ul>
-            </div>
-            <div class="footer">Copyright© 2015 hanxv</div>
-        </nav>
-    </div>
-    <div class="main-content">
-        <!-- header里面属性： container-fluid  流布局    uppercase：全部大写
+      </div>
+      <div class="ul-div " onmousewheel="return scroll(event,this)">
+        <ul>
+        </ul>
+      </div>
+      <div class="footer">Copyright© 2015 hanxv</div>
+    </nav>
+  </div>
+  <div class="main-content">
+    <!-- header里面属性： container-fluid  流布局    uppercase：全部大写
       第一个div xs和md和sm 确认在大小屏幕的宽度  offset设置偏移-->
-        <header class="container-fluid  uppercase ">
-            <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2">
-                <div class="blog-title-div">
-                    <h1 id="" class=" blog-title">{{ .Info.Title }}</h1>
-                </div>
-                <div class="blog-info-div">
-                    <div class="blog-tag col-md-offset-7">
-                        本文标签:
-                        {{range .Info.Tags}}
-                          <a class="node" href="#">{{.}}</a>
-                        {{end}}
-                    </div>
-                </div>
+    <div class="row">
+      <header class="container-fluid">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2">
+          <div class="blog-title-div">
+            <h1 id="" class="blog-title">{{.Info.Title}}</h1>
+          </div>
+          <div class="blog-info-div">
+            <span class="blog-time">{{.Info.Date.Format "Jan 02, 2006"}} / </span>
+            <div class="blog-tag">
+              {{$n := len .Info.Tags}}
+              {{range $i,$e:= .Info.Tags}}
+              <a class="tagnode" href="#">{{$e}}</a>
+                {{if ne (plus1 $i) $n}},{{end}}
+              {{end}}
             </div>
-        </header>
-        <div class="container-fluid content-div content">
-            <article class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2 scrollspy-example  markdown-body" data-spy="scroll" data-target="#right-menu-nav" data-offset="0">
-                {{ .Content }}
-            </article>
-            <div class="col-md-2 col-md-offset-9 right-menu" id="right-menu">
-                <nav class=" hidden-print hidden-xs hidden-sm  right-menu-nav " role="navigation" id="right-menu-nav">
-                    <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
-                        <ul class="nav bs-docs-sidenav right-menu-ul"></ul>
-                    </div>
-                </nav>
+          </div>
+        </div>
+      </header>
+      <div class="container-fluid content-div content">
+        <article class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2 scrollspy-example  markdown-body" data-spy="scroll" data-target="#right-menu-nav" data-offset="0">
+          {{.Content}}
+        </article>
+        <div class="col-md-2 col-md-offset-9 right-menu" id="right-menu">
+          <nav class=" hidden-print hidden-xs hidden-sm  right-menu-nav " role="navigation" id="right-menu-nav">
+            <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
+              <ul class="nav bs-docs-sidenav right-menu-ul"></ul>
             </div>
+          </nav>
         </div>
-        <div class="blog-info-div">
-            <h3 class="blog-time col-md-offset-7  col-xs-offset-4 col-sm-offset-2">创建时间:{{.Info.Date.Format "Jan 02, 2006"}}</h3>
-        </div>
-    </div>
-    <!-- Javascript -->
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/noframework.waypoints.min.js"></script>
-    <script src="/js/perfect-scrollbar.jquery.js"></script>
-    <script src="/js/index.js"></script>
+      </div>
 
-    <script>
-      var category={{ .Info.Category }};
-    </script>
+      <div id="disqus_thread" class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2"></div>
+    </div>
+  </div>
+  <!-- Javascript -->
+  <script src="/js/jquery.js"></script>
+  <script src="/js/date-en-US.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/noframework.waypoints.min.js"></script>
+  <script src="/js/perfect-scrollbar.jquery.js"></script>
+  <script src="/js/index.js"></script>
+  <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'superhx';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
 </body>
+
 </html>

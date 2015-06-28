@@ -20,12 +20,24 @@ var templateDir string
 var homeTmpl *template.Template
 var blogTmpl *template.Template
 
+var plus = template.FuncMap{
+	"plus1": func(x int) int {
+		return x + 1
+	},
+}
+
 func init() {
 	ThemeDir, _ = osext.ExecutableFolder()
 	ThemeDir += "/../src/github.com/superhx/goblog/theme"
 	templateDir = ThemeDir + "/template"
 	homeTmpl, _ = template.ParseFiles(templateDir + "/home.htm")
 	blogTmpl, _ = template.ParseFiles(templateDir + "/article.htm")
+	// // blogTmpl, err = template.ParseFiles(templateDir + "/article.htm")
+	// // if err != nil {
+	// // 	fmt.Println(err)
+	// // }
+	// // blogTmpl = blogTmpl.Funcs(plus)
+	blogTmpl = template.Must(new(template.Template).Funcs(plus).ParseFiles(templateDir + "/article.htm"))
 }
 
 func renderCategory(category []interface{}) {
@@ -64,7 +76,7 @@ func renderArticle(node mark.Node, article Article) {
 	}
 	buf := bytes.NewBufferString("")
 	mark.NewHTMLWriter(node).WriteTo(buf)
-	blogTmpl.Execute(output, map[string]interface{}{"Info": article, "Content": buf})
+	blogTmpl.ExecuteTemplate(output, "article.htm", map[string]interface{}{"Info": article, "Content": buf})
 	if err != nil {
 		log.Errorln(err)
 		return
