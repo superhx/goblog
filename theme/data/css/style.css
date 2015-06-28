@@ -261,13 +261,13 @@ li{
   }
 }
 .overlay span.time {
-  font-size: 16px;
+  font-size: 12px;
   display: inline-block;
   float: right;
   margin-left: 10px;
   padding: 4px 0 0 0;
   text-align: left;
-  width: 50px;
+  width: 80px;
   color: #999999;
 }
 .overlay div.content {

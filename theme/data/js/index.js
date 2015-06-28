@@ -1,11 +1,11 @@
 var time = 0;
 var blogTop = 0;
-var num = 0; 
+var num = 0;
 // $.getJSON("./category.json", function(data) {
 
 // });
 var jsonData = [{
-  "date": "2012-01-10T00:00:00Z",
+  "date": "2015-06-10T00:00:00Z",
   "link": "2012/1/10/markdown_help_9/index.html",
   "tags": ["java", "golang"],
   "title": "Markdown help"
@@ -174,7 +174,7 @@ $("#toggle").click(
                 $(".main-content").toggleClass("active");
                 $("#overlay").toggleClass("open");
                 $(".right-menu").toggleClass("active");
-            
+
 
     }
   ),
@@ -313,5 +313,10 @@ $('.menu-li').mouseenter(function(e) {
 });
 
 function format(date) {
-  return date.toString('MMM d');
+  var seconds=parseInt((Date.now()-date)/1000);
+  if(seconds<60) return parseInt(seconds/60)+' secs ago';
+  if(seconds/60 < 60) return parseInt(seconds/60)+' mins ago';
+  if(seconds/3600 < 24) return parseInt(seconds/3600)+' hrs ago';
+  if(seconds/(3600*24) < 30) return parseInt(seconds/(3600*24))+' days ago';
+  return date.toString('MMM d yyyy');
 }
