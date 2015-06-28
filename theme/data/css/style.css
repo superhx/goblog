@@ -36,10 +36,11 @@ h1, h2, h3, h4, h5, h5 {
 }
 p {
   font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Lantinghei SC",  "Source Han Sans", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", sans-serif;
-  font-size: 16px;
+  font-size: 22px;
   margin-top: 20px;
   margin-bottom: 20px;
   font-weight: 400;
+  line-height: 33px;
 }
 
 li{
@@ -371,6 +372,7 @@ table {
   margin-bottom: 20px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+  font-size: 20px;
 }
 table > thead > tr > th, table > tbody > tr > th, table > tfoot > tr > th, table > thead > tr > td, table > tbody > tr > td, table > tfoot > tr > td {
   padding: 8px;
