@@ -14,8 +14,9 @@ body {
 
 article{
   margin-bottom: 40px;
-  font-size: 22px;
-  line-height: 33px;
+  font-size: 18px;
+  line-height: 27.2000007629395px;
+  font-family: TIBch, 'Classic Grotesque W01', 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, sans-serif;
 }
 
 h1, .h1 {
@@ -41,18 +42,44 @@ h1, h2, h3, h4, h5, h5 {
   margin-bottom: 20px;
   font-weight: 500;
 }
-p {
-  font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Lantinghei SC",  "Source Han Sans", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", sans-serif;
-  font-size: 22px;
+article p {
   margin-top: 20px;
   margin-bottom: 20px;
   font-weight: 400;
-  line-height: 33px;
 }
 
 article li{
-  font-size: 22px;
+
 }
+
+article table {
+  /*width: 100%;*/
+  max-width: 100%;
+  margin-bottom: 20px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+article table > thead > tr > th, table > tbody > tr > th, table > tfoot > tr > th, table > thead > tr > td, table > tbody > tr > td, table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+article table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+  font-weight: 500;
+}
+article table > caption + thead > tr:first-child > th, table > colgroup + thead > tr:first-child > th, table > thead:first-child > tr:first-child > th, table > caption + thead > tr:first-child > td, table > colgroup + thead > tr:first-child > td, table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+article table > tbody + tbody {
+  border-top: 2px solid #ddd;
+}
+article table > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
 .btn-custom {
   background-color: transparent;
   color: #ff6633;
@@ -373,34 +400,7 @@ article li{
     z-index: 200;
   }
 }
-table {
-  /*width: 100%;*/
-  max-width: 100%;
-  margin-bottom: 20px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  font-size: 20px;
-}
-table > thead > tr > th, table > tbody > tr > th, table > tfoot > tr > th, table > thead > tr > td, table > tbody > tr > td, table > tfoot > tr > td {
-  padding: 8px;
-  line-height: 1.42857143;
-  vertical-align: top;
-  border-top: 1px solid #ddd;
-}
-table > thead > tr > th {
-  vertical-align: bottom;
-  border-bottom: 2px solid #ddd;
-  font-weight: 500;
-}
-table > caption + thead > tr:first-child > th, table > colgroup + thead > tr:first-child > th, table > thead:first-child > tr:first-child > th, table > caption + thead > tr:first-child > td, table > colgroup + thead > tr:first-child > td, table > thead:first-child > tr:first-child > td {
-  border-top: 0;
-}
-table > tbody + tbody {
-  border-top: 2px solid #ddd;
-}
-table > tbody > tr:nth-of-type(odd) {
-  background-color: #f9f9f9;
-}
+
 .ps-container > .ps-scrollbar-y-rail {
   z-index: 300;
 }
