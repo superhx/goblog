@@ -69,11 +69,11 @@ func workspace() {
 		log.Errorln(err)
 		return
 	}
-	err = exec.Command("cp", "-R", blog.ThemeDir+"/dashboard", config.PublicDir).Run()
-	if err != nil {
-		log.Errorln(err)
-		return
-	}
+	// err = exec.Command("cp", "-R", blog.ThemeDir+"/dashboard", config.PublicDir).Run()
+	// if err != nil {
+	// 	log.Errorln(err)
+	// 	return
+	// }
 	log.Infoln("Init workspace done")
 }
 
