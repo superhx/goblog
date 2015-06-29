@@ -270,19 +270,6 @@ $('.ul-div').scroll(function(e) {
   lastScrollTop = top;
 });
 
-// var isUp=false;
-// var lastScrollTop=0;
-// var searchDiv=$('.search-div')
-// var topThresh=searchDiv.height();
-// function searchScroll(top){
-//   console.log(top);
-//   if(top<topThreshold) return;
-//   if(isUp^(top>topThreshold)) searchDiv.fadeToggle();
-//   isUp=top<lastScrollTop;
-//   lastScrollTop=top;
-// }
-
-
 
 $('.ul-div').perfectScrollbar();
 $('.node').on('click', searchNode);
