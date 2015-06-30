@@ -1,9 +1,17 @@
 var time = 0;
 var blogTop = 0;
 var num = 0;
-// $.getJSON("./category.json", function(data) {
-
-// });
+$.getJSON("/category.json", function(data) {
+  $.each(data, function(index, val) {
+    var date = Date.parse(val.date);
+    var tag = '';
+    for (var i = val.tags.length - 1; i >= 0; i--) {
+      tag += '<span class="node">' + val.tags[i] + '</span>'
+    };
+    var string = '<li class="menu-li"><span class="time">' + format(date) + '</span><div class="content"><a class="title" href=/' + val.link + '>' + val.title + '</a><div class="tags"><span>' + tag + '</span></div></div></li>'
+    $('.ul-div ul').append(string);
+  });
+});
 var jsonData = [{
   "date": "2015-06-10T00:00:00Z",
   "link": "2012/1/10/markdown_help_9/index.html",
@@ -105,17 +113,17 @@ var jsonData = [{
   "tags": ["java", "golang"],
   "title": "Markdown help"
 }];
-(function(data) {
-  $.each(data, function(index, val) {
-    var date = Date.parse(val.date);
-    var tag = '';
-    for (var i = val.tags.length - 1; i >= 0; i--) {
-      tag += '<span class="node">' + val.tags[i] + '</span>'
-    };
-    var string = '<li class="menu-li"><span class="time">' + format(date) + '</span><div class="content"><a class="title" href=/"' + val.link + '">' + val.title + '</a><div class="tags"><span>' + tag + '</span></div></div></li>'
-    $('.ul-div ul').append(string);
-  });
-})(jsonData);
+// (function(data) {
+//   $.each(data, function(index, val) {
+//     var date = Date.parse(val.date);
+//     var tag = '';
+//     for (var i = val.tags.length - 1; i >= 0; i--) {
+//       tag += '<span class="node">' + val.tags[i] + '</span>'
+//     };
+//     var string = '<li class="menu-li"><span class="time">' + format(date) + '</span><div class="content"><a class="title" href=/"' + val.link + '">' + val.title + '</a><div class="tags"><span>' + tag + '</span></div></div></li>'
+//     $('.ul-div ul').append(string);
+//   });
+// })(jsonData);
 
 (function() {
   var a = /\b.*(iphone|ipad|android).*\b/;
