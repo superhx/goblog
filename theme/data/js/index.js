@@ -5,12 +5,11 @@
         self.isRight = true;
 
         self.initLeftMenu(self.bindLeftEvent);
-        if (self.isRight) {
+        if (category) {
             self.bindRightMenu();
         };
         self.search();
         self.bindScrollShow();
-        self.bindHoverShow();
     },
     initLeftMenu: function (callback) {
         var self = this;
@@ -25,14 +24,14 @@
                 var string = '<li class="menu-li"><span class="time">' + self.format(date) + '</span><div class="content"><a class="title" href=/' + val.link + '>' + val.title + '</a><div class="tags"><span>' + tag + '</span></div></div></li>'
                 $('.ul-div ul').append(string);
             });
-            callback();
+            callback.call(self);
         });
     },
     bindLeftEvent: function () {
         var self = this;
         var toggleBlog = function () {
             // var localhref = window.location.href;
-            var localhref = 'localhost://blog/2012/1/9/markdown_help_13/index.html'
+            var localhref = 'localhost://blog/2012/1/14/markdown_help_13/index.html'
             var blogList = $(".menu-li");
             var blogTop = 0, num = 0;
             for (var i = 0; i < blogList.length; i++) {
@@ -54,18 +53,18 @@
         $("#toggle").click(
             function (event) {
                 event.preventDefault();
-                if (self.time == 0) {
-                    $('.ul-div').animate({scrollTop: toggleBlog().getTop()}, 500);
-                    $('.menu-li').eq(toggleBlog().getNum()).addClass('active');
-                    console.log(toggleBlog().getTop());
-                    time += 1;
-                }
                 $(this).find(".top").toggleClass("active");
                 $(this).find(".middle").toggleClass("active");
                 $(this).find(".bottom").toggleClass("active");
                 $(".main-content").toggleClass("active");
                 $("#overlay").toggleClass("open");
                 $(".right-menu").toggleClass("active");
+                $('.ul-div').scrollTop(0);
+                if (self.time == 1) {
+                    $('.ul-div').animate({scrollTop: toggleBlog().getTop()}, 500);
+                    $('.menu-li').eq(toggleBlog().getNum()).addClass('active');
+                    self.time += 1;
+                }
             }
         );
 
@@ -80,6 +79,21 @@
             return false;
         };
         $('.ul-div').perfectScrollbar();
+        $('.menu-li').mouseenter(function (e) {
+            var target = $(e.delegateTarget);
+            setTimeout(function () {
+                if (target.is(':hover')) {
+                    target.find('div.tags').animate({
+                        'margin-top': '5px'
+                    }, 400);
+                }
+            }, 500);
+            // $(e.delegateTarget).find('div.tags').animate({'margin-top':'5px'},200);
+        }).mouseleave(function (e) {
+            $(e.delegateTarget).find('div.tags').animate({
+                'margin-top': '-25px'
+            }, 200);
+        });
     },
     bindRightMenu: function () {
         var getEle = $('.content').find('h2,h3');
@@ -180,23 +194,6 @@
                 searchDiv.fadeToggle();
             }
             lastScrollTop = top;
-        });
-    },
-    bindHoverShow: function () {
-        $('.menu-li').mouseenter(function (e) {
-            var target = $(e.delegateTarget);
-            setTimeout(function () {
-                if (target.is(':hover')) {
-                    target.find('div.tags').animate({
-                        'margin-top': '5px'
-                    }, 400);
-                }
-            }, 500);
-            // $(e.delegateTarget).find('div.tags').animate({'margin-top':'5px'},200);
-        }).mouseleave(function (e) {
-            $(e.delegateTarget).find('div.tags').animate({
-                'margin-top': '-25px'
-            }, 200);
         });
     },
     format: function (date) {
