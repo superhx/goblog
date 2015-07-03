@@ -2,7 +2,6 @@
     init: function () {
         var self = this;
         self.time = 1;
-        self.isRight = true;
 
         self.initLeftMenu(self.bindLeftEvent);
         if (category) {
@@ -10,6 +9,8 @@
         };
         self.search();
         self.bindScrollShow();
+
+        self.bindNewPage();
     },
     initLeftMenu: function (callback) {
         var self = this;
@@ -203,6 +204,29 @@
         if (seconds / 3600 < 24) return parseInt(seconds / 3600) + ' hrs ago';
         if (seconds / (3600 * 24) < 30) return parseInt(seconds / (3600 * 24)) + ' days ago';
         return date.toString('MMM d yyyy');
+    },
+    bindNewPage:function(){
+    	var self = this;
+    	$.ajax({
+    		url:'/blog.html' , 
+    		success:function(res){ 
+    			
+    			$('.ul-div ul').empty();
+    			$('.right-menu-ul').empty();
+    			$('article').html($(res).find('article').html());
+
+    			        self.time = 1;
+
+        self.initLeftMenu(self.bindLeftEvent);
+        if (category) {
+            self.bindRightMenu();
+        };
+        self.search();
+        self.bindScrollShow();
+
+        self.bindNewPage();
+    		}
+    	})
     }
 
 }).init();
