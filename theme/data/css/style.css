@@ -1,4 +1,10 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+
+@font-face {
+  font-family: Classic Grotesque Pro Book;
+  src: url(book.woff);
+}
+
 html {
   overflow: auto;
   overflow-x: hidden;
@@ -9,35 +15,35 @@ html {
 }
 
 body {
-  font-family: "Avenir Next", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Lantinghei SC",  "Source Han Sans", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", sans-serif;
+  font-family: "Helvetica Neue", "Roboto", "Classic Grotesque Pro Book", "Segoe UI", Arial, "Source Han Sans SC", "Lantinghei SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", sans-serif;
 }
 
 article{
   margin-bottom: 40px;
   font-size: 18px;
   line-height: 27.2000007629395px;
-  font-family: TIBch, 'Classic Grotesque W01', 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, sans-serif;
+  font-weight: 400;
 }
 
-h1, .h1 {
+article h1, .h1 {
   font-size: 36px;
 }
-h2, .h2 {
+article h2, .h2 {
   font-size: 30px;
 }
-h3, .h3 {
+article h3, .h3 {
   font-size: 24px;
 }
-h4, .h4 {
+article h4, .h4 {
   font-size: 18px;
 }
-h5, .h5 {
+article h5, .h5 {
   font-size: 14px;
 }
-h6, .h6 {
+article h6, .h6 {
   font-size: 12px;
 }
-h1, h2, h3, h4, h5, h5 {
+article h1, h2, h3, h4, h5, h5 {
   margin-top: 20px;
   margin-bottom: 20px;
   font-weight: 500;
@@ -45,7 +51,6 @@ h1, h2, h3, h4, h5, h5 {
 article p {
   margin-top: 20px;
   margin-bottom: 20px;
-  font-weight: 400;
 }
 
 article li{
