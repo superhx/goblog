@@ -1,19 +1,19 @@
 ({
-    init: function () {
+    init: function() {
         var self = this;
         self.time = 1;
 
         self.initLeftMenu(self.bindLeftEvent);
         // if (category) {
-            self.bindRightMenu();
+        self.bindRightMenu();
         // };
         self.search();
         self.bindScrollShow();
     },
-    initLeftMenu: function (callback) {
+    initLeftMenu: function(callback) {
         var self = this;
-        $.getJSON("/category.json", function (data) {
-            $.each(data, function (index, val) {
+        $.getJSON("/category.json", function(data) {
+            $.each(data, function(index, val) {
                 var date = Date.parse(val.date);
                 var tag = '';
                 for (var i = val.tags.length - 1; i >= 0; i--) {
@@ -28,12 +28,13 @@
 
         });
     },
-    bindLeftEvent: function () {
+    bindLeftEvent: function() {
         var self = this;
-        var toggleBlog = function () {
+        var toggleBlog = function() {
             var localhref = window.location.href;
             var blogList = $(".menu-li");
-            var blogTop = 0, num = 0;
+            var blogTop = 0,
+                num = 0;
             for (var i = 0; i < blogList.length; i++) {
                 if (localhref.toLowerCase().indexOf(blogList.eq(i).find('a').attr('href').toLowerCase()) >= 0) {
                     blogTop = blogList.eq(i).offset().top - document.body.scrollTop;
@@ -42,17 +43,17 @@
                 }
             };
             return {
-                getTop: function () {
+                getTop: function() {
                     return blogTop;
                 },
-                getNum: function () {
+                getNum: function() {
                     return num;
                 }
             };
         };
         $('.menu-li').eq(toggleBlog().getNum()).addClass('active');
         $("#toggle").click(
-            function (event) {
+            function(event) {
                 event.preventDefault();
                 $(this).find(".top").toggleClass("active");
                 $(this).find(".middle").toggleClass("active");
@@ -62,61 +63,65 @@
                 $(".right-menu").toggleClass("active");
                 $('.ul-div').scrollTop(0);
                 if (self.time == 1) {
-                    $('.ul-div').animate({scrollTop: toggleBlog().getTop()}, 500);
+                    $('.ul-div').animate({
+                        scrollTop: toggleBlog().getTop()
+                    }, 500);
                     self.time += 1;
                 }
             }
         );
 
-        $(".main-content").click(function () {
+        $(".main-content").click(function() {
             if ($(".main-content").attr("class").split(" ").length == 2) {
                 $("#toggle").trigger("click");
             };
         });
-        var scroll = function (event, scroller) {
+        var scroll = function(event, scroller) {
             var k = event.wheelDelta ? event.wheelDelta : -event.detail * 10;
             scroller.scrollTop = scroller.scrollTop - k;
             return false;
         };
         $('.ul-div').perfectScrollbar();
-        $('.menu-li').mouseenter(function (e) {
+        $('.menu-li').mouseenter(function(e) {
             var target = $(e.delegateTarget);
-            setTimeout(function () {
+            setTimeout(function() {
                 if (target.is(':hover')) {
                     target.find('div.tags').animate({
                         'margin-top': '5px'
                     }, 400);
                 }
             }, 500);
-        }).mouseleave(function (e) {
+        }).mouseleave(function(e) {
             $(e.delegateTarget).find('div.tags').animate({
                 'margin-top': '-25px'
             }, 200);
         });
-                $('.title').on('click',function(){
+        $('.title').on('click', function() {
             history.pushState('', '', $(this).attr('href'));
             $.ajax({
-            url:$(this).attr('href') , 
-            success:function(res){ 
-                
-                $('.ul-div ul').empty();
-                $('.right-menu-ul').empty();
-                $('article').html($(res).find('article').html());
-                $('#toggle').off('click');
-                $(".main-content").off('click');
-                self.time = 1;
-                self.initLeftMenu(self.bindLeftEvent);
-                // if (category) {
-                    self.bindRightMenu();
-                // };
-                           }
-        })           
+                url: $(this).attr('href'),
+                success: function(res) {
+                    //var temp = $(res).filter('script')[1].innerHTML.toString().split('=')[1];
+                    $('script')[1].remove();
+                    $('script').first().after($(res).filter('script')[1]);
+                    $('.ul-div ul').empty();
+                    $('.right-menu-ul').empty();
+                    $('article').html($(res).find('article').html());
+                    $('#toggle').off('click');
+                    $(".main-content").off('click');
+                    self.time = 1;
+                    self.initLeftMenu(self.bindLeftEvent);
+                    if (category) {
+                        self.bindRightMenu();
+                    };
+                }
+            })
 
             return false;
-        }); 
-       
+        });
+
     },
-    bindRightMenu: function () {
+    bindRightMenu: function() {
         var getEle = $('.content').find('h2,h3');
         var a = getEle.length;
         for (var i = 0; i < a;) {
@@ -136,10 +141,10 @@
             $(".right-menu-ul").append(temp);
         };
 
-        $('.content').find('h2,h3,article').each(function () {
+        $('.content').find('h2,h3,article').each(function() {
             new Waypoint({
                 element: this,
-                handler: function (direction) {
+                handler: function(direction) {
                     var num = '.a' + $(this.element).attr("class").charAt(3);
                     $('.right-menu-ul a').removeClass('active');
                     $('.right-menu-ul ul').removeClass('active');
@@ -156,7 +161,7 @@
             });
         });
         var rightTop = parseInt($('.right-menu').offset().top);
-        $(document).scroll(function (e) {
+        $(document).scroll(function(e) {
             var pos = document.body.scrollTop;
             if (pos >= rightTop) {
                 $('.right-menu').addClass('fixed');
@@ -168,7 +173,7 @@
             }
         });
     },
-    search: function () {
+    search: function() {
         var totalList = $(".menu-li");
         var input = $('.search');
         input.bind('keyup', sendKeyWord);
@@ -176,6 +181,7 @@
         function sendKeyWord(e) {
             dealData($.trim(input.val()));
         };
+
         function dealData(text) {
             for (var i = 0; i < totalList.length; i++) {
                 if (totalList.eq(i).text().toLowerCase().indexOf(text.toLowerCase()) < 0) {
@@ -184,7 +190,9 @@
                     totalList.eq(i).show();
                 }
             }
-            $('.ul-div').animate({scrollTop: 0}, 500);
+            $('.ul-div').animate({
+                scrollTop: 0
+            }, 500);
         };
 
         $('.tagnode').on('click', searchNode);
@@ -198,12 +206,12 @@
             dealData($(e.target).html());
         };
     },
-    bindScrollShow: function () {
+    bindScrollShow: function() {
         var isUp = true;
         var lastScrollTop = 0;
         var searchDiv = $('.search-div')
         var topThreshold = searchDiv.height();
-        $('.ul-div').scroll(function (e) {
+        $('.ul-div').scroll(function(e) {
             var top = parseInt($('.ps-scrollbar-y').css('top'));
             if (top == lastScrollTop) return;
             if (top < topThreshold) {
@@ -217,7 +225,7 @@
             lastScrollTop = top;
         });
     },
-    format: function (date) {
+    format: function(date) {
         var seconds = parseInt((Date.now() - date) / 1000);
         if (seconds < 60) return parseInt(seconds / 60) + ' secs ago';
         if (seconds / 60 < 60) return parseInt(seconds / 60) + ' mins ago';
