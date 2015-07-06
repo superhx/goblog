@@ -4,13 +4,11 @@
         self.time = 1;
 
         self.initLeftMenu(self.bindLeftEvent);
-        if (category) {
+        // if (category) {
             self.bindRightMenu();
-        };
+        // };
         self.search();
         self.bindScrollShow();
-
-        self.bindNewPage();
     },
     initLeftMenu: function (callback) {
         var self = this;
@@ -20,19 +18,20 @@
                 var tag = '';
                 for (var i = val.tags.length - 1; i >= 0; i--) {
                     tag += '<span class="node">' + val.tags[i] + '</span>'
-                }
-                ;
-                var string = '<li class="menu-li"><span class="time">' + self.format(date) + '</span><div class="content"><a class="title" href=/' + val.link + '>' + val.title + '</a><div class="tags"><span>' + tag + '</span></div></div></li>'
+                };
+                var string = '<li class="menu-li"><span class="time">' + self.format(date) + '</span><div class="content"><a class="title" href="/' + val.link + '">' + val.title + '</a><div class="tags"><span>' + tag + '</span></div></div></li>';
                 $('.ul-div ul').append(string);
             });
+
             callback.call(self);
+
+
         });
     },
     bindLeftEvent: function () {
         var self = this;
         var toggleBlog = function () {
-            // var localhref = window.location.href;
-            var localhref = 'localhost://blog/2012/1/14/markdown_help_13/index.html'
+            var localhref = window.location.href;
             var blogList = $(".menu-li");
             var blogTop = 0, num = 0;
             for (var i = 0; i < blogList.length; i++) {
@@ -51,6 +50,7 @@
                 }
             };
         };
+        $('.menu-li').eq(toggleBlog().getNum()).addClass('active');
         $("#toggle").click(
             function (event) {
                 event.preventDefault();
@@ -63,7 +63,6 @@
                 $('.ul-div').scrollTop(0);
                 if (self.time == 1) {
                     $('.ul-div').animate({scrollTop: toggleBlog().getTop()}, 500);
-                    $('.menu-li').eq(toggleBlog().getNum()).addClass('active');
                     self.time += 1;
                 }
             }
@@ -89,12 +88,33 @@
                     }, 400);
                 }
             }, 500);
-            // $(e.delegateTarget).find('div.tags').animate({'margin-top':'5px'},200);
         }).mouseleave(function (e) {
             $(e.delegateTarget).find('div.tags').animate({
                 'margin-top': '-25px'
             }, 200);
         });
+                $('.title').on('click',function(){
+            history.pushState('', '', $(this).attr('href'));
+            $.ajax({
+            url:$(this).attr('href') , 
+            success:function(res){ 
+                
+                $('.ul-div ul').empty();
+                $('.right-menu-ul').empty();
+                $('article').html($(res).find('article').html());
+                $('#toggle').off('click');
+                $(".main-content").off('click');
+                self.time = 1;
+                self.initLeftMenu(self.bindLeftEvent);
+                // if (category) {
+                    self.bindRightMenu();
+                // };
+                           }
+        })           
+
+            return false;
+        }); 
+       
     },
     bindRightMenu: function () {
         var getEle = $('.content').find('h2,h3');
@@ -164,10 +184,10 @@
                     totalList.eq(i).show();
                 }
             }
-            $('.ul-div').scrollTop(0);
+            $('.ul-div').animate({scrollTop: 0}, 500);
         };
 
-        $('.node').on('click', searchNode);
+        $('.tagnode').on('click', searchNode);
 
         function searchNode(e) {
             if ($(".main-content").attr("class").split(" ").length == 1) {
@@ -204,29 +224,5 @@
         if (seconds / 3600 < 24) return parseInt(seconds / 3600) + ' hrs ago';
         if (seconds / (3600 * 24) < 30) return parseInt(seconds / (3600 * 24)) + ' days ago';
         return date.toString('MMM d yyyy');
-    },
-    bindNewPage:function(){
-    	var self = this;
-    	$.ajax({
-    		url:'/blog.html' , 
-    		success:function(res){ 
-    			
-    			$('.ul-div ul').empty();
-    			$('.right-menu-ul').empty();
-    			$('article').html($(res).find('article').html());
-
-    			        self.time = 1;
-
-        self.initLeftMenu(self.bindLeftEvent);
-        if (category) {
-            self.bindRightMenu();
-        };
-        self.search();
-        self.bindScrollShow();
-
-        self.bindNewPage();
-    		}
-    	})
     }
-
 }).init();
