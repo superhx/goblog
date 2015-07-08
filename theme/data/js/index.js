@@ -45,3 +45,16 @@ setTimeout(function(){
 	100);
 },450);
 }
+
+PNotify.prototype.options.styling = "fontawesome";
+$("#deploy").click(function(){
+	$.get("/dashboard/deploy",function(data){
+		//console.log(data);
+        if(data.status=="fail"){
+            new PNotify({title:"Deploy Failed",text: data.error, type: "error"});
+        }else{
+            new PNotify({title: "Deploy Success", type: "success"});
+        }
+
+	});
+})

@@ -102,7 +102,7 @@ license GPL/LGPL/MPL
 			// After a delay, remove the notice.
 			hide: true,
 			// Delay in milliseconds before the notice is removed.
-			delay: 8000,
+			delay: 2000,
 			// Reset the hide timer if the mouse moves over the notice.
 			mouse_reset: true,
 			// Remove the notice's elements from the DOM after it is removed.
