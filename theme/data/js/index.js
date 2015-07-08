@@ -4,9 +4,9 @@
         self.time = 1;
 
         self.initLeftMenu(self.bindLeftEvent);
-        // if (category) {
+        if (category) {
         self.bindRightMenu();
-        // };
+        };
         self.search();
         self.bindScrollShow();
     },
@@ -101,7 +101,6 @@
             $.ajax({
                 url: $(this).attr('href'),
                 success: function(res) {
-                    //var temp = $(res).filter('script')[1].innerHTML.toString().split('=')[1];
                     $('script')[1].remove();
                     $('script').first().after($(res).filter('script')[1]);
                     $('.ul-div ul').empty();
@@ -110,6 +109,9 @@
                     $('#toggle').off('click');
                     $(".main-content").off('click');
                     self.time = 1;
+                    $('.blog-title').html($(res).find('.blog-title').html());
+                    $('.blog-time').html($(res).find('.blog-time').html());
+                    $('.blog-tag').html($(res).find('.blog-tag').html());
                     self.initLeftMenu(self.bindLeftEvent);
                     if (category) {
                         self.bindRightMenu();

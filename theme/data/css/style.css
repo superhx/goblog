@@ -156,6 +156,7 @@ article table > tbody > tr:nth-of-type(odd) {
   top: 0;
   left: 0;
   -webkit-transition: all .35s ease;
+  -moz-transition: all .35s ease;
   transition: all .35s ease;
   cursor: pointer
 }
@@ -168,6 +169,7 @@ article table > tbody > tr:nth-of-type(odd) {
 .top.active {
   -webkit-transform: translateY(9px) translateX(0) rotate(45deg);
   -ms-transform: translateY(9px) translateX(0) rotate(45deg);
+  -moz-transform: translateY(9px) translateX(0) rotate(45deg);
   transform: translateY(9px) translateX(0) rotate(45deg);
   background: rgba(0, 0, 0, 0.14902);
 }
@@ -177,6 +179,7 @@ article table > tbody > tr:nth-of-type(odd) {
 }
 .bottom.active {
   -ms-transform: translateY(-9px) translateX(0) rotate(-45deg);
+  -moz-transform: translateY(-9px) translateX(0) rotate(-45deg);
   -webkit-transform: translateY(-9px) translateX(0) rotate(-45deg);
   tranform: translateY(-9px) translateX(0) rotate(-45deg);
   background: rgba(0, 0, 0, 0.14902);
@@ -185,13 +188,13 @@ article table > tbody > tr:nth-of-type(odd) {
   position: fixed;
   background: #fff;
   top: 0;
-  left: 0;
+  left: -450px;
   width: 450px;
   height: 100%;
   opacity: 0;
-  visibility: hidden;
-  -webkit-transition: opacity .35s, visibility .35s;
-  transition: opacity .35s, visibility .35s;
+  -webkit-transition: opacity .35s,left .35s;
+  -moz-transition: opacity .35s,left .35s;
+  transition: opacity .35s, left .35s;
   overflow: hidden;
   z-index: 100;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
@@ -199,7 +202,7 @@ article table > tbody > tr:nth-of-type(odd) {
 }
 .overlay.open {
   opacity: 1;
-  visibility: visible;
+  left:0;
 }
 .overlay nav {
   position: relative;
@@ -236,12 +239,6 @@ article table > tbody > tr:nth-of-type(odd) {
   float: left;
 }
 
-/*.search {
-    width: 250px;
-    margin-top: 7px;
-    padding: 1px 12px;
-    height: 28px;
-}*/
 
 .overlay nav ul li {
   display: block;
@@ -263,12 +260,7 @@ article table > tbody > tr:nth-of-type(odd) {
 .overlay nav ul li:last-child {
   border-bottom: none;
 }
-.overlay.open nav ul li {
-  -webkit-animation: menuFade .5s ease forwards;
-  animation: menuFade .5s ease forwards;
-  -webkit-animation-delay: .35s;
-  animation-delay: 0s
-}
+
 .overlay nav ul li a {
   font-size: 18px;
   height: auto;
@@ -347,6 +339,7 @@ article table > tbody > tr:nth-of-type(odd) {
   left: 0;
   -webkit-transform: translateX(-105%);
   -ms-transform: translateX(-105%);
+  -moz-transform: translateX(-105%);
   transform: translateX(-105%);
   height: 2px;
   width: 100%;
@@ -354,11 +347,7 @@ article table > tbody > tr:nth-of-type(odd) {
   -webkit-transition: .35s ease;
   transition: .35s ease
 }
-.overlay nav ul li a:hover:after {
-  /*-webkit-transform: translateX(0%);
-  -ms-transform: translateX(0%);
-  transform: translateX(0%)*/
-}
+
 .overlay nav ul li a span {
   font-size: 8px;
 }
