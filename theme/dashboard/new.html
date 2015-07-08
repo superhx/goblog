@@ -241,7 +241,10 @@
                 success: function () {
                     new PNotify({title: "Publish Success", type: "success"});
                     clearInterval(t);
-                    localStorage.clear();
+                    localStorage.removeItem('title');
+                    localStorage.removeItem('tags');
+                    localStorage.removeItem('content')
+//                    localStorage.clear();
                     setTimeout("javascript:location.href='/dashboard'", 3000);
                 },
                 error: function () {
