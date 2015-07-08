@@ -1,48 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Dashboard</title>
-    <style type="text/css">
-        html,
-        body {
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        .floater {
-            float: left;
-            height: 50%;
-            margin-bottom: -100px;
-        }
-
-        .dashboard {
-            clear: both;
-            width: 500px;
-            height: 100px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+	<title>Dashboard</title>
 </head>
-
+<link rel="stylesheet" type="text/css" href="/css/index.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <body>
-<div class="floater">
-</div>
-<div class="dashboard">
-    <ul>
-        <li><span><a href="/">Home</a></span></li>
-        <li><span><a href="new.html">New Blog</a></span></li>
-        <li><span>Deploy</span></li>
-    </ul>
-</div>
-</body>
+   <div class= "dashboard">
+   	<a href="/"><i class="fa fa-home  node"></i></a>
+   	<a href="/dashboard/new.html"><i class="fa fa-pencil  node"></i></a>
+   	<a href="/dashboard/deploy"><i class="fa fa-cloud-upload  node"></i></a>
+   </div>
 <script src="/js/jquery.js"></script>
-<script type="text/javascript">
-    // tags=["java","php"]
-    // $.post("/dashboard/blog/new",{"title":"233","tags":tags,"content":"bilibili"},function(data,status){
-    //   console.log(data)
-    // });
-</script>
+<script src="/js/index.js"></script>
+</body>
 </html>
