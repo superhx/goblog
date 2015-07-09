@@ -107,7 +107,7 @@
                     $('.ul-div ul').empty();
                     $('.right-menu-ul').empty();
                     $('.main-content .row').html($(res).find('.row').html());
-                    $(document).scrollTop(0)
+                    $(document).scrollTop(0);
                     // $('article').html($(res).find('article').html());
                     $('#toggle').off('click');
                     $(".main-content").off('click');
@@ -121,7 +121,8 @@
                     $('#init').remove();
                     $('body').append($(res).filter('#init'));
                     self.initLeftMenu(self.bindLeftEvent);
-                    if (category) self.bindRightMenu();
+                    console.log(category);
+                    if (category) {$('.right-menu').addClass('active');  console.log(123); self.bindRightMenu();}
                     self.search();
 
 
