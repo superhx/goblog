@@ -36,7 +36,9 @@
             var blogTop = 0,
                 num = 0;
             for (var i = 0; i < blogList.length; i++) {
-                if (localhref.toLowerCase().indexOf(escape(blogList.eq(i).find('a').attr('href').toLowerCase())) >= 0) {
+              // console.log(blogList.eq(i).find('a').attr('href'));
+              // console.log(escape(blogList.eq(i).find('a').attr('href')));
+                if (escape(unescape(localhref.toLowerCase())).indexOf(escape(blogList.eq(i).find('a').attr('href').toLowerCase())) >= 0) {
                     blogTop = blogList.eq(i).offset().top - document.body.scrollTop;
                     num = i;
                     break;
@@ -109,6 +111,8 @@
                     // $('article').html($(res).find('article').html());
                     $('#toggle').off('click');
                     $(".main-content").off('click');
+                    $('.tagnode').off('click');
+                    $('.search').off('keyup');
                     self.time = 1;
                     // $('.blog-title').html($(res).find('.blog-title').html());
                     // $('.blog-time').html($(res).find('.blog-time').html());
@@ -118,6 +122,7 @@
                     $('body').append($(res).filter('#init'));
                     self.initLeftMenu(self.bindLeftEvent);
                     if (category) self.bindRightMenu();
+                    self.search();
 
 
                 }
@@ -180,7 +185,7 @@
         });
     },
     search: function() {
-        var totalList = $(".menu-li");
+
         var input = $('.search');
         input.bind('keyup', sendKeyWord);
 
@@ -189,6 +194,7 @@
         };
 
         function dealData(text) {
+          var totalList = $(".menu-li");
             for (var i = 0; i < totalList.length; i++) {
                 if (totalList.eq(i).text().toLowerCase().indexOf(text.toLowerCase()) < 0) {
                     totalList.eq(i).hide();
