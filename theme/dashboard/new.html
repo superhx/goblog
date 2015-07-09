@@ -226,7 +226,7 @@
         }
 
         PNotify.prototype.options.styling = "fontawesome";
-        if (title == "" || content == "") {
+        if (title == "" || content == "" || tags == "") {
             new PNotify({title: "Content Can't be Blank", type: "error"});
         } else {
             $.ajax({
@@ -248,7 +248,7 @@
                     setTimeout("javascript:location.href='/dashboard'", 3000);
                 },
                 error: function () {
-                    new PNotify({title: "Publish Failed", text:"Network Error",type: "error"});
+                    new PNotify({title: "Publish Failed", text: "Network Error", type: "error"});
                 }
             });
         }
