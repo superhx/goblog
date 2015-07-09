@@ -73,7 +73,9 @@ func (blog *Blog) Generate() (err error) {
 		renderCategory(blog.articles)
 
 		//generate home page
-		renderHomePage(getOutputPath(*(blog.articles[0].(*Article))))
+		if len(blog.articles) != 0 {
+			renderHomePage(getOutputPath(*(blog.articles[0].(*Article))))
+		}
 	}()
 
 	if err != nil || len(files) == 0 {
