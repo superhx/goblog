@@ -196,7 +196,7 @@
         }
     }
 
-    if (localStorage.getItem("category")) {
+    if (localStorage.getItem("content")) {
         recover();
     }
 
@@ -260,6 +260,7 @@
 //        console.log(e.scrollHeight);
         $(e).css({'height': 'auto', 'overflow-y': 'hidden'}).height(e.scrollHeight);
     }
+
     $('textarea').each(function () {
         h(this);
     }).on('input', function () {
