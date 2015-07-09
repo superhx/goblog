@@ -31,12 +31,12 @@
     bindLeftEvent: function() {
         var self = this;
         var toggleBlog = function() {
-            var localhref = window.location.href;
+            var localhref = window.location.href+"index.html";
             var blogList = $(".menu-li");
             var blogTop = 0,
                 num = 0;
             for (var i = 0; i < blogList.length; i++) {
-                if (localhref.toLowerCase().indexOf(blogList.eq(i).find('a').attr('href').toLowerCase()) >= 0) {
+                if (localhref.toLowerCase().indexOf(escape(blogList.eq(i).find('a').attr('href').toLowerCase())) >= 0) {
                     blogTop = blogList.eq(i).offset().top - document.body.scrollTop;
                     num = i;
                     break;
@@ -52,6 +52,7 @@
             };
         };
         $('.menu-li').eq(toggleBlog().getNum()).addClass('active');
+        console.log(toggleBlog().getNum());
         $("#toggle").click(
             function(event) {
                 event.preventDefault();
@@ -103,8 +104,8 @@
                 success: function(res) {
                     $('.ul-div ul').empty();
                     $('.right-menu-ul').empty();
-
                     $('.main-content .row').html($(res).find('.row').html());
+                    $(document).scrollTop(0)
                     // $('article').html($(res).find('article').html());
                     $('#toggle').off('click');
                     $(".main-content").off('click');
@@ -113,11 +114,9 @@
                     // $('.blog-time').html($(res).find('.blog-time').html());
                     // $('.blog-tag').html($(res).find('.blog-tag').html());
 
-
-                    self.initLeftMenu(self.bindLeftEvent);
-
                     $('#init').remove();
                     $('body').append($(res).filter('#init'));
+                    self.initLeftMenu(self.bindLeftEvent);
                     if (category) self.bindRightMenu();
 
 

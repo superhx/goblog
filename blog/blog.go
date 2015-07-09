@@ -12,6 +12,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 )
@@ -35,7 +36,7 @@ func New(title string, tags []string, content string, category bool) {
 	article["category"] = category
 	bytes, _ := json.Marshal(article)
 	str := "```\n" + string(bytes) + "\n```\n\n"
-	path := fmt.Sprintf("%s/articles/%s.md", config.SourceDir, title)
+	path := fmt.Sprintf("%s/articles/%s.md", config.SourceDir, strings.Replace(title, "?", "", -1))
 	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY, os.ModePerm)
 	if err != nil {
 		log.Errorln(err)
