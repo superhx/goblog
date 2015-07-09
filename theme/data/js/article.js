@@ -101,12 +101,10 @@
             $.ajax({
                 url: $(this).attr('href'),
                 success: function(res) {
-
                     $('.ul-div ul').empty();
                     $('.right-menu-ul').empty();
 
-                    $('.main-content .row').html($(res).find('.main-content .row').html());
-
+                    $('.main-content .row').html($(res).find('.row').html());
                     // $('article').html($(res).find('article').html());
                     $('#toggle').off('click');
                     $(".main-content").off('click');

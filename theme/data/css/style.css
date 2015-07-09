@@ -85,6 +85,10 @@ article table > tbody > tr:nth-of-type(odd) {
   background-color: #f9f9f9;
 }
 
+article img{
+  max-width: 100%;
+}
+
 .btn-custom {
   background-color: transparent;
   color: #ff6633;
