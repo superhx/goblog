@@ -76,7 +76,7 @@ func renderArticle(node mark.Node, article Article) {
 	}
 	buf := bytes.NewBufferString("")
 	mark.NewHTMLWriter(node).WriteTo(buf)
-	blogTmpl.ExecuteTemplate(output, "article.htm", map[string]interface{}{"Info": article, "Content": buf})
+	blogTmpl.ExecuteTemplate(output, "article.htm", map[string]interface{}{"Info": article, "Content": buf, "Disqus": config.Disqus})
 	if err != nil {
 		log.Errorln(err)
 		return
