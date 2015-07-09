@@ -68,7 +68,7 @@ func renderCategory(category []interface{}) {
 func renderArticle(node mark.Node, article Article) {
 	outputPath := config.PublicDir + "/" + getOutputPath(article)
 	os.MkdirAll(path.Dir(outputPath), os.ModePerm)
-	output, err := os.OpenFile(outputPath, os.O_CREATE|os.O_WRONLY, os.ModePerm)
+	output, err := os.OpenFile(outputPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, os.ModePerm)
 	defer output.Close()
 	if err != nil {
 		log.Errorln(err)

@@ -101,21 +101,28 @@
             $.ajax({
                 url: $(this).attr('href'),
                 success: function(res) {
-                    $('script')[1].remove();
-                    $('script').first().after($(res).filter('script')[1]);
+
                     $('.ul-div ul').empty();
                     $('.right-menu-ul').empty();
-                    $('article').html($(res).find('article').html());
+
+                    $('.main-content .row').html($(res).find('.main-content .row').html());
+
+                    // $('article').html($(res).find('article').html());
                     $('#toggle').off('click');
                     $(".main-content").off('click');
                     self.time = 1;
-                    $('.blog-title').html($(res).find('.blog-title').html());
-                    $('.blog-time').html($(res).find('.blog-time').html());
-                    $('.blog-tag').html($(res).find('.blog-tag').html());
+                    // $('.blog-title').html($(res).find('.blog-title').html());
+                    // $('.blog-time').html($(res).find('.blog-time').html());
+                    // $('.blog-tag').html($(res).find('.blog-tag').html());
+
+
                     self.initLeftMenu(self.bindLeftEvent);
-                    if (category) {
-                        self.bindRightMenu();
-                    };
+
+                    $('#init').remove();
+                    $('body').append($(res).filter('#init'));
+                    if (category) self.bindRightMenu();
+
+
                 }
             })
 

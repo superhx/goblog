@@ -56,11 +56,8 @@
           <div class="blog-info-div">
             <span class="blog-time">{{.Info.Date.Format "Jan 02, 2006"}} / </span>
             <div class="blog-tag">
-              {{$n := len .Info.Tags}}
-              {{range $i,$e:= .Info.Tags}}
-              <a class="tagnode" href="#">{{$e}}</a>
-                {{if ne (plus1 $i) $n}},{{end}}
-              {{end}}
+              {{$n := len .Info.Tags}} {{range $i,$e:= .Info.Tags}}
+              <a class="tagnode" href="#">{{$e}}</a> {{if ne (plus1 $i) $n}},{{end}} {{end}}
             </div>
           </div>
         </div>
@@ -81,19 +78,13 @@
       <div id="disqus_thread" class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2"></div>
     </div>
   </div>
-  <!-- Javascript -->
-  <script type="text/javascript">
-    var category={{.Info.Category}};
-  </script>
-  <script src="/js/jquery.js"></script>
-  <script src="/js/date-en-US.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
-  <script src="/js/noframework.waypoints.min.js"></script>
-  <script src="/js/perfect-scrollbar.jquery.js"></script>
-  <script src="/js/article.js"></script>
   <script src="/js/pangu.js"></script>
-  <script type="text/javascript">
+  <!-- Javascript -->
+  <script id="init" type="text/javascript">
+    var category = {{.Info.Category}};
+
     pangu.page_spacing();
+
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = 'superhx';
 
@@ -106,6 +97,12 @@
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
   </script>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/date-en-US.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/noframework.waypoints.min.js"></script>
+  <script src="/js/perfect-scrollbar.jquery.js"></script>
+  <script src="/js/article.js"></script>
 </body>
 
 </html>
