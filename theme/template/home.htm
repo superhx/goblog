@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<link rel="stylesheet" type="text/css" href="/css/index.css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<body>
-   <div class= "dashboard">
-   	<a href="{{.First}}"><i class="fa fa-home  node"></i></a>
-   	<a href="http://www.facebook.com"><i class="fa fa-facebook-square  node"></i></a>
-   	<a href="https://github.com/superhx"><i class="fa fa-github  node"></i></a>
-   </div>
-</body>
-<script src="/js/jquery.js"></script>
-<script src="/js/index.js"></script>
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="1;url={{.First}}">
+        <script type="text/javascript">
+            window.location.href = "{{.First}}"
+        </script>
+        <title>Page Redirection</title>
+    </head>
+    <body>
+        <!-- Note: don't tell people to `click` the link, just tell them that it is a link. -->
+        If you are not redirected automatically, follow the <a href='{{.First}}'>link to example</a>
+    </body>
 </html>

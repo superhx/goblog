@@ -1,5 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
-
+/*@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+*/
 @font-face {
   font-family: Classic Grotesque Pro Book;
   src: url(book.woff);
@@ -89,6 +89,10 @@ article img{
   max-width: 100%;
 }
 
+article code{
+  color: inherit;
+}
+
 .btn-custom {
   background-color: transparent;
   color: #ff6633;
@@ -116,7 +120,7 @@ article img{
   margin: 30px auto
 }
 .fadeIn {
-  animation-duration: 1.2s；
+  animation-duration: 1.2s;
   -webkit-animation-duration: 1.2s;
   -moz-animation-duration: 1.2s;
 }
@@ -185,7 +189,7 @@ article img{
   -ms-transform: translateY(-9px) translateX(0) rotate(-45deg);
   -moz-transform: translateY(-9px) translateX(0) rotate(-45deg);
   -webkit-transform: translateY(-9px) translateX(0) rotate(-45deg);
-  tranform: translateY(-9px) translateX(0) rotate(-45deg);
+  transform: translateY(-9px) translateX(0) rotate(-45deg);
   background: rgba(0, 0, 0, 0.14902);
 }
 .overlay {
@@ -369,7 +373,7 @@ article img{
   color: #333333;
 }
 .right-menu .fixed {
-  display: fixed;
+  position: fixed;
 }
 @media screen and (max-width: 500px) {
   .overlay.open {

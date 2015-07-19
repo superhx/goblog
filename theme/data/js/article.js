@@ -54,7 +54,6 @@
             };
         };
         $('.menu-li').eq(toggleBlog().getNum()).addClass('active');
-        console.log(toggleBlog().getNum());
         $("#toggle").click(
             function(event) {
                 event.preventDefault();

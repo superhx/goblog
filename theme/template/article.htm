@@ -7,11 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{{.Info.Title}}</title>
   <!-- Styles -->
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
   <link href="/css/style.css" rel="stylesheet">
   <!--<link rel="stylesheet" href="css/github-markdown.min.css">-->
-  <link rel="stylesheet" href="/css/default.min.css">
-  <link rel="stylesheet" href="/css/perfect-scrollbar.css">
+  <!--   <link rel="stylesheet" href="/css/default.min.css">-->  
   <script src="/js/pace.js"></script>
   <link href="/css/pace-theme-flash.min.css" rel="stylesheet">
 </head>
@@ -78,7 +77,10 @@
       <div id="disqus_thread" class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2"></div>
     </div>
   </div>
+  <link rel="stylesheet" href="/css/perfect-scrollbar.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
   <script src="/js/pangu.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
   <!-- Javascript -->
   <script id="init" type="text/javascript">
     var category = {{.Info.Category}};
@@ -96,10 +98,12 @@
       dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
+    hljs.initHighlightingOnLoad();
   </script>
-  <script src="/js/jquery.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="/js/date-en-US.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="/js/noframework.waypoints.min.js"></script>
   <script src="/js/perfect-scrollbar.jquery.js"></script>
   <script src="/js/article.js"></script>

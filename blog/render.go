@@ -3,7 +3,6 @@ package blog
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	log "github.com/Sirupsen/logrus"
 	"github.com/kardianos/osext"
 	"github.com/superhx/mark"
@@ -41,25 +40,15 @@ func init() {
 }
 
 func renderCategory(category []interface{}) {
-	file, err := os.Create(config.PublicDir + "/template/category.htm")
-	defer file.Close()
-	if err != nil {
-		fmt.Println("Create Categoty template fail")
-	}
-	file.WriteString("<nav><ul>")
 
 	data := make([]map[string]interface{}, 0, len(category))
 	for _, item := range category {
 		article := item.(*Article)
-		link := config.Root + "/" + getOutputPath(*article)
-		file.WriteString("<li><a href=\"" + link + "\">" + article.Title + "</a></li>")
-
 		data = append(data, map[string]interface{}{"title": article.Title, "tags": article.Tags, "date": article.Date, "link": getOutputPath(*article)})
 	}
-	file.WriteString("</ul></nav>")
 
 	json, _ := json.Marshal(data)
-	err = ioutil.WriteFile(config.PublicDir+"/category.json", json, os.ModePerm)
+	err := ioutil.WriteFile(config.PublicDir+"/category.json", json, os.ModePerm)
 	if err != nil {
 		log.Errorln(err)
 	}
