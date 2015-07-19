@@ -6,6 +6,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/superhx/goblog/blog"
+	"github.com/superhx/goblog/server"
 	"github.com/zenazn/goji/graceful"
 	"io/ioutil"
 	"os"
@@ -31,7 +32,7 @@ func main() {
 	}
 	switch cmd := os.Args[1]; {
 	case cmd == "server" || cmd == "s":
-		server()
+		startServer()
 		defer graceful.Wait()
 	case cmd == "generate" || cmd == "g":
 		generate()
@@ -43,13 +44,15 @@ func main() {
 		if len(os.Args) > 2 {
 			help(os.Args[2])
 		}
+	case cmd == "deploy" || cmd == "d":
+		server.Deploy()
 	default:
 		help("unkown")
 	}
 }
 
-func server() {
-	go blog.Server(8001)
+func startServer() {
+	go server.Server(8001)
 	open.Run("http://localhost:8001/dashboard")
 }
 
