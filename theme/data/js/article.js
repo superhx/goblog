@@ -31,14 +31,13 @@
     bindLeftEvent: function() {
         var self = this;
         var toggleBlog = function() {
-            var localhref = window.location.href+"index.html";
+            var localhref=window.location.href;
+            localhref=localhref.match(/index.html$/)?localhref:localhref+"index.html";
             var blogList = $(".menu-li");
             var blogTop = 0,
                 num = 0;
             for (var i = 0; i < blogList.length; i++) {
-              // console.log(blogList.eq(i).find('a').attr('href'));
-              // console.log(escape(blogList.eq(i).find('a').attr('href')));
-                if (escape(unescape(localhref.toLowerCase())).indexOf(escape(blogList.eq(i).find('a').attr('href').toLowerCase())) >= 0) {
+                if (encodeURI(decodeURI(localhref)).indexOf(encodeURI(blogList.eq(i).find('a').attr('href'))) >= 0) {
                     blogTop = blogList.eq(i).offset().top - document.body.scrollTop;
                     num = i;
                     break;
@@ -107,24 +106,16 @@
                     $('.right-menu-ul').empty();
                     $('.main-content .row').html($(res).find('.row').html());
                     $(document).scrollTop(0);
-                    // $('article').html($(res).find('article').html());
                     $('#toggle').off('click');
                     $(".main-content").off('click');
                     $('.tagnode').off('click');
                     $('.search').off('keyup');
                     self.time = 1;
-                    // $('.blog-title').html($(res).find('.blog-title').html());
-                    // $('.blog-time').html($(res).find('.blog-time').html());
-                    // $('.blog-tag').html($(res).find('.blog-tag').html());
-
                     $('#init').remove();
                     $('body').append($(res).filter('#init'));
                     self.initLeftMenu(self.bindLeftEvent);
-                    console.log(category);
                     if (category) {$('.right-menu').addClass('active');  console.log(123); self.bindRightMenu();}
                     self.search();
-
-
                 }
             })
 
