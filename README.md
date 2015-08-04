@@ -2,6 +2,9 @@
 
 **goblog** is a fast and simple static blog framework implemented by golang
 
+##Demo
+[http://superhx.github.io/](http://superhx.github.io/)
+
 ##Features
 
 - Amazing first generating speed. Generating 1000 files(4KB per file) only need 5s.
@@ -41,4 +44,16 @@ $ goblog generate
 ###Start the server
 ```bash
 $ goblog server
+```
+
+###Deploy your blog
+```bash
+$ golog deploy
+```
+
+you have to config git first.It just simple run
+``` bash
+$ git add *
+$ git commit -a -m "~"
+$ git push origin master
 ```
