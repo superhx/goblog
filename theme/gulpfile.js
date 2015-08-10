@@ -10,8 +10,8 @@ var DATA_JS_DEST = 'data/js/';
 var DATA_CSS_SRC = 'src/data/css/';
 var DATA_CSS_DEST = 'data/css';
 var TMPL = 'template/'
-var BLOG_DIR = '/Users/Lancer/blog_test';
-
+// the blog dir for test
+var BLOG_DIR = '/Users/Lancer/Desktop/blog/';
 
 gulp.task('js', function () {
     gulp.src(DATA_JS_SRC + '*.js')
