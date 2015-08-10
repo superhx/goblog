@@ -67,7 +67,7 @@ func workspace() {
 	os.MkdirAll(config.PublicDir, os.ModePerm)
 	os.MkdirAll(config.SourceDir+"/articles", os.ModePerm)
 	os.MkdirAll(config.SourceDir+"/data", os.ModePerm)
-	err := exec.Command("cp", "-R", blog.ThemeDir+"/data/", config.PublicDir).Run()
+	err := exec.Command("cp", "-rf", blog.ThemeDir+"/data/", config.PublicDir).Run()
 	if err != nil {
 		log.Errorln(err)
 		return
