@@ -1,0 +1,1 @@
+npm install --save-dev gulp gulp-rename gulp-uglify gulp-shell gulp-minify-css  gulp-react

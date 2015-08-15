@@ -3,7 +3,8 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var shell = require('gulp-shell');
 var minifyCSS = require('gulp-minify-css');
-var watch = require('gulp-watch');
+var react = require('gulp-react');
+
 
 var DATA_JS_SRC = 'src/data/js/';
 var DATA_JS_DEST = 'data/js/';
@@ -18,7 +19,14 @@ gulp.task('js', function () {
         .pipe(uglify())
         .pipe(rename({extname: '.min.js'}))
         .pipe(gulp.dest(DATA_JS_DEST))
-        .on('end', blogReloadResource);
+})
+
+gulp.task('jsx', function () {
+    gulp.src(DATA_JS_SRC + '*.jsx')
+        .pipe(react())
+        .pipe(uglify())
+        .pipe(rename({extname: '.min.js'}))
+        .pipe(gulp.dest(DATA_JS_DEST))
 })
 
 gulp.task('css', function () {
@@ -26,7 +34,6 @@ gulp.task('css', function () {
         .pipe(minifyCSS())
         .pipe(rename({extname: '.min.css'}))
         .pipe(gulp.dest(DATA_CSS_DEST))
-        .on('end', blogReloadResource);
 })
 
 gulp.task('template', shell.task([
@@ -37,12 +44,13 @@ gulp.task('template', shell.task([
 gulp.task('init', blogReloadResource)
 
 gulp.task('monitor', function () {
-    gulp.watch(DATA_JS_SRC + '*.js', ['js'])
-    gulp.watch(DATA_CSS_SRC + '*.css', ['css'])
+    gulp.watch(DATA_JS_SRC + '*.js', ['js', 'init'])
+    gulp.watch(DATA_JS_SRC + '*.jsx', ['jsx', 'init'])
+    gulp.watch(DATA_CSS_SRC + '*.css', ['css', 'init'])
     gulp.watch(TMPL + '*.htm', ['template'])
 })
 
-gulp.task('default', ['js', 'css', 'template', 'monitor'])
+gulp.task('default', ['js', 'jsx', 'css', 'template', 'init', 'monitor'])
 
 function blogReloadResource() {
     gulp.src('').pipe(shell([

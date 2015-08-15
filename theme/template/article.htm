@@ -1,112 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{.Info.Title}}</title>
-  <!-- Styles -->
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/css/style.css" rel="stylesheet">
-  <!--<link rel="stylesheet" href="css/github-markdown.min.css">-->
-  <!--   <link rel="stylesheet" href="/css/default.min.css">-->  
-  <script src="/js/pace.js"></script>
-  <link href="/css/pace-theme-flash.min.css" rel="stylesheet">
 </head>
-
-<body class=" pace-done">
-  <div class="pace  pace-inactive">
-    <div class="pace-progress" data-progress-text="100%" data-progress="99" style="-webkit-transform: translate3d(100%, 0px, 0px); transform: translate3d(100%, 0px, 0px);">
-      <div class="pace-progress-inner"></div>
-    </div>
-    <div class="pace-activity"></div>
-  </div>
-  <div class="button-container" id="toggle">
-    <span class="top"></span>
-    <span class="middle"></span>
-    <span class="bottom"></span>
-  </div>
-  <div class="overlay" id="overlay">
-    <nav class="overlay-menu">
-      <div class="search-div">
-        <!-- <input type="text" class="form-control search" placeholder="Search"> -->
-        <div class="search-container">
-          <span class="icon glyphicon glyphicon-search" aria-hidden="true"></span>
-          <input class="search" placeholder="Search">
-        </div>
-      </div>
-      <div class="ul-div " onmousewheel="return scroll(event,this)">
-        <ul>
-        </ul>
-      </div>
-      <div class="footer">Copyright© 2015 hanxv</div>
-    </nav>
-  </div>
-  <div class="main-content">
-    <!-- header里面属性： container-fluid  流布局    uppercase：全部大写
-      第一个div xs和md和sm 确认在大小屏幕的宽度  offset设置偏移-->
-    <div class="row">
-      <header class="container-fluid">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2">
-          <div class="blog-title-div">
-            <h1 id="" class="blog-title">{{.Info.Title}}</h1>
-          </div>
-          <div class="blog-info-div">
-            <span class="blog-time">{{.Info.Date.Format "Jan 02, 2006"}} / </span>
-            <div class="blog-tag">
-              {{$n := len .Info.Tags}} {{range $i,$e:= .Info.Tags}}
-              <a class="tagnode" href="#">{{$e}}</a> {{if ne (plus1 $i) $n}},{{end}} {{end}}
-            </div>
-          </div>
-        </div>
-      </header>
-      <div class="container-fluid content-div content">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2 scrollspy-example  markdown-body" data-spy="scroll" data-target="#right-menu-nav" data-offset="0">
-          {{.Content}}
-        </div>
-        <div class="col-md-2 col-md-offset-9 right-menu" id="right-menu">
-          <nav class=" hidden-print hidden-xs hidden-sm  right-menu-nav " role="navigation" id="right-menu-nav">
-            <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
-              <ul class="nav bs-docs-sidenav right-menu-ul"></ul>
-            </div>
-          </nav>
-        </div>
-      </div>
-
-      <div id="disqus_thread" class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-2"></div>
-    </div>
-  </div>
-  <link rel="stylesheet" href="/css/perfect-scrollbar.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
-  <script src="/js/pangu.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
-  <!-- Javascript -->
-  <script id="init" type="text/javascript">
-    var category = {{.Info.Category}};
-
-    pangu.page_spacing();
-
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = '{{.Disqus}}';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-    hljs.initHighlightingOnLoad();
-  </script>
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script src="/js/date-en-US.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="/js/noframework.waypoints.min.js"></script>
-  <script src="/js/perfect-scrollbar.jquery.js"></script>
-  <script src="/js/article.js"></script>
+<body>
+<div style="display: none;">
+    <title>{{.Info.Title}}</title>
+    <time>{{.Info.Date.Format "Jan 02, 2006"}}</time>
+    <tags>
+        {{range $i,$e:= .Info.Tags}}
+        <tag>{{$e}}</tag>
+        {{end}}
+    </tags>
+    <category>{{.Info.Category}}}</category>
+    <disqus>{{.Disqus}}</disqus>
+    <content>{{.Content}}</content>
+</div>
 </body>
-
+<script src="/js/react.min.js"></script>
 </html>
