@@ -2,3 +2,6 @@ theme/dashboard/.idea/*
 theme/.idea/*
 .idea/*
 **/.idea/*
+default.vim
+default.vim.lock
+*.swp

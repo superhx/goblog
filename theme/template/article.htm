@@ -4,17 +4,20 @@
 </head>
 <body>
 <div style="display: none;">
-    <title>{{.Info.Title}}</title>
-    <time>{{.Info.Date.Format "Jan 02, 2006"}}</time>
-    <tags>
-        {{range $i,$e:= .Info.Tags}}
-        <tag>{{$e}}</tag>
-        {{end}}
-    </tags>
-    <category>{{.Info.Category}}}</category>
-    <disqus>{{.Disqus}}</disqus>
-    <content>{{.Content}}</content>
+    <b-title>{{.Info.Title}}</b-title>
+    <b-time>{{.Info.Date.Format "Jan 02, 2006"}}</b-time>
+    <b-tags>
+	    {{range $i,$e:= .Info.Tags}}
+	    <b-tag>{{$e}}</b-tag>
+	    {{end}}
+    </b-tags>
+    <b-catalogue>{{.Info.Catalogue}}</b-catalogue>
+    <b-disqus>{{.Disqus}}</b-disqus>
+    <b-content>{{.Content}}</b-content>
 </div>
+<div id="container"></div>
 </body>
+<script src="/js/jquery.min.js"></script>
 <script src="/js/react.min.js"></script>
+<script src="/js/goblog.min.js"></script>
 </html>
