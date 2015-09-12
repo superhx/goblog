@@ -22,7 +22,8 @@ gulp.task('js', function() {
         .pipe(react()).on('error', console.error.bind(console));
     var js = gulp.src(DATA_JS_SRC + '*.js');
 
-    merge(jsx, js).pipe(uglify())
+    merge(jsx, js)
+    	// .pipe(uglify())
         .pipe(concat('goblog.min.js'))
         .pipe(gulp.dest(DATA_JS_DEST))
 })

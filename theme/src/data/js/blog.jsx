@@ -27,7 +27,7 @@ var SearchResultPanel = React.createClass({
 									{blog.tags.map(function(tag, index){
 										return (
 											<span key={index}>{ tag }</span>
-										)
+										);
 									})}
 								</div>
 							</li>
@@ -37,13 +37,14 @@ var SearchResultPanel = React.createClass({
 			</div>
 		);
 	}
-})
+});
 
 var SearchContainer = React.createClass({
 	getInitialState: function(){
 		return {
 			searchValue: '',
-			blogList: []
+			blogList: [],
+			searchResult: []
 		};
 	},
 	componentDidMount: function(){
@@ -53,24 +54,34 @@ var SearchContainer = React.createClass({
 			cache: false,
 			success: function(data){
 				this.setState({blogList: data});
+				this.setState({searchResult: this.state.blogList})
 			}.bind(this)
 		});
 	},
-	filterBlogs: function(){
-		return this.state.blogList;
+	search: function(srch){
+		this.setState({'searchValue': srch});
+		this.setState({'searchResult': this.state.blogList.filter(function(e, i){
+			srch = srch.toLowerCase();
+			if(e.title.toLowerCase().indexOf(srch) >= 0) return true;
+			for(var i=0; i < e.tags.length; i++){
+				if(e.tags[i].toLowerCase().indexOf(srch) >= 0) return true;
+			}
+			return false;
+		})});
+	},
+	handleInputSearch: function(e){
+		this.search(e.target.value);
 	},
 	render: function(){
-		srcRes = this.filterBlogs();
 		return (
 			<div>
-				<SearchBox searchValue={this.state.searchValue} />
-				<SearchResultPanel blogList={srcRes} />
+				<SearchBox searchValue={this.state.searchValue} handleSearch={this.handleInputSearch} />
+				<SearchResultPanel blogList={this.state.searchResult} />
 			</div>
-		)
+		);
 	}
 });
 
-console.log(287);
 React.render(
 	<SearchContainer />,
 	document.getElementById('container')
