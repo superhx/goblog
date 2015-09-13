@@ -13,6 +13,7 @@ var SearchBox = React.createClass({
         }
 });
 
+
 var SearchResultPanel = React.createClass({
 	render: function(){
 		return (
@@ -38,6 +39,7 @@ var SearchResultPanel = React.createClass({
 		);
 	}
 });
+
 
 var SearchContainer = React.createClass({
 	getInitialState: function(){
@@ -82,7 +84,61 @@ var SearchContainer = React.createClass({
 	}
 });
 
+
+var ArticleHeader = React.createClass({
+	render: function(){
+		return (
+			<div>
+				<h1>{this.props.title}</h1>
+				<div>
+					<time>{this.props.date}</time>
+					<ul>
+						{this.props.tags.map(function(tag, index){
+							return (
+								<li key={index}>{tag}</li>
+							);
+						})}
+					</ul>
+				</div>
+			</div>
+		);
+	}
+});
+
+
+var ArticleContent = React.createClass({
+	render:function(){
+		return (
+			<div dangerouslySetInnerHTML={{__html: this.props.content}}/>
+		);
+	}
+});
+
+
+var ArticleContainer = React.createClass({
+	componentWillMount: function(){
+		var tags = $('b-tag').toArray().map(function(tag){ return $(tag).text(); });;
+		this.setState({
+			title: $('b-title').text(),
+			date: $('b-date').text(),
+			tags: tags,
+			content: $('b-content').html()
+		});
+	},
+	render: function(){
+		return (
+			<div>
+				<ArticleHeader title={this.state.title} date={this.state.date} tags={this.state.tags}/>
+				<ArticleContent content={this.state.content}/>
+			</div>
+		);
+	}
+});
+
 React.render(
-	<SearchContainer />,
+	<div>
+		<SearchContainer />
+		<ArticleContainer />
+	</div>,
 	document.getElementById('container')
 );
