@@ -86,6 +86,10 @@ var SearchContainer = React.createClass({
 
 
 var ArticleHeader = React.createClass({
+	handleTagSearch: function(e){
+		e.stopPropagation();
+		this.props.search($(e.target).text());
+	},
 	render: function(){
 		return (
 			<div>
@@ -95,9 +99,9 @@ var ArticleHeader = React.createClass({
 					<ul>
 						{this.props.tags.map(function(tag, index){
 							return (
-								<li key={index}>{tag}</li>
+								<li key={index} onClick={this.handleTagSearch}>{tag}</li>
 							);
-						})}
+						}, this)}
 					</ul>
 				</div>
 			</div>
@@ -128,17 +132,29 @@ var ArticleContainer = React.createClass({
 	render: function(){
 		return (
 			<div>
-				<ArticleHeader title={this.state.title} date={this.state.date} tags={this.state.tags}/>
+				<ArticleHeader title={this.state.title} date={this.state.date} tags={this.state.tags} search={this.props.search}/>
 				<ArticleContent content={this.state.content}/>
 			</div>
 		);
 	}
 });
 
+
+var Blog = React.createClass({
+	search: function(srch){
+		this.refs.searchContainer.search(srch);
+	},
+	render: function(){
+		return (
+			<div>
+				<SearchContainer ref='searchContainer'/>
+				<ArticleContainer search={this.search}/>
+			</div>
+		);
+	}
+});
+
 React.render(
-	<div>
-		<SearchContainer />
-		<ArticleContainer />
-	</div>,
+	<Blog />,
 	document.getElementById('container')
 );
