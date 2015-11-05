@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="css/goblog.min.css" rel="stylesheet">
 </head>
 <body>
 <div style="display: none;">
-    <b-title>{{.Info.Title}}</b-title>
-    <b-time>{{.Info.Date.Format "Jan 02, 2006"}}</b-time>
-    <b-tags>
-	    {{range $i,$e:= .Info.Tags}}
-	    <b-tag>{{$e}}</b-tag>
-	    {{end}}
-    </b-tags>
-    <b-catalogue>{{.Info.Catalogue}}</b-catalogue>
-    <b-disqus>{{.Disqus}}</b-disqus>
-    <b-content>{{.Content}}</b-content>
+<b-title>{{.Info.Title}}</b-title>
+<b-time>{{.Info.Date.Format "Jan 02, 2006"}}</b-time>
+<b-tags>
+{{range $i,$e:= .Info.Tags}}
+<b-tag>{{$e}}</b-tag>
+{{end}}
+</b-tags>
+<b-catalogue>{{.Info.Catalogue}}</b-catalogue>
+<b-disqus>{{.Disqus}}</b-disqus>
+<b-content>{{.Content}}</b-content>
 </div>
 <div id="container"></div>
 </body>

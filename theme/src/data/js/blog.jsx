@@ -76,7 +76,7 @@ var SearchContainer = React.createClass({
 	},
 	render: function(){
 		return (
-			<div>
+			<div className="search-container">
 				<SearchBox searchValue={this.state.searchValue} handleSearch={this.handleInputSearch} />
 				<SearchResultPanel blogList={this.state.searchResult} />
 			</div>

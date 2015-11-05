@@ -46,7 +46,6 @@ func renderCategory(category []interface{}) {
 		article := item.(*Article)
 		data = append(data, map[string]interface{}{"title": article.Title, "tags": article.Tags, "date": article.Date, "link": "/" + getOutputPath(*article)})
 	}
-
 	json, _ := json.Marshal(data)
 	err := ioutil.WriteFile(config.PublicDir+"/blogs.json", json, os.ModePerm)
 	if err != nil {
