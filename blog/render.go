@@ -31,11 +31,6 @@ func init() {
 	templateDir = ThemeDir + "/template"
 	homeTmpl, _ = template.ParseFiles(templateDir + "/home.htm")
 	blogTmpl, _ = template.ParseFiles(templateDir + "/article.htm")
-	// // blogTmpl, err = template.ParseFiles(templateDir + "/article.htm")
-	// // if err != nil {
-	// // 	fmt.Println(err)
-	// // }
-	// // blogTmpl = blogTmpl.Funcs(plus)
 	blogTmpl = template.Must(new(template.Template).Funcs(plus).ParseFiles(templateDir + "/article.htm"))
 }
 

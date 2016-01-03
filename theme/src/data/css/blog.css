@@ -1,3 +1,243 @@
+body{
+  font-family: 'Avenir Next', Roboto, 'Classic Grotesque Pro Book', 'Segoe U';
+}
+
+.menu-button {
+  position: fixed;
+  top: 13px;
+  left: 30px;
+  height: 21px;
+  width: 29px;
+  cursor: pointer;
+  -webkit-transition: opacity .25s ease;
+  -moz-transition: opacity .25s ease;
+  transition: opacity .25s ease;
+  z-index: 100
+}
+
+.menu-button:hover {
+  opacity: .7
+}
+
+.menu-button span {
+  background: rgb(214, 214, 214);
+  border: none;
+  height: 4px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: all .35s ease;
+  -moz-transition: all .35s ease;
+  transition: all .35s ease;
+  cursor: pointer
+}
+
+.menu-button span:nth-of-type(2) {
+  top: 9px
+}
+
+.menu-button span:nth-of-type(3) {
+  top: 18px
+}
+
 .search-container {
-        width: 150px;
+  width: 450px;
+  position: fixed;
+  top: 0px;
+  left: -450px;
+  box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 6px 0px;
+}
+
+.search-container.open {
+  left: 0px;
+  animation-name: open;
+  animation-duration: 0.5s;
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+    left: -450px;
+  }
+
+  to {
+    opacity: 1;
+    left: 0px;
+  }
+}
+
+@-webkit-keyframes open {
+  from {
+    opacity: 0;
+    left: -450px;
+  }
+
+  to {
+    opacity: 1;
+    left: 0px;
+  }
+}
+
+.search-container.close {
+  animation-name: close;
+  animation-duration: 0.5s;
+}
+
+@keyframes close {
+  from {
+    opacity: 1;
+    left: 0px;
+  }
+
+  to {
+    opacity: 0;
+    left: -450px;
+  }
+}
+
+@-webkit-keyframes close {
+  from {
+    opacity: 1;
+    left: 0px;
+  }
+
+  to {
+    opacity: 0;
+    left: -450px;
+  }
+}
+
+.srch-box {
+  box-sizing: border-box;
+  height: 50px;
+  padding: 8px 0px;
+  border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+.srch-box > .srch-wrapper {
+  height: 30px;
+  width: 300px;
+  margin: 0px auto;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.14902);
+}
+
+.srch-box > .srch-wrapper > input {
+  box-sizing: border-box;
+  width: 250px;
+  line-height: 23px;
+  font-size: 16px;
+  height: 100%;
+  border: none;
+  outline: none;
+  outline-color: rgba(0, 0, 0, 0.8);
+}
+
+.srch-wrapper > .srch-icon {
+  display: inline-block;
+  margin: 7px 8px;
+  float: left;
+}
+
+ul.srch-res-list {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul.srch-res-list > li {
+  list-style: none;
+  height: 60px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.main-container {
+  width: 100%;
+}
+
+.offset-right {
+  margin-left: 450px;
+  animation-name: 'offset-right';
+  animation-duration: 0.5s;
+}
+
+@keyframes offset-right {
+  from {
+    margin-left: 0px;
+  }
+  to {
+    margin-left: 450px;
+  }
+}
+
+@-webkit-keyframes offset-right {
+  from {
+    margin-left: 0px;
+  }
+  to {
+    margin-left: 450px;
+  }
+}
+
+.offset-none {
+  margin-left: 0px;
+  animation-name: 'offset-none';
+  animation-duration: 0.5s;
+}
+
+@keyframes offset-none {
+  from {
+    margin-left: 450px;
+  }
+  to {
+    margin-left: 0px;
+  }
+}
+
+@-webkit-keyframes offset-none {
+  from {
+    margin-left: 450px;
+  }
+  to {
+    margin-left: 0px;
+  }
+}
+
+.article-container{
+  max-width: 900px;
+  margin: 0px auto;
+}
+
+.article-container > header > div {
+  color: rgb(200, 200, 200);
+  font-size: 16px;
+}
+
+.article-container > header time {
+
+}
+
+.article-container > header time::after {
+  content: " / ";
+}
+
+.article-container > header ul {
+  display: inline-block;
+  list-style: none;
+  padding: 0px;
+}
+
+.article-container > header ul > li {
+  display: inline-block;
+  margin: 0px 4px;
+  cursor: pointer;
+}
+
+.article-container > header ul > li::after {
+  content: ",";
+}
+
+.article-container > header ul > li:last-child::after {
+  content: "";
 }

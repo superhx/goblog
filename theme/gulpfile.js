@@ -1,65 +1,74 @@
 var gulp = require('gulp');
-var uglify = require('gulp-uglify');
 var shell = require('gulp-shell');
-var minifyCSS = require('gulp-minify-css');
-var react = require('gulp-react');
+var rename = require('gulp-rename');
 var concat = require('gulp-concat');
-var order = require("gulp-order");
-var merge = require('merge-stream');
 var watch = require('gulp-watch');
+var minifyCSS = require('gulp-minify-css');
+var browserify = require('gulp-browserify');
+var reactify = require('reactify');
 
-
-var DATA_JS_SRC = 'src/data/js/';
-var DATA_JS_DEST = 'data/js/';
-var DATA_CSS_SRC = 'src/data/css/';
-var DATA_CSS_DEST = 'data/css';
-var TMPL = 'template/'
-var LIB_JS_DIR = 'src/lib/js/';
-var BLOG_DIR = '/Users/Lancer/blog_preview/';
-
+var jsSrc = 'src/data/js/';
+var jsDest = 'data/js/';
 gulp.task('js', function() {
-    var jsx = gulp.src(DATA_JS_SRC + '*.jsx')
-        .pipe(react()).on('error', console.error.bind(console));
-    var js = gulp.src(DATA_JS_SRC + '*.js');
+  gulp
+    .src(jsSrc + 'main.jsx')
+    .pipe(browserify({
+      transform: ['reactify'],
+      extensions: ['jsx']
+    }))
+    .on('error', function(err){
+      console.log(err.message);
+      this.emit('end');
+    })
+    .pipe(rename('blog.min.js'))
+    .pipe(gulp.dest(jsDest));
 
-    merge(jsx, js)
-    	// .pipe(uglify())
-        .pipe(concat('goblog.min.js'))
-        .pipe(gulp.dest(DATA_JS_DEST))
-})
+});
 
+var cssSrc = 'src/data/css/';
+var cssDest = 'data/css/';
 gulp.task('css', function() {
-    gulp.src(DATA_CSS_SRC + '*.css')
-        .pipe(minifyCSS())
-        .pipe(concat('goblog.min.css'))
-        .pipe(gulp.dest(DATA_CSS_DEST))
-})
+  gulp.src(cssSrc + '*.css')
+    .pipe(minifyCSS())
+    .pipe(concat('blog.min.css'))
+    .pipe(gulp.dest(cssDest));
+});
 
 gulp.task('lib', function() {
-    gulp.src(LIB_JS_DIR + '*.js')
-        .pipe(gulp.dest(DATA_JS_DEST));
-})
+  gulp.src('src/lib/js/*')
+    .pipe(gulp.dest(jsDest));
+  gulp.src('src/lib/css/*')
+    .pipe(gulp.dest(cssDest));
+});
+
+var blogDir = '/Users/Lancer/blog_preview/';
 gulp.task('template', shell.task([
-    'rm -f category.json',
-    'goblog g'
+  'rm -f category.json',
+  'goblog g'
 ], {
-    'cwd': BLOG_DIR
-}))
+  'cwd': blogDir
+}));
 
-gulp.task('init', function(){
-    gulp.src('').pipe(shell([
-        'goblog i'
-    ], {
-        'cwd': BLOG_DIR
-    }));
-})
+gulp.task('init', shell.task(
+  ['goblog i'], {
+    'cwd': blogDir
+  }
+));
 
+gulp.task('init', function() {
+  gulp.src('').pipe(shell([
+    'goblog i'
+  ], {
+    'cwd': blogDir
+  }));
+});
+
+var TMPL = 'template/';
 gulp.task('monitor', function() {
-    gulp.watch(DATA_JS_SRC + '*.js', ['js'])
-    gulp.watch(DATA_JS_SRC + '*.jsx', ['js'])
-    gulp.watch(DATA_CSS_SRC + '*.css', ['css'])
-    gulp.watch('data/*/*', ['init'])
-    gulp.watch(TMPL + '*.htm', ['template'])
-})
+  gulp.watch(jsSrc + '/**/*.jsx', ['js']);
+  gulp.watch(cssSrc + '*.css', ['css']);
+  gulp.watch('data/*/*', ['init']);
+  gulp.watch(TMPL + '*.htm', ['template']);
+});
 
-gulp.task('default', ['lib', 'js', 'css', 'template', 'init', 'monitor'])
+gulp.task('default', ['lib', 'js', 'css', 'template', 'init', 'monitor']);
