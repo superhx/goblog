@@ -6,7 +6,7 @@
     render: function() {
       return (
         <div className={this.getClassNames()} ref="container" onClick={this.handleClick}>
-          <ArticleContainer search={this.props.search}/>
+          <ArticleContainer {...this.props}/>
         </div>
       );
     },

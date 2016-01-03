@@ -41,9 +41,9 @@ gulp.task('lib', function() {
     .pipe(gulp.dest(cssDest));
 });
 
-var blogDir = '/Users/Lancer/blog_preview/';
+var blogDir = '/Users/Lancer/blog_preview';
 gulp.task('template', shell.task([
-  'rm -f category.json',
+  'rm -f catalogue.json',
   'goblog g'
 ], {
   'cwd': blogDir
@@ -54,14 +54,6 @@ gulp.task('init', shell.task(
     'cwd': blogDir
   }
 ));
-
-gulp.task('init', function() {
-  gulp.src('').pipe(shell([
-    'goblog i'
-  ], {
-    'cwd': blogDir
-  }));
-});
 
 var TMPL = 'template/';
 gulp.task('monitor', function() {

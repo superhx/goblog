@@ -20,7 +20,10 @@
                     <datetime>
                       {new Date(blog.date).toString('MMM d yyyy')}
                     </datetime>
-                    <a className="title" href={blog.link}>
+                    <a
+                      className="title"
+                      onClick={this.titleClickHandler}
+                      href={blog.link}>
                       {blog.title}
                     </a>
                     <div>
@@ -34,11 +37,16 @@
                     </div>
                   </li>
                 );
-              })}
+              }, this)}
             </ul>
           </div>
         </ScrollArea>
       );
+    },
+    titleClickHandler: function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      this.props.loadNewBlog($(e.target).attr('href'));
     }
   });
 

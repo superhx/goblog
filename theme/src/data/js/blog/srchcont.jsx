@@ -13,11 +13,18 @@
     },
     render: function(){
       return (
-        <div className={this.getClassNames()} ref="container">
+        <div
+          className={this.getClassNames()}
+          ref="container">
+
           <SearchBox
             searchValue={this.state.searchValue}
-            handleSearch={this.handleInputSearch} />
-          <SearchResultPanel blogList={this.state.searchResult} />
+            handleSearch={this.handleInputSearch}/>
+
+          <SearchResultPanel
+            blogList={this.state.searchResult}
+            loadNewBlog={this.props.loadNewBlog}/>
+
         </div>
       );
     },
