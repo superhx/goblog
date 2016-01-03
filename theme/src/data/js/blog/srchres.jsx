@@ -20,13 +20,13 @@
                     <datetime>
                       {new Date(blog.date).toString('MMM d yyyy')}
                     </datetime>
-                    <a href={blog.link}>
+                    <a className="title" href={blog.link}>
                       {blog.title}
                     </a>
                     <div>
                       {blog.tags.map(function(tag, index){
                         return (
-                          <span key={index}>
+                          <span className="tag" key={index}>
                             { tag }
                           </span>
                         );

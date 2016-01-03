@@ -149,7 +149,37 @@ ul.srch-res-list > li {
   list-style: none;
   height: 60px;
   width: 100%;
+  padding: 5px 20px;
   box-sizing: border-box;
+  border-bottom: 1px solid rgb(245, 245, 245);
+}
+
+ul.srch-res-list > li:last-child {
+  border-bottom: none;
+}
+
+ul.srch-res-list > li > datetime {
+  display: inline-block;
+  float: right;
+  height: 100%;
+  width: 75px;
+  font-size: 12px;
+  color: #999999;
+}
+
+ul.srch-res-list > li > a.title {
+  font-size: 18px;
+  text-decoration: none;
+  color: rgb(85, 85, 85);
+}
+
+ul.srch-res-list span.tag {
+  box-sizing: border-box;
+  background-color: rgb(245, 245, 245);
+  font-size: 14px;
+  color: rgb(153, 153, 153);
+  padding: 2px;
+  margin-right: 5px;
 }
 
 .main-container {
