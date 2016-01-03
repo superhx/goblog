@@ -29,12 +29,12 @@ func Generate() (err error) {
 }
 
 //New ...
-func New(title string, tags []string, content string, category bool) {
+func New(title string, tags []string, content string, catalogue bool) {
 	article := make(map[string]interface{})
 	article["title"] = title
 	article["tags"] = tags
 	article["date"] = time.Now().Format("2006/01/02|15:04:05")
-	article["category"] = category
+	article["catalogue"] = catalogue
 	bytes, _ := json.Marshal(article)
 	str := "```\n" + string(bytes) + "\n```\n\n"
 	path := fmt.Sprintf("%s/articles/%s.md", config.SourceDir, strings.Replace(title, "?", "", -1))
@@ -60,14 +60,14 @@ func (blog *Blog) Generate() (err error) {
 	files, err := blog.files()
 
 	defer func() {
-		//generate category.json
+		//generate catalogue.json
 		b, _ := json.Marshal(blog.articles)
-		err = ioutil.WriteFile("category.json", b, os.ModePerm)
+		err = ioutil.WriteFile("catalogue.json", b, os.ModePerm)
 		if err != nil {
-			log.Warnln("[Generate Fail]: category.json")
+			log.Warnln("[Generate Fail]: catalogue.json")
 		}
 
-		//generate static category html
+		//generate static catalogue html
 		By(func(i1, i2 interface{}) bool {
 			return i1.(*Article).Date.Time.After(i2.(*Article).Date.Time)
 		}).Sort(blog.articles)
@@ -101,11 +101,11 @@ func (blog *Blog) files() (files []os.FileInfo, err error) {
 		return
 	}
 
-	category, err := ioutil.ReadFile("category.json")
+	catalogue, err := ioutil.ReadFile("catalogue.json")
 	var aticles []*Article
 
-	//not init before or category.json broken
-	if err != nil || json.Unmarshal(category, &aticles) != nil {
+	//not init before or catalogue.json broken
+	if err != nil || json.Unmarshal(catalogue, &aticles) != nil {
 		log.Info("Generate all")
 		os.MkdirAll(config.PublicDir+"/template", os.ModePerm)
 		os.MkdirAll(config.PublicDir+"/css", os.ModePerm)
