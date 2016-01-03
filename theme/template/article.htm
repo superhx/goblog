@@ -5,23 +5,24 @@
 </head>
 <body>
 <div style="display: none;">
-<b-title>{{.Info.Title}}</b-title>
-<b-time>{{.Info.Date.Format "Jan 02, 2006"}}</b-time>
-<b-tags>
-{{range $i,$e:= .Info.Tags}}
-<b-tag>{{$e}}</b-tag>
-{{end}}
-</b-tags>
-<b-catalogue>{{.Info.Catalogue}}</b-catalogue>
-<b-disqus>{{.Disqus}}</b-disqus>
-<b-content>{{.Content}}</b-content>
+  <b-title>{{.Info.Title}}</b-title>
+  <b-time>{{.Info.Date.Format "Jan 02, 2006"}}</b-time>
+  <b-tags>
+    {{range $i,$e:= .Info.Tags}}
+      <b-tag>{{$e}}</b-tag>
+    {{end}}
+  </b-tags>
+  <b-catalogue>{{.Info.Catalogue}}</b-catalogue>
+  <b-disqus>{{.Disqus}}</b-disqus>
+  <b-content>{{.Content}}</b-content>
 </div>
 <div id="container"></div>
-</body>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/react-with-addons.js"></script>
 <script src="/js/react-dom.min.js"></script>
 <script src="/js/scrollArea.js"></script>
 <script src="/js/date.js"></script>
 <script src="/js/blog.min.js"></script>
+Hello world
+</body>
 </html>
