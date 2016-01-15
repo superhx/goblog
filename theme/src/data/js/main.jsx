@@ -36,6 +36,9 @@
         </div>
       );
     },
+    componentDidMount: function() {
+      hljs.initHighlightingOnLoad();
+    },
     search: function(srch){
       this.refs.searchContainer.search(srch);
       this.openSearchContainer();
@@ -51,7 +54,7 @@
     },
     checkUrlIdentity: function(blogLink) {
       var oldUrl = decodeURIComponent(window.location.pathname);
-      return blogLink.indexOf(oldUrl) == 0;
+      return blogLink.indexOf(oldUrl) === 0;
     },
     loadNewBlog: function(blogLink) {
       if(this.checkUrlIdentity(blogLink)) return;
@@ -67,9 +70,16 @@
             blogTitle: blog.find('b-title').text(),
             blogDate: blog.find('b-time').text(),
             blogTags: tags
+          }, function() {
+            $('html > head > title').text(this.state.blogTitle);
+            $('pre code').each(function(i, block) { hljs.highlightBlock(block); });
           });
+          this.scrollTopSmooth();
         }.bind(this)
       });
+    },
+    scrollTopSmooth: function() {
+      $('body').animate({ scrollTop: 0 }, 500);
     }
   });
 

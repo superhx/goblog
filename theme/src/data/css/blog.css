@@ -151,7 +151,7 @@ ul.srch-res-list {
 
 ul.srch-res-list > li {
   list-style: none;
-  height: 60px;
+  min-height: 60px;
   width: 100%;
   padding: 5px 20px;
   box-sizing: border-box;
@@ -175,6 +175,7 @@ ul.srch-res-list > li > a.title {
   display: block;
   font-size: 18px;
   text-decoration: none;
+  margin:5px 0px;
   color: rgb(85, 85, 85);
 }
 
