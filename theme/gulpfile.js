@@ -34,7 +34,20 @@ gulp.task('css', function() {
     .pipe(gulp.dest(cssDest));
 });
 
+var jsLibSrc = 'src/lib/js/';
 gulp.task('lib', function() {
+  var jsLibs = [
+    'react-with-addons.min.js',
+    'react-dom.min.js',
+    'jquery.min.js',
+    'scrollArea.js',
+    'date.js',
+    'highlight.pack.js'
+  ];
+
+  gulp.src(jsLibs.map(function(e) { return jsLibSrc + e; }))
+    .pipe(concat('lib.min.js'))
+    .pipe(gulp.dest(jsDest));
   gulp.src('src/lib/js/*')
     .pipe(gulp.dest(jsDest));
   gulp.src('src/lib/css/*')
