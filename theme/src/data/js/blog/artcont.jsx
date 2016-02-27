@@ -12,6 +12,7 @@
             tags={this.props.tags}
             search={this.props.search}/>
           <ArticleContent content={this.props.content}/>
+          <div id="disqus_thread"></div>
         </div>
       );
     }

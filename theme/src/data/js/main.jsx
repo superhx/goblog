@@ -75,11 +75,20 @@
             $('pre code').each(function(i, block) { hljs.highlightBlock(block); });
           });
           this.scrollTopSmooth();
+          this.reloadComment();
         }.bind(this)
       });
     },
     scrollTopSmooth: function() {
       $('body').animate({ scrollTop: 0 }, 500);
+    },
+    reloadComment: function() {
+      DISQUS.reset({
+          reload: true,
+          config: function() {
+            this.page.identifier = window.location.pathname;
+          }
+      });
     }
   });
 
