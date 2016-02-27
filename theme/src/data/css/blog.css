@@ -179,6 +179,10 @@ ul.srch-res-list > li > a.title {
   color: rgb(85, 85, 85);
 }
 
+ul.srch-res-list > li.active {
+  background-color: rgb(250, 250, 250);
+}
+
 ul.srch-res-list span.tag {
   box-sizing: border-box;
   background-color: rgb(245, 245, 245);

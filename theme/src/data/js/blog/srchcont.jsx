@@ -23,7 +23,8 @@
 
           <SearchResultPanel
             blogList={this.state.searchResult}
-            loadNewBlog={this.props.loadNewBlog}/>
+            loadNewBlog={this.props.loadNewBlog}
+            ref="resPanel"/>
 
         </div>
       );
@@ -35,7 +36,9 @@
         cache: false,
         success: function(data){
           this.setState({blogList: data});
-          this.setState({searchResult: this.state.blogList});
+          this.setState({searchResult: this.state.blogList}, function() {
+            this.refs.resPanel.focusCurrent();
+          });
         }.bind(this)
       });
     },
