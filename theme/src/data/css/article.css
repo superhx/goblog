@@ -112,3 +112,11 @@ article pre code {
   color: inherit;
 }
 
+article a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+article a:hover {
+  text-decoration: underline;
+}
