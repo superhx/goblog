@@ -11,7 +11,7 @@
       return (
         <ScrollArea
           speed={0.8}
-          style={{height:window.innerHeight - searchBoxHeight}}
+          style={{height:window.innerHeight - searchBoxHeight -20}}
           className="area"
           contentClassName="content"
           horizontal={false}
