@@ -254,6 +254,13 @@ ul.srch-res-list span.tag {
   font-size: 16px;
 }
 
+.article-container > header > h1 {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 44px;
+  margin: 20px 0px 0px 0px;
+}
+
 .article-container > header time {
 
 }

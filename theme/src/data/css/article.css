@@ -1,0 +1,114 @@
+article {
+  margin-bottom: 40px;
+  font-size: 18px;
+  line-height: 27.2000007629395px;
+  font-weight: 400;
+}
+
+article h1,
+.h1 {
+  font-size: 36px;
+}
+
+article h2,
+.h2 {
+  font-size: 30px;
+}
+
+article h3,
+.h3 {
+  font-size: 24px;
+}
+
+article h4,
+.h4 {
+  font-size: 18px;
+}
+
+article h5,
+.h5 {
+  font-size: 14px;
+}
+
+article h6,
+.h6 {
+  font-size: 12px;
+}
+
+article h1,
+h2,
+h3,
+h4,
+h5,
+h5 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+article p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+article li {}
+
+article table {
+  /*width: 100%;*/
+  max-width: 100%;
+  margin-bottom: 20px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+article table > thead > tr > th,
+table > tbody > tr > th,
+table > tfoot > tr > th,
+table > thead > tr > td,
+table > tbody > tr > td,
+table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+article table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+  font-weight: 500;
+}
+
+article table > caption + thead > tr:first-child > th,
+table > colgroup + thead > tr:first-child > th,
+table > thead:first-child > tr:first-child > th,
+table > caption + thead > tr:first-child > td,
+table > colgroup + thead > tr:first-child > td,
+table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+
+article table > tbody + tbody {
+  border-top: 2px solid #ddd;
+}
+
+article table > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+article img {
+  max-width: 100%;
+}
+
+article pre {
+  display: block;
+  word-wrap: normal;
+  overflow: auto;
+  width: auto;
+}
+
+article pre code {
+  white-space: inherit;
+  color: inherit;
+}
+

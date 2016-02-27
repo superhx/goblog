@@ -48,9 +48,8 @@ gulp.task('lib', function() {
   gulp.src(jsLibs.map(function(e) { return jsLibSrc + e; }))
     .pipe(concat('lib.min.js'))
     .pipe(gulp.dest(jsDest));
-  gulp.src('src/lib/js/*')
-    .pipe(gulp.dest(jsDest));
   gulp.src('src/lib/css/*')
+    .pipe(concat('lib.min.css'))
     .pipe(gulp.dest(cssDest));
 });
 
