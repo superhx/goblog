@@ -37,12 +37,7 @@ gulp.task('css', function() {
 var jsLibSrc = 'src/lib/js/';
 gulp.task('lib', function() {
   var jsLibs = [
-    'react-with-addons.min.js',
-    'react-dom.min.js',
-    'jquery.min.js',
     'scrollArea.js',
-    'date.js',
-    'highlight.pack.js'
   ];
 
   gulp.src(jsLibs.map(function(e) { return jsLibSrc + e; }))
@@ -53,7 +48,7 @@ gulp.task('lib', function() {
     .pipe(gulp.dest(cssDest));
 });
 
-var blogDir = '/Users/Lancer/blog_preview';
+var blogDir = '/Users/Lancer/blog';
 gulp.task('template', shell.task([
   'rm -f catalogue.json',
   'goblog g'
