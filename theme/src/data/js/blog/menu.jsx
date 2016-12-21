@@ -1,15 +1,18 @@
-(function() {
-  var MenuButton = React.createClass({
-    render: function() {
-      return (
-        <div className="menu-button" onClick={this.props.toggleSearchContainer}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      );
-    }
-  });
+import React from 'react'
 
-  module.exports = MenuButton;
-}());
+
+export default class MenuButton extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div className="menu-button" onClick={this.props.toggleSearchContainer}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    )
+  }
+}

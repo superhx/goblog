@@ -3,33 +3,16 @@ var shell = require('gulp-shell');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var watch = require('gulp-watch');
-var minifyCSS = require('gulp-minify-css');
-var browserify = require('gulp-browserify');
-var reactify = require('reactify');
+var webpack = require('webpack-stream');
 
 var jsSrc = 'src/data/js/';
 var jsDest = 'data/js/';
-gulp.task('js', function() {
-  gulp
-    .src(jsSrc + 'main.jsx')
-    .pipe(browserify({
-      transform: ['reactify'],
-      extensions: ['jsx']
-    }))
-    .on('error', function(err){
-      console.log(err.message);
-      this.emit('end');
-    })
-    .pipe(rename('blog.min.js'))
-    .pipe(gulp.dest(jsDest));
-
-});
+gulp.task('js', shell.task(['webpack --process']));
 
 var cssSrc = 'src/data/css/';
 var cssDest = 'data/css/';
 gulp.task('css', function() {
   gulp.src(cssSrc + '*.css')
-    .pipe(minifyCSS())
     .pipe(concat('blog.min.css'))
     .pipe(gulp.dest(cssDest));
 });
@@ -48,7 +31,7 @@ gulp.task('lib', function() {
     .pipe(gulp.dest(cssDest));
 });
 
-var blogDir = '/Users/Lancer/blog';
+var blogDir = '/Users/robin/Blog';
 gulp.task('template', shell.task([
   'rm -f catalogue.json',
   'goblog g'
@@ -71,3 +54,4 @@ gulp.task('monitor', function() {
 });
 
 gulp.task('default', ['lib', 'js', 'css', 'template', 'init', 'monitor']);
+// gulp.task('default', ['js']);

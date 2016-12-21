@@ -1,99 +1,122 @@
-(function() {
-  var MenuButton = require('./blog/menu.jsx');
-  var SearchContainer = require('./blog/srchcont.jsx');
-  var MainContainer = require('./blog/maincont.jsx');
+import MenuButton from './blog/menu'
+import SearchContainer from './blog/srchcont'
+import MainContainer from './blog/maincont'
+import React from 'react'
+import ReactDom from 'react-dom'
 
-  var Blog = React.createClass({
-    getInitialState: function() {
-      var tags = $('b-tag').toArray().map(function(tag){ return $(tag).text(); });
-      return {
-        isMenuOpen: false,
-        blogContent: $('b-content').html(),
-        blogTitle: $('b-title').text(),
-        blogDate: $('b-time').text(),
-        blogTags: tags
-      };
-    },
-    render: function(){
-      return (
-        <div>
-          <MenuButton
-            toggleSearchContainer={this.toggleSearchContainer}/>
+class Blog extends React.Component{
 
-          <SearchContainer
-            ref='searchContainer'
-            open={this.state.isMenuOpen}
-            loadNewBlog={this.loadNewBlog}/>
+  constructor(props) {
+    super(props)
+    this.setInitialState()
 
-          <MainContainer
-            search={this.search}
-            offset={this.state.isMenuOpen}
-            closeSearchContainer={this.closeSearchContainer}
-            content={this.state.blogContent}
-            title={this.state.blogTitle}
-            date={this.state.blogDate}
-            tags={this.state.blogTags}/>
-        </div>
-      );
-    },
-    componentDidMount: function() {
-      hljs.initHighlightingOnLoad();
-    },
-    search: function(srch){
-      this.refs.searchContainer.search(srch);
-      this.openSearchContainer();
-    },
-    toggleSearchContainer: function() {
-      this.setState({isMenuOpen: !this.state.isMenuOpen});
-    },
-    openSearchContainer: function() {
-      if(!this.state.isMenuOpen) this.toggleSearchContainer();
-    },
-    closeSearchContainer: function() {
-      if(this.state.isMenuOpen) this.toggleSearchContainer();
-    },
-    checkUrlIdentity: function(blogLink) {
-      var oldUrl = decodeURIComponent(window.location.pathname);
-      return blogLink.indexOf(oldUrl) === 0;
-    },
-    loadNewBlog: function(blogLink) {
-      if(this.checkUrlIdentity(blogLink)) return;
-      history.pushState('', '', blogLink);
-      $.ajax({
-        url: blogLink,
-        method: 'GET',
-        success: function(html) {
-          var blog = $(html);
-          var tags = blog.find('b-tag').toArray().map(function(tag){ return $(tag).text(); });
-          this.setState({
-            blogContent: blog.find('b-content').html(),
-            blogTitle: blog.find('b-title').text(),
-            blogDate: blog.find('b-time').text(),
-            blogTags: tags
-          }, function() {
-            $('html > head > title').text(this.state.blogTitle);
-            $('pre code').each(function(i, block) { hljs.highlightBlock(block); });
-          });
-          this.scrollTopSmooth();
-          this.reloadComment();
-        }.bind(this)
-      });
-    },
-    scrollTopSmooth: function() {
-      $('body').animate({ scrollTop: 0 }, 500);
-    },
-    reloadComment: function() {
-      DISQUS.reset({
-          reload: true,
-          config: function() {
-            this.page.identifier = window.location.pathname;
-          }
-      });
+    this.toggleSearchContainer = this.toggleSearchContainer.bind(this)
+    this.closeSearchContainer = this.closeSearchContainer.bind(this)
+    this.loadNewBlog = this.loadNewBlog.bind(this)
+    this.search = this.search.bind(this)
+  }
+
+  setInitialState() {
+    let tags = $('b-tag').toArray().map(function(tag){ return $(tag).text() })
+    this.state = {
+      isMenuOpen: false,
+      blogContent: $('b-content').html(),
+      blogTitle: $('b-title').text(),
+      blogDate: $('b-time').text(),
+      blogTags: tags
     }
-  });
+  }
 
-  ReactDOM.render(
-    <Blog />,
-    document.getElementById('container')
-  );
-}());
+  render(){
+    return (
+      <div>
+        <MenuButton
+          toggleSearchContainer={this.toggleSearchContainer}/>
+
+        <SearchContainer
+          ref='searchContainer'
+          open={this.state.isMenuOpen}
+          loadNewBlog={this.loadNewBlog}/>
+
+        <MainContainer
+          search={this.search}
+          offset={this.state.isMenuOpen}
+          closeSearchContainer={this.closeSearchContainer}
+          content={this.state.blogContent}
+          title={this.state.blogTitle}
+          date={this.state.blogDate}
+          tags={this.state.blogTags}/>
+      </div>
+    )
+  }
+
+  componentDidMount() {
+    hljs.initHighlightingOnLoad()
+  }
+
+  search(srch){
+    this.refs.searchContainer.search(srch)
+    this.openSearchContainer()
+  }
+
+  toggleSearchContainer() {
+    this.setState({isMenuOpen: !this.state.isMenuOpen})
+  }
+
+  openSearchContainer() {
+    if(!this.state.isMenuOpen) this.toggleSearchContainer()
+  }
+
+  closeSearchContainer() {
+    if(this.state.isMenuOpen) this.toggleSearchContainer()
+  }
+
+  checkUrlIdentity(blogLink) {
+    let oldUrl = decodeURIComponent(window.location.pathname)
+    return blogLink.indexOf(oldUrl) === 0
+  }
+
+  loadNewBlog(blogLink) {
+    if(this.checkUrlIdentity(blogLink)) return
+    history.pushState('', '', blogLink)
+    $.ajax({
+      url: blogLink,
+      method: 'GET',
+      success: html => {
+        let blog = $(html)
+        let tags = blog.find('b-tag').toArray().map(function(tag){ return $(tag).text() })
+        this.setState({
+          blogContent: blog.find('b-content').html(),
+          blogTitle: blog.find('b-title').text(),
+          blogDate: blog.find('b-time').text(),
+          blogTags: tags
+        }, function() {
+          $('html > head > title').text(this.state.blogTitle)
+          $('pre code').each(function(i, block) { hljs.highlightBlock(block) })
+        })
+        this.scrollTopSmooth()
+        this.reloadComment()
+      }
+    })
+  }
+
+  scrollTopSmooth() {
+    $('body').animate({ scrollTop: 0 }, 500)
+  }
+
+  reloadComment() {
+    DISQUS.reset({
+        reload: true,
+        config: function() {
+          this.page.identifier = window.location.pathname
+        }
+    })
+  }
+
+}
+
+
+ReactDOM.render(
+  <Blog />,
+  document.getElementById('container')
+)
